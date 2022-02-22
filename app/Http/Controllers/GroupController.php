@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\GroupRequest;
 use App\Models\Groups;
 use Illuminate\Http\Request;
-use PHPUnit\TextUI\XmlConfiguration\Group;
+use Illuminate\Support\Facades\DB;
 
 class GroupController extends Controller
 {
@@ -16,9 +16,11 @@ class GroupController extends Controller
      */
     public function index()
     {
-        $groups  = Groups::all();
-        
-        return view('groups.index',['groups' => $groups]);
+        $groups  = Groups::paginate(10);
+
+        return view('groups.index',[
+            'groups' => $groups
+        ]);
     }
 
     /**
@@ -52,7 +54,9 @@ class GroupController extends Controller
      */
     public function show(Groups $group)
     {
-        return view ('groups.show',['group' => $group]);
+        return view ('groups.show',[
+            'group' => $group
+        ]);
     }
 
     /**
@@ -63,7 +67,9 @@ class GroupController extends Controller
      */
     public function edit(Groups $group)
     {
-        return view ('groups.edit',['group' => $group]);
+        return view ('groups.edit',[
+            'group' => $group
+        ]);
     }
 
     /**

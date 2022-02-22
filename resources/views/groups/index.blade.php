@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
 
-<div>
+<div class="container">
     <table class="table">
         <tbody>
         @foreach ($groups as $group)
@@ -10,34 +10,23 @@
             <td>{{ $group->name }}</td>
             <td>
                 <div class="row">
-                <form action="{{ route('group.show', ['group' => $group]) }}" method="GET">
-                        <button class="btn btn-danger">Show</button>
+                <a href = "{{ route('group.show', ['group' => $group]) }}" >Show</a>
+                <br>
+                <a href = "{{ route('group.edit', ['group' => $group]) }}" >Edit</a>
+                <form action="{{ route('group.destroy', ['group' => $group]) }}" method="POST">
+                    @csrf
+                    <button class="btn">Delete</button>
                 </form>
-                <form action="{{ route('group.edit', ['group' => $group]) }}" method="GET">
-                        <button class="btn btn-danger">Edit</button>
-                </form>
-                <div class="col-3">
-                    <form action="{{ route('group.destroy', ['group' => $group]) }}" method="POST">
-                        @csrf
-                        <button class="btn btn-danger">Delete</button>
-                    </form>
-                </div>
-                </div>
             </td>
         </tr>
         @endforeach
         </tbody>
     </table>
 </div>
+{{ $groups->links() }}
 
-<form action="{{ route('groups.create') }}" method="GET">
-    @csrf
-    <button class="btn">Create</button>
-</form>
-
-<form action="{{ route('subjects.index') }}" method="GET">
-    @csrf
-    <button class="btn">Check the subjects</button>
-</form>
+<a href = "{{ route('groups.create') }}"> Create </a>
+<br>
+<a href = "{{ route('subjects.index') }}"> Check the subjects </a>
 
 @endsection

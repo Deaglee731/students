@@ -12,8 +12,6 @@
     </form>  
 </div>
 
-<form action="{{ route('groups.index') }}" method="GET">
-    <button class="btn btn-danger">Back</button>
-</form>
+<a href = "{{ route('groups.index') }}"> Back </a>
 
 @endsection

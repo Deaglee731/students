@@ -15,9 +15,11 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        $subjects  = Subjects::all();
+        $subjects  = Subjects::paginate(10);
 
-        return view('subjects.index',['subjects' => $subjects]);
+        return view('subjects.index',[
+            'subjects' => $subjects
+        ]);
     }
 
     /**
@@ -51,7 +53,9 @@ class SubjectController extends Controller
      */
     public function show(Subjects $subject)
     {
-        return view ('subjects.show',['subject' => $subject]);
+        return view ('subjects.show',[
+            'subject' => $subject
+        ]);
     }
 
     /**
@@ -62,7 +66,9 @@ class SubjectController extends Controller
      */
     public function edit(Subjects $subject)
     {
-        return view ('subjects.edit',['subject' => $subject]);
+        return view ('subjects.edit',[
+            'subject' => $subject
+        ]);
     }
 
     /**

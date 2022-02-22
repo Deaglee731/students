@@ -8,9 +8,8 @@
         <h3 style="text-align: center;"> Тут когда-то появятся оценки </h3>
         @csrf
    </form>
-   <form action="{{ route('subjects.index') }}" method="GET">
-        <button class="btn btn-danger">Back</button>
-   </form>
+   
+   <a href = "{{ route('subjects.index') }}"> Back </a>
 </div>
 
 @endsection
