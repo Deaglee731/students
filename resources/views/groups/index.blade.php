@@ -1,6 +1,7 @@
 @extends('app')
 @section('content')
-<div class="container">
+
+<div>
     <table class="table">
         <tbody>
         @foreach ($groups as $group)

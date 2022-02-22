@@ -1,6 +1,7 @@
 @extends('app')
 @section('content')
-<div class="container">
+
+<div>
     <table class="table">
         <tbody>
         @foreach ($subjects as $subject)
@@ -38,4 +39,5 @@
     @csrf
     <button class="btn">Check the group</button>
 </form>
+
 @endsection
