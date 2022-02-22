@@ -16,9 +16,9 @@ class Students extends Model
     }
 
 
-    public function score(){
+    public function subjects(){
 
-        return $this->belongsToMany(Scores::class);
+        return $this->belongsToMany(Subjects::class,'scores');
     }
 
 }
