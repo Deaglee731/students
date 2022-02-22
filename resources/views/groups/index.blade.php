@@ -9,11 +9,14 @@
             <td>{{ $group->name }}</td>
             <td>
                 <div class="row">
-                <div class="col-3"><a class="btn btn-primary" href="/groups/{{ $group }}">Show</a></div>
-                <div class="col-3"><a class="btn btn-success" href="/groups/{{ $group }}/edit">Edit</a></div>
+                <form action="{{ route('group.show', ['group' => $group]) }}" method="GET">
+                        <button class="btn btn-danger">Show</button>
+                </form>
+                <form action="{{ route('group.edit', ['group' => $group]) }}" method="GET">
+                        <button class="btn btn-danger">Edit</button>
+                </form>
                 <div class="col-3">
-                    <form action="{{ route('group_destroy', ['group' => $group]) }}" method="POST">
-                        @method('DELETE')
+                    <form action="{{ route('group.destroy', ['group' => $group]) }}" method="POST">
                         @csrf
                         <button class="btn btn-danger">Delete</button>
                     </form>
@@ -25,5 +28,10 @@
         </tbody>
     </table>
 </div>
+
+<form action="{{ route('groups.create') }}" method="GET">
+    @csrf
+    <button class="btn">Create</button>
+</form>
 
 @endsection

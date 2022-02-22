@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\GroupRequest;
 use App\Models\Groups;
 use Illuminate\Http\Request;
+use PHPUnit\TextUI\XmlConfiguration\Group;
 
 class GroupController extends Controller
 {
@@ -37,11 +39,11 @@ class GroupController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(GroupRequest $request)
     {
-        Groups::create($request);
-        redirect(route('groups.index'));
-        // Sohranenit  - save v BD post
+        Groups::create($request->validated());
+        
+        return back();
     }
 
     /**
@@ -50,9 +52,9 @@ class GroupController extends Controller
      * @param  \App\Models\Groups  $groups
      * @return \Illuminate\Http\Response
      */
-    public function show(Groups $groups)
+    public function show(Groups $group)
     {
-        return view ('groups.show',['group' => $groups]);
+        return view ('groups.show',['group' => $group]);
         // Otobrajenie konkretnogo objecta get
     }
 
@@ -62,9 +64,9 @@ class GroupController extends Controller
      * @param  \App\Models\Groups  $groups
      * @return \Illuminate\Http\Response
      */
-    public function edit(Groups $groups)
+    public function edit(Groups $group)
     {
-        return view ('groups.edit');
+        return view ('groups.edit',['group' => $group]);
         // Redactirovanie conkretnogo objecta get
     }
 
@@ -75,11 +77,12 @@ class GroupController extends Controller
      * @param  \App\Models\Groups  $groups
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Groups $groups)
+    public function update(GroupRequest $request, Groups $group)
     {
-        //$groups->fill($request);
-        $groups->save();
-        redirect(route('groups_index'));
+    
+        $group->update($request->validated());
+
+        return redirect(route('groups.index'));
         //  Ovnovlenie konkretnogo objecta post
     }
 
@@ -89,10 +92,11 @@ class GroupController extends Controller
      * @param  \App\Models\Groups  $groups
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Groups $groups)
+    public function destroy(Groups $group)
     {
-        $groups->delete();
-        redirect(route('groups_index'));
+        $group->delete();
+        
+        return back();
         // udalenie konkretnogo objecta post
     }
 }
