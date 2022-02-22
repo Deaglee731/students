@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\GroupRequest;
-use App\Models\Groups;
+use App\Http\Requests\SubjectRequest;
+use App\Models\Subjects;
 use Illuminate\Http\Request;
-use PHPUnit\TextUI\XmlConfiguration\Group;
 
-class GroupController extends Controller
+class SubjectController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +15,9 @@ class GroupController extends Controller
      */
     public function index()
     {
-        $groups  = Groups::all();
-        
-        return view('groups.index',['groups' => $groups]);
+        $subjects  = Subjects::all();
+
+        return view('subjects.index',['subjects' => $subjects]);
     }
 
     /**
@@ -28,7 +27,7 @@ class GroupController extends Controller
      */
     public function create()
     {
-        return view('groups.create');
+        return view('subjects.create');
     }
 
     /**
@@ -37,58 +36,58 @@ class GroupController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(GroupRequest $request)
+    public function store(SubjectRequest $request)
     {
-        Groups::create($request->validated());
-
+        Subjects::create($request->validated());
+        
         return back();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Groups  $groups
+     * @param  \App\Models\Subjects  $subjects
      * @return \Illuminate\Http\Response
      */
-    public function show(Groups $group)
+    public function show(Subjects $subject)
     {
-        return view ('groups.show',['group' => $group]);
+        return view ('subjects.show',['subject' => $subject]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Groups  $groups
+     * @param  \App\Models\Subjects  $subjects
      * @return \Illuminate\Http\Response
      */
-    public function edit(Groups $group)
+    public function edit(Subjects $subject)
     {
-        return view ('groups.edit',['group' => $group]);
+        return view ('subjects.edit',['subject' => $subject]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Groups  $groups
+     * @param  \App\Models\Subjects  $subjects
      * @return \Illuminate\Http\Response
      */
-    public function update(GroupRequest $request, Groups $group)
+    public function update(SubjectRequest $request, Subjects $subject)
     {
-        $group->update($request->validated());
+        $subject->update($request->validated());
 
-        return redirect(route('groups.index'));
+        return redirect(route('subjects.index'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Groups  $groups
+     * @param  \App\Models\Subjects  $subjects
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Groups $group)
+    public function destroy(Subjects $subject)
     {
-        $group->delete();
+        $subject->delete();
         
         return back();
     }

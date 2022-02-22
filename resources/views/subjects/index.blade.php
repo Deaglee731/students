@@ -3,20 +3,20 @@
 <div class="container">
     <table class="table">
         <tbody>
-        @foreach ($groups as $group)
+        @foreach ($subjects as $subject)
         <tr>
-            <th scope="row">{{ $group->id }}</th>
-            <td>{{ $group->name }}</td>
+            <th scope="row">{{ $subject->id }}</th>
+            <td>{{ $subject->name }}</td>
             <td>
                 <div class="row">
-                <form action="{{ route('group.show', ['group' => $group]) }}" method="GET">
+                <form action="{{ route('subject.show', ['subject' => $subject]) }}" method="GET">
                         <button class="btn btn-danger">Show</button>
                 </form>
-                <form action="{{ route('group.edit', ['group' => $group]) }}" method="GET">
+                <form action="{{ route('subject.edit', ['subject' => $subject]) }}" method="GET">
                         <button class="btn btn-danger">Edit</button>
                 </form>
                 <div class="col-3">
-                    <form action="{{ route('group.destroy', ['group' => $group]) }}" method="POST">
+                    <form action="{{ route('subject.destroy', ['subject' => $subject]) }}" method="POST">
                         @csrf
                         <button class="btn btn-danger">Delete</button>
                     </form>
@@ -29,14 +29,13 @@
     </table>
 </div>
 
-<form action="{{ route('groups.create') }}" method="GET">
+<form action="{{ route('subjects.create') }}" method="GET">
     @csrf
     <button class="btn">Create</button>
 </form>
 
-<form action="{{ route('subjects.index') }}" method="GET">
+<form action="{{ route('groups.index') }}" method="GET">
     @csrf
-    <button class="btn">Check the subjects</button>
+    <button class="btn">Check the group</button>
 </form>
-
 @endsection
