@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
 use App\Models\Subjects;
 use Illuminate\Support\Facades\Route;
@@ -39,4 +40,14 @@ Route::controller(SubjectController::class)->group(function () {
     Route::get('/subjects/{subject}/edit','edit')->name('subject.edit');
     Route::post('/subjects/{subject}/update','update')->name('subject.update');
     Route::post('/subjects/{subject}/delete','destroy')->name('subject.destroy');
+});
+
+Route::controller(StudentController::class)->group(function () {
+    Route::get('/students/', 'index')->name('students.index');
+    Route::get('/students/create', 'create')->name('students.create');
+    Route::post('/students/create','store')->name('students.store');
+    Route::get('/students/{student}','show')->name('student.show');
+    Route::get('/students/{student}/edit','edit')->name('student.edit');
+    Route::post('/students/{student}/update','update')->name('student.update');
+    Route::post('/students/{student}/delete','destroy')->name('student.destroy');
 });

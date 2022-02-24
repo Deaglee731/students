@@ -52,7 +52,7 @@
         "laravel": {
         "dont-discover": [
             "laravel/telescope"
-        ]
+        ]}
     },
     "config": {
         "optimize-autoloader": true,
