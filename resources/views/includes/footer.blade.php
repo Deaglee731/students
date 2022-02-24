@@ -1,3 +1,3 @@
 <footer style="text-align: right;">
-        <p>© 2018 Gandalf</p>
+        <p>© 2022 ALEX </p>
 </footer>

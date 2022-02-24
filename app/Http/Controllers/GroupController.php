@@ -18,7 +18,7 @@ class GroupController extends Controller
     {
         $groups  = Groups::paginate(10);
 
-        return view('groups.index',[
+        return view('groups.index', [
             'groups' => $groups
         ]);
     }
@@ -54,7 +54,7 @@ class GroupController extends Controller
      */
     public function show(Groups $group)
     {
-        return view ('groups.show',[
+        return view ('groups.show', [
             'group' => $group
         ]);
     }
@@ -67,7 +67,7 @@ class GroupController extends Controller
      */
     public function edit(Groups $group)
     {
-        return view ('groups.edit',[
+        return view ('groups.edit', [
             'group' => $group
         ]);
     }

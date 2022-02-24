@@ -9,16 +9,13 @@
         <p>
         <input type="text" name="first_name" placeholder="Введите имя" size="18" /></p>
         <input type="text" name="last_name" placeholder="Введите фамилию" size="18" /></p>
-        <input type="text" name="middle_name" size="18" /></p>
-        <form action="formdata" method="post" name="form1">
-        <p><select name="list1">
+        <input type="text" name="middle_name" placeholder="Введите отчество" size="18" /></p>
+        <p><select name="group_id">
             <option>Выберите из списка</option>
-            @foreach $groups as $group
-            <option>$group->name</option>
+            @foreach ($groups as $group)
+            <option> {{ $group->name }}</option>
             @endforeach
             </select></p>
-            <p><input type="submit" value="Отправить"></p>
-        </form>
         <button class="btn">Add student</button>
     </form>  
 </div>

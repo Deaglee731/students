@@ -19,7 +19,7 @@ class StudentController extends Controller
         $students  = Students::paginate(10);
 
         return view('students.index', [
-            'students' => $students
+            'students' => $students,
         ]);
     }
 
@@ -31,8 +31,10 @@ class StudentController extends Controller
     public function create()
     {
         $groups = Groups::all();
-
-        return view('students.create' , ['groups' => $groups]);
+        
+        return view('students.create' , [
+            'groups' => $groups
+        ]);
     }
 
     /**
@@ -43,7 +45,10 @@ class StudentController extends Controller
      */
     public function store(StudentRequest $request)
     {
-        Students::create($request->validated());
+        $group_id = Groups::where('name', '=', $request->group_id)->first();
+        $data = $request->validated();
+        $data['group_id'] = $group_id->id;
+        Students::create($data);
 
         return back();
     }
@@ -69,8 +74,11 @@ class StudentController extends Controller
      */
     public function edit(Students $student)
     {
+        $groups = Groups::all();
+
         return view ('students.edit', [
-            'student' => $student
+            'student' => $student,
+            'groups' => $groups,
         ]);
     }
 
@@ -83,7 +91,10 @@ class StudentController extends Controller
      */
     public function update(StudentRequest $request, Students $student)
     {
-        $student->update($request->validated());
+        $group_id = Groups::where('name', '=', $request->group_id)->first();
+        $data = $request->validated();
+        $data['group_id'] = $group_id->id;
+        $student->update($data);
 
         return redirect(route('students.index'));
     }
@@ -94,9 +105,9 @@ class StudentController extends Controller
      * @param  \App\Models\Students  $students
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Students $students)
+    public function destroy(Students $student)
     {
-        $students->delete();
+        $student->delete();
         
         return back();
     }
