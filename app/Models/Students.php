@@ -9,16 +9,13 @@ class Students extends Model
 {
     use HasFactory;
 
-
-    public function group(){
-
+    public function group()
+    {
         return $this->belongsTo(Groups::class);
     }
 
-
-    public function subjects(){
-
-        return $this->belongsToMany(Subjects::class,'scores');
+    public function subjects()
+    {
+        return $this->belongsToMany(Subjects::class, 'scores');
     }
-
 }
