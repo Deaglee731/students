@@ -7,7 +7,7 @@
  <li> <a href="{{ route('subjects.index') }}"><b>Subjects</b></a></li>
 </div>
   <meta charset="utf-8">
-  <title>header</title>
+  <title>Title</title>
  </head> 
  <body>
   <header style="text-align: center;">

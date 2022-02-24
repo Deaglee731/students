@@ -31,7 +31,6 @@ class StudentController extends Controller
     public function create()
     {
         $groups = Groups::all();
-        
         return view('students.create' , [
             'groups' => $groups
         ]);
@@ -95,7 +94,7 @@ class StudentController extends Controller
         $data = $request->validated();
         $data['group_id'] = $group_id->id;
         $student->update($data);
-
+        
         return redirect(route('students.index'));
     }
 

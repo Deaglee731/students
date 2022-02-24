@@ -19,10 +19,11 @@
             <th> {{ $student->group->name }} </td>
             <th>
                 <div class="row">
-                <a href = "{{ route('student.show', ['student' => $student]) }}" >Show</a>
+                <a href = "{{ route('students.show', ['student' => $student]) }}" >Show</a>
                 <br>
-                <a href = "{{ route('student.edit', ['student' => $student]) }}" >Edit</a>
-                <form action="{{ route('student.destroy', ['student' => $student]) }}" method="POST">
+                <a href = "{{ route('students.edit', ['student' => $student]) }}" >Edit</a>
+                <form action="{{ route('students.destroy', ['student' => $student]) }}"  method="POST">
+                    <input type="hidden" name="_method" value="delete"/>
                     @csrf
                     <button class="btn">Delete</button>
                 </form>
