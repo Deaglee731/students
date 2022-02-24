@@ -12,5 +12,5 @@
     </form>
 </div>
 
-<a href = "{{ route('subjects.index') }}"> Back </a>
+<a href="{{ route('subjects.index') }}"> Back </a>
 @endsection

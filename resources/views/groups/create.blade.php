@@ -7,11 +7,12 @@
         <br>
         @csrf
         <p>
-        <input type="text" name="name" placeholder="Введите название группы" size="18" /></p>
+            <input type="text" name="name" placeholder="Введите название группы" size="18" />
+        </p>
         <button class="btn">Add group</button>
-    </form>  
+    </form>
 </div>
 
-<a href = "{{ route('groups.index') }}"> Back </a>
+<a href="{{ route('groups.index') }}"> Back </a>
 
 @endsection

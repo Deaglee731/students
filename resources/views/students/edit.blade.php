@@ -8,8 +8,8 @@
         <input type="text" name="first_name" value="{{$student->first_name}}" placeholder="Введите новое имя" size="18" style="background-color:lightsteelblue;" />
         <input type="text" name="last_name" value="{{$student->last_name}}" placeholder="Введите новую фамилию" size="18" style="background-color:lightsteelblue;" />
         <input type="text" name="middle_name" value="{{$student->middle_name}}" placeholder="Введите новое отчество" size="18" style="background-color:lightsteelblue;" />
+        <h3>Текущая группа студента {{ $student->group->name }} </h3>
         <p><select name="group_id">
-                {{ $student->group->name }}
                 @foreach ($groups as $group)
                 <option> {{ $group->name }}</option>
                 @endforeach
