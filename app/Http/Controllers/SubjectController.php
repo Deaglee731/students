@@ -67,8 +67,6 @@ class SubjectController extends Controller
      */
     public function edit(Subjects $subject)
     {
-        $groups = Groups::all();
-
         return view ('subjects.edit', [
             'subject' => $subject,
         ]);
