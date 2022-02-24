@@ -8,6 +8,7 @@
         @csrf
         <input type="text" name="name" value="{{$subject->name}}" placeholder="Введите новое название группы" size="18" style="background-color:lightsteelblue;" />
         <br>
+        <input type="hidden" name="_method" value="PUT" />
         <button class="btn">Save</button>
     </form>
 </div>
