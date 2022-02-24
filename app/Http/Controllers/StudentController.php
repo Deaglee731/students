@@ -30,8 +30,9 @@ class StudentController extends Controller
      */
     public function create()
     {
-        $groups = Groups::all();
-        return view('students.create' , [
+        $groups = Groups::pluck('id','name')->all();
+
+        return view('students.create', [
             'groups' => $groups
         ]);
     }
@@ -44,10 +45,7 @@ class StudentController extends Controller
      */
     public function store(StudentRequest $request)
     {
-        $group_id = Groups::where('name', '=', $request->group_id)->first();
-        $data = $request->validated();
-        $data['group_id'] = $group_id->id;
-        Students::create($data);
+        Students::create($request->validated());
 
         return back();
     }
@@ -60,7 +58,7 @@ class StudentController extends Controller
      */
     public function show(Students $student)
     {
-        return view ('students.show', [
+        return view('students.show', [
             'student' => $student
         ]);
     }
@@ -73,9 +71,9 @@ class StudentController extends Controller
      */
     public function edit(Students $student)
     {
-        $groups = Groups::all();
+        $groups = Groups::pluck('id','name')->all();
 
-        return view ('students.edit', [
+        return view('students.edit', [
             'student' => $student,
             'groups' => $groups,
         ]);
@@ -90,11 +88,8 @@ class StudentController extends Controller
      */
     public function update(StudentRequest $request, Students $student)
     {
-        $group_id = Groups::where('name', '=', $request->group_id)->first();
-        $data = $request->validated();
-        $data['group_id'] = $group_id->id;
-        $student->update($data);
-        
+        $student->update($request->validated());
+
         return redirect(route('students.index'));
     }
 
@@ -107,7 +102,7 @@ class StudentController extends Controller
     public function destroy(Students $student)
     {
         $student->delete();
-        
+
         return back();
     }
 }

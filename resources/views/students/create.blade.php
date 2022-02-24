@@ -12,11 +12,13 @@
         <input type="text" name="last_name" placeholder="Введите фамилию" size="18" /></p>
         <input type="text" name="middle_name" placeholder="Введите отчество" size="18" /></p>
         <h3> Выберите из списка необходимую группу</h3>
-        <p><select name="group_id">
-                @foreach ($groups as $group)
-                <option> {{ $group->name }}</option>
+        <p>
+            <select name="group_id">
+                @foreach ($groups as $name => $id)
+                <option value="{{ $id }}"> {{ $name }}</option>
                 @endforeach
-            </select></p>
+            </select>
+        </p>
         <button class="btn">Add student</button>
     </form>
 </div>
