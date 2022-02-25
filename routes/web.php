@@ -24,3 +24,8 @@ Route::get('/', function () {
 Route::resource('groups', GroupController::class)->shallow();
 Route::resource('subjects', SubjectController::class)->shallow();
 Route::resource('students', StudentController::class)->shallow();
+
+
+Route::GET('/students/{student}/showScore', [StudentController::class,'showScore'])->name('student.showScore');
+Route::POST('/students/{student}/addScore', [StudentController::class,'addScore'])->name('student.addScore');
+Route::DELETE('/students/{student}/deleteScore/{score}',[StudentController::class,'deleteScore'])->name('student.deleteScore');

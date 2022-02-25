@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ScoreRequest;
 use App\Http\Requests\StudentRequest;
 use App\Models\Groups;
 use App\Models\Students;
+use App\Models\Subjects;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -58,8 +60,18 @@ class StudentController extends Controller
      */
     public function show(Students $student)
     {
+        $scores = collect();
+        $subjects = collect();
+
+        foreach ($student->subjects as $subject) {
+            $scores[] = $subject->pivot->first();
+            $subjects[] = $subject;
+        }
+
         return view('students.show', [
-            'student' => $student
+            'student' => $student,
+            'scores' => $scores,
+            'subjects' => $subjects
         ]);
     }
 
@@ -104,5 +116,36 @@ class StudentController extends Controller
         $student->delete();
 
         return back();
+    }
+
+    public function addScore(ScoreRequest $request, Students $student)
+    {   
+        $request->validate;
+        $student->subjects()->attach('students_id', [
+            'score' => $request->score , 
+            'subjects_id' => $request->subject_id]);
+
+        return back();
+    }
+
+
+    public function showScore(Request $request, Students $student)
+    {   
+        $subjectsAll = Subjects::all(); // Имена всех предметов
+        $subjects = $student->subjects; // Имена предметов по которому у студента УЖЕ есть оценка.
+        $diffsubject = $subjectsAll->diff($subjects); // Предметы по которым у студента НЕТ оценок. Их и передаем.
+
+        return view('students.showscore', [
+            'student' => $student,
+            'subjects' => $diffsubject
+        ]);
+    }
+
+    public function deleteScore(Request $request, Students $student)
+    {
+        dd($request);
+        $student->subjects()->detach('subject_id');
+
+        dd($request);
     }
 }
