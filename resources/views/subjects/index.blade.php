@@ -14,7 +14,7 @@
                     <a href="{{ route('subjects.edit', ['subject' => $subject]) }}">Edit</a>
                     <form action="{{ route('subjects.destroy', ['subject' => $subject]) }}" method="POST">
                         @csrf
-                        <input type="hidden" name="_method" value="DELETE" />
+                        @method('DELETE')
                         <button class="btn btn-danger">Delete</button>
                     </form>
                 </td>

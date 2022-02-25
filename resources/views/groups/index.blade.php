@@ -15,7 +15,7 @@
                         <a href="{{ route('groups.edit', ['group' => $group]) }}">Edit</a>
                         <form action="{{ route('groups.destroy', ['group' => $group]) }}" method="POST">
                             @csrf
-                            <input type="hidden" name="_method" value="DELETE" />
+                            @method('DELETE')
                             <button class="btn">Delete</button>
                         </form>
                 </td>

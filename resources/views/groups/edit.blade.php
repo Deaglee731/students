@@ -8,7 +8,7 @@
         @csrf
         <input type="text" name="name" value="{{$group->name}}" placeholder="Введите новое название группы" size="18" style="background-color:lightsteelblue;" />
         </p>
-        <input type="hidden" name="_method" value="PUT" />
+        @method('PUT')
         @csrf
         <button class="btn">Save</button>
     </form>

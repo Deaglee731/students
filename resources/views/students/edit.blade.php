@@ -16,7 +16,7 @@
                 @endforeach
             </select>
         </p>
-        <input type="hidden" name="_method" value="PUT" />
+        @method('PUT')
         @csrf
         <button class="btn">Save</button>
     </form>

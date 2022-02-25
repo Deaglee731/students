@@ -23,7 +23,7 @@
                         <br>
                         <a href="{{ route('students.edit', ['student' => $student]) }}">Edit</a>
                         <form action="{{ route('students.destroy', ['student' => $student]) }}" method="POST">
-                            <input type="hidden" name="_method" value="delete" />
+                            @method('DELETE')
                             @csrf
                             <button class="btn">Delete</button>
                         </form>
