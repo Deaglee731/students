@@ -32,7 +32,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        $groups = Groups::pluck('id','name')->all();
+        $groups = Groups::pluck('id', 'name')->all();
 
         return view('students.create', [
             'groups' => $groups
@@ -61,17 +61,13 @@ class StudentController extends Controller
     public function show(Students $student)
     {
         $scores = collect();
-        $subjects = collect();
-
         foreach ($student->subjects as $subject) {
-            $scores[] = $subject->pivot->first();
-            $subjects[] = $subject;
+            $scores[] = $subject->pivot->where(['subjects_id' => $subject->id])->first();
         }
 
         return view('students.show', [
             'student' => $student,
-            'scores' => $scores,
-            'subjects' => $subjects
+            'scores' => $scores
         ]);
     }
 
@@ -83,7 +79,7 @@ class StudentController extends Controller
      */
     public function edit(Students $student)
     {
-        $groups = Groups::pluck('id','name')->all();
+        $groups = Groups::pluck('id', 'name')->all();
 
         return view('students.edit', [
             'student' => $student,
@@ -113,27 +109,29 @@ class StudentController extends Controller
      */
     public function destroy(Students $student)
     {
+        $student->subjects()->detach();
         $student->delete();
 
         return back();
     }
 
     public function addScore(ScoreRequest $request, Students $student)
-    {   
+    {
         $request->validate;
         $student->subjects()->attach('students_id', [
-            'score' => $request->score , 
-            'subjects_id' => $request->subject_id]);
+            'score' => $request->score,
+            'subjects_id' => $request->subject_id
+        ]);
 
         return back();
     }
 
 
     public function showScore(Request $request, Students $student)
-    {   
-        $subjectsAll = Subjects::all(); // Имена всех предметов
-        $subjects = $student->subjects; // Имена предметов по которому у студента УЖЕ есть оценка.
-        $diffsubject = $subjectsAll->diff($subjects); // Предметы по которым у студента НЕТ оценок. Их и передаем.
+    {
+        $subjectsAll = Subjects::all();
+        $subjects = $student->subjects;
+        $diffsubject = $subjectsAll->diff($subjects);
 
         return view('students.showscore', [
             'student' => $student,
@@ -143,9 +141,28 @@ class StudentController extends Controller
 
     public function deleteScore(Request $request, Students $student)
     {
-        dd($request);
-        $student->subjects()->detach('subject_id');
+        $student->subjects()->detach(['subjects_id' => $request->subjects_id]);
 
-        dd($request);
+        return back();
+    }
+
+    public function editScore(Request $request, Students $student)
+    {
+        $subject = Subjects::where('id', $request->subject_id)->first();
+
+        return view('students.updateScore', [
+            'student' => $student,
+            'score' => $request->score,
+            'subject' => $subject
+        ]);
+    }
+
+    public function updateScore(Request $request, Students $student)
+    {
+        $student->subjects()->updateExistingPivot($student->id, [
+            'score' => $request->score,
+        ]);
+
+        return redirect(route('students.index'));
     }
 }
