@@ -20,7 +20,7 @@
                 <form action="{{ route('student.deleteScore',['student' => $student, 'score' => $score->score]) }}" method="POST">
                     @method('DELETE')
                     @csrf
-                    <button class="btn">Delete</button>
+                    <button class="btn">Delete</button>  //  СДЕЛАТЬ ХИДЕН ПОЛЕ КОТОРОЕ БУДЕТ ПРЕДАВАТЬ ЗНАЧЕНИ ОЦЕНКИ КОТОРОЕ НУЖНО ЧТОБ УДАЛИТЬ ИЗ СВОДНОЙ ТАБЛИЦЫ.
                 </form>
             </th>
             @endforeach
