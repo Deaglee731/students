@@ -59,15 +59,9 @@ class StudentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Students $student)
-    {
-        $scores = collect();
-        foreach ($student->subjects as $subject) {
-            $scores[] = $subject->pivot->where(['subjects_id' => $subject->id])->first();
-        }
-
+    {   
         return view('students.show', [
             'student' => $student,
-            'scores' => $scores
         ]);
     }
 
@@ -118,7 +112,7 @@ class StudentController extends Controller
     public function addScore(ScoreRequest $request, Students $student)
     {
         $request->validate;
-        $student->subjects()->attach('students_id', [
+        $student->subjects()->attach($request->subject_id, [
             'score' => $request->score,
             'subjects_id' => $request->subject_id
         ]);
@@ -141,15 +135,16 @@ class StudentController extends Controller
 
     public function deleteScore(Request $request, Students $student)
     {
-        $student->subjects()->detach(['subjects_id' => $request->subjects_id]);
+        $student->subjects()->detach($request->subjects_id,['subjects_id' => $request->subjects_id]);
 
         return back();
     }
 
     public function editScore(Request $request, Students $student)
     {
+       
         $subject = Subjects::where('id', $request->subject_id)->first();
-
+        
         return view('students.updateScore', [
             'student' => $student,
             'score' => $request->score,
@@ -159,7 +154,7 @@ class StudentController extends Controller
 
     public function updateScore(Request $request, Students $student)
     {
-        $student->subjects()->updateExistingPivot($student->id, [
+        $student->subjects()->where('subjects_id',$request->subjects_id)->updateExistingPivot($request->subjects_id, [
             'score' => $request->score,
         ]);
 

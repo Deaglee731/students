@@ -12,24 +12,14 @@
         <tr>
             <form action="{{ route('student.deleteScore',['student' => $student]) }}" method="POST">
                 @foreach ($student->subjects as $subject)
-                <th> <br> {{$subject->name}} <br> <button class="submit">Delete</button> </th>
+                <th> <br> {{$subject->name}} <br> <button class="submit">Delete</button> <a href="{{ route('student.editScore', ['student' => $student , 'subject_id' => $subject->id]) }}">Edit </a> </th>
                 <input type="hidden" name="subjects_id" value="{{ $subject->id }}" />
                 @method('DELETE')
                 @csrf
+                <td> {{ $subject->pivot->score }} </td>
+
                 @endforeach
             </form>
-        </tr>
-        @foreach ($scores as $score)
-        <th>
-            {{ $score->score }}
-            <form action="{{ route('student.editScore', ['student' => $student , 'subject_id' => $score->subjects_id]) }}" method="POST">
-                <input type="hidden" name="score" value="{{ $score->score }}" />
-                <input type="hidden" name="subject_id" value="{{ $score->subjects_id }}" />
-                <button class="btn">Edit</button>
-                @csrf
-            </form>
-        </th>
-        @endforeach
         </tr>
         </tr>
     </table>

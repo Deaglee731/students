@@ -18,6 +18,6 @@ class Students extends Model
 
     public function subjects()
     {
-        return $this->belongsToMany(Subjects::class, 'scores');
+        return $this->belongsToMany(Subjects::class, 'scores')->withPivot('score');;
     }
 }

@@ -29,5 +29,5 @@ Route::resource('students', StudentController::class)->shallow();
 Route::GET('/students/{student}/showScore', [StudentController::class, 'showScore'])->name('student.showScore');
 Route::POST('/students/{student}/addScore', [StudentController::class, 'addScore'])->name('student.addScore');
 Route::DELETE('/students/{student}/deleteScore/', [StudentController::class, 'deleteScore'])->name('student.deleteScore');
-Route::POST('students/{student}/editScore/{subject_id}', [StudentController::class, 'editScore'])->name('student.editScore');
-Route::PUT('students/{student}/updateScore', [StudentController::class, 'updateScore'])->name('student.updateScore');
+Route::GET('students/{student}/editScore/{subject_id}', [StudentController::class, 'editScore'])->name('student.editScore');
+Route::PATCH('students/{student}/updateScore', [StudentController::class, 'updateScore'])->name('student.updateScore');
