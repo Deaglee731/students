@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Group;
 use App\Models\Student;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -19,11 +20,10 @@ class StudentFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name(),
             'first_name' => $this->faker->firstName(),
             'last_name' => $this->faker->lastName(),
             'middle_name' => $this->faker->userName(),
-            'group_id' => GroupFactory::factory(),
+            'group_id' => Group::factory(),
         ];
     }
 }

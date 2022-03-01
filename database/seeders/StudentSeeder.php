@@ -2,8 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Group;
+use App\Models\Score;
 use App\Models\Student;
+use App\Models\Subject;
+use Database\Factories\ScoreFactory;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
 
 
@@ -17,7 +20,8 @@ class StudentSeeder extends Seeder
     public function run()
     {
         Student::factory()
-            ->count(50)
+            ->count(15)
+            ->hasAttached(Subject::factory(5),['score' => 5])
             ->create();
     }
 }

@@ -2,15 +2,13 @@
 
 namespace Database\Factories;
 
-use App\Models\Group;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Subject>
  */
-class GroupFactory extends Factory
+class SubjectFactory extends Factory
 {
-    protected $model = Group::class;
     /**
      * Define the model's default state.
      *
@@ -19,7 +17,7 @@ class GroupFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->numerify('IVT-[###]')
+            'name' => $this->faker->numerify('Subject-[##]')
         ];
     }
 }
