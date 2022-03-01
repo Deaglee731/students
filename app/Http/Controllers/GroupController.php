@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\GroupRequest;
-use App\Models\Groups;
+use App\Models\Group;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -16,7 +16,7 @@ class GroupController extends Controller
      */
     public function index()
     {
-        $groups  = Groups::paginate(10);
+        $groups  = Group::paginate(10);
 
         return view('groups.index', [
             'groups' => $groups
@@ -41,7 +41,7 @@ class GroupController extends Controller
      */
     public function store(GroupRequest $request)
     {
-        Groups::create($request->validated());
+        Group::create($request->validated());
 
         return back();
     }
@@ -49,10 +49,10 @@ class GroupController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Groups  $groups
+     * @param  \App\Models\Group  $groups
      * @return \Illuminate\Http\Response
      */
-    public function show(Groups $group)
+    public function show(Group $group)
     {
         return view('groups.show', [
             'group' => $group
@@ -62,10 +62,10 @@ class GroupController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Groups  $groups
+     * @param  \App\Models\Group  $groups
      * @return \Illuminate\Http\Response
      */
-    public function edit(Groups $group)
+    public function edit(Group $group)
     {
         return view('groups.edit', [
             'group' => $group
@@ -76,10 +76,10 @@ class GroupController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Groups  $groups
+     * @param  \App\Models\Group  $groups
      * @return \Illuminate\Http\Response
      */
-    public function update(GroupRequest $request, Groups $group)
+    public function update(GroupRequest $request, Group $group)
     {
         $group->update($request->validated());
 
@@ -89,10 +89,10 @@ class GroupController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Groups  $groups
+     * @param  \App\Models\Group  $groups
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Groups $group)
+    public function destroy(Group $group)
     {
         $group->delete();
 

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SubjectRequest;
-use App\Models\Groups;
-use App\Models\Subjects;
+use App\Models\Group;
+use App\Models\Subject;
 use Illuminate\Http\Request;
 
 class SubjectController extends Controller
@@ -16,7 +16,7 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        $subjects  = Subjects::paginate(10);
+        $subjects  = Subject::paginate(10);
 
         return view('subjects.index', [
             'subjects' => $subjects
@@ -41,7 +41,7 @@ class SubjectController extends Controller
      */
     public function store(SubjectRequest $request)
     {
-        Subjects::create($request->validated());
+        Subject::create($request->validated());
 
         return back();
     }
@@ -49,10 +49,10 @@ class SubjectController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Subjects  $subjects
+     * @param  \App\Models\Subject  $subjects
      * @return \Illuminate\Http\Response
      */
-    public function show(Subjects $subject)
+    public function show(Subject $subject)
     {
         return view('subjects.show', [
             'subject' => $subject
@@ -62,10 +62,10 @@ class SubjectController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Subjects  $subjects
+     * @param  \App\Models\Subject  $subjects
      * @return \Illuminate\Http\Response
      */
-    public function edit(Subjects $subject)
+    public function edit(Subject $subject)
     {
         return view('subjects.edit', [
             'subject' => $subject,
@@ -76,10 +76,10 @@ class SubjectController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Subjects  $subjects
+     * @param  \App\Models\Subject  $subjects
      * @return \Illuminate\Http\Response
      */
-    public function update(SubjectRequest $request, Subjects $subject)
+    public function update(SubjectRequest $request, Subject $subject)
     {
         $subject->update($request->validated());
 
@@ -89,10 +89,10 @@ class SubjectController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Subjects  $subjects
+     * @param  \App\Models\Subject  $subjects
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Subjects $subject)
+    public function destroy(Subject $subject)
     {
         $subject->delete();
         

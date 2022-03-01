@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ScoreRequest;
 use App\Http\Requests\StudentRequest;
-use App\Models\Groups;
-use App\Models\Students;
-use App\Models\Subjects;
+use App\Models\Group;
+use App\Models\Student;
+use App\Models\Subject;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -18,7 +18,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students  = Students::paginate(10);
+        $students  = Student::paginate(10);
 
         return view('students.index', [
             'students' => $students,
@@ -32,7 +32,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        $groups = Groups::pluck('id', 'name')->all();
+        $groups = Group::pluck('id', 'name')->all();
 
         return view('students.create', [
             'groups' => $groups
@@ -47,7 +47,7 @@ class StudentController extends Controller
      */
     public function store(StudentRequest $request)
     {
-        Students::create($request->validated());
+        Student::create($request->validated());
 
         return back();
     }
@@ -55,10 +55,10 @@ class StudentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Students  $students
+     * @param  \App\Models\Student  $students
      * @return \Illuminate\Http\Response
      */
-    public function show(Students $student)
+    public function show(Student $student)
     {
         return view('students.show', [
             'student' => $student,
@@ -68,12 +68,12 @@ class StudentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Students  $students
+     * @param  \App\Models\Student  $students
      * @return \Illuminate\Http\Response
      */
-    public function edit(Students $student)
+    public function edit(Student $student)
     {
-        $groups = Groups::pluck('id', 'name')->all();
+        $groups = Group::pluck('id', 'name')->all();
 
         return view('students.edit', [
             'student' => $student,
@@ -85,10 +85,10 @@ class StudentController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Students  $students
+     * @param  \App\Models\Student  $students
      * @return \Illuminate\Http\Response
      */
-    public function update(StudentRequest $request, Students $student)
+    public function update(StudentRequest $request, Student $student)
     {
         $student->update($request->validated());
 
@@ -98,10 +98,10 @@ class StudentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Students  $students
+     * @param  \App\Models\Student  $students
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Students $student)
+    public function destroy(Student $student)
     {
         $student->subjects()->detach();
         $student->delete();

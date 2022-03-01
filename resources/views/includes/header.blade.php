@@ -3,9 +3,9 @@
 
 <head>
   <div style="margin-left: 100px;">
-    <li> <a href="{{ route('students.index') }}"><b>Students</b></a></li>
-    <li> <a href="{{ route('groups.index') }}"><b>Groups</b></a></li>
-    <li> <a href="{{ route('subjects.index') }}"><b>Subjects</b></a></li>
+    <li> <a href="{{ route('students.index') }}"><b>Student</b></a></li>
+    <li> <a href="{{ route('groups.index') }}"><b>Group</b></a></li>
+    <li> <a href="{{ route('subjects.index') }}"><b>Subject</b></a></li>
   </div>
   <meta charset="utf-8">
   <title>Title</title>
@@ -13,7 +13,7 @@
 
 <body>
   <header style="text-align: center;">
-    <h1>FWT_education (Students)</h1>
+    <h1>FWT_education (Student)</h1>
   </header>
 </body>
 

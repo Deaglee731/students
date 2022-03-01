@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Students extends Model
+class Student extends Model
 {
     use HasFactory;
     
@@ -13,11 +13,11 @@ class Students extends Model
 
     public function group(){
 
-        return $this->belongsTo(Groups::class);
+        return $this->belongsTo(Group::class);
     }
 
     public function subjects()
     {
-        return $this->belongsToMany(Subjects::class, 'scores','student_id','subject_id')->withPivot('score');;
+        return $this->belongsToMany(Subject::class, 'scores','student_id','subject_id')->withPivot('score');;
     }
 }

@@ -15,7 +15,7 @@
             </select>
             <input type="text" name="score" placeholder="Введите оценку" size="18" />
         </p>
-        <button class="btn">Add Scores to Student</button>
+        <button class="btn">Add Score to Student</button>
     </form>
 </div>
 <a href="{{ route('students.index') }}"> Back </a>

@@ -4,7 +4,7 @@ use App\Http\Controllers\GroupController;
 use App\Http\Controllers\ScoreController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
-use App\Models\Subjects;
+use App\Models\Subject;
 use Illuminate\Support\Facades\Route;
 
 /*
