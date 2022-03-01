@@ -11,25 +11,22 @@ class ScoreController extends Controller
 {
     public function store(ScoreRequest $request, Students $student)
     {
-        $request->validate;
         $student->subjects()->attach($request->subject_id, [
             'score' => $request->score,
-            'subjects_id' => $request->subject_id
+            'subject_id' => $request->subject_id
         ]);
 
         return back();
     }
 
 
-    public function show(Students $student)
+    public function create(Students $student)
     {
-        $subjectsAll = Subjects::all();
-        $subjects = $student->subjects;
-        $diffsubject = $subjectsAll->diff($subjects);
+        $subject = Subjects::whereNotIn('id', $student->subjects->pluck('id'))->get();
 
         return view('scores.create', [
             'student' => $student,
-            'subjects' => $diffsubject
+            'subjects' => $subject
         ]);
     }
 

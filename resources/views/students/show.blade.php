@@ -13,7 +13,8 @@
             <form action="{{ route('scores.delete',['student' => $student]) }}" method="POST">
                 @foreach ($student->subjects as $subject)
                 <th> <br> {{$subject->name}} <br> <button class="submit">Delete</button>
-                 <a href="{{ route('scores.edit', ['student' => $student , 'subject_id' => $subject->id , 'score' => $subject->pivot->score ]) }}">Edit </a> </th>
+                    <a href="{{ route('scores.edit', ['student' => $student , 'subject_id' => $subject->id , 'score' => $subject->pivot->score ]) }}">Edit </a>
+                </th>
                 <input type="hidden" name="subjects_id" value="{{ $subject->id }}" />
                 @method('DELETE')
                 @csrf
@@ -24,7 +25,7 @@
         </tr>
     </table>
 </div>
-<a href="{{ route('scores.show', ['student' => $student]) }}">Add Score</a>
+<a href="{{ route('scores.create', ['student' => $student]) }}">Add Score</a>
 <br>
 <a href="{{ route('students.index') }}"> Back </a>
 @endsection

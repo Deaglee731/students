@@ -2,7 +2,7 @@
 @section('content')
 
 <div>
-    <form action="{{ route('scores.create', ['student' => $student]) }}" method="POST" required="required">
+    <form action="{{ route('scores.store', ['student' => $student]) }}" method="POST" required="required">
         <h2 style="text-align: center;"> Добавление новой оценки студенту {{$student->first_name}} {{$student->last_name}} {{$student->middle_name}} </h2>
         <br>
         @csrf
