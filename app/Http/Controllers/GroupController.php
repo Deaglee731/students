@@ -54,7 +54,7 @@ class GroupController extends Controller
      */
     public function show(Groups $group)
     {
-        return view ('groups.show', [
+        return view('groups.show', [
             'group' => $group
         ]);
     }
@@ -67,7 +67,7 @@ class GroupController extends Controller
      */
     public function edit(Groups $group)
     {
-        return view ('groups.edit', [
+        return view('groups.edit', [
             'group' => $group
         ]);
     }
@@ -95,7 +95,7 @@ class GroupController extends Controller
     public function destroy(Groups $group)
     {
         $group->delete();
-        
+
         return back();
     }
 }

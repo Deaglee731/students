@@ -10,21 +10,21 @@
     <table class="table">
         <tr>
         <tr>
-            <form action="{{ route('student.deleteScore',['student' => $student]) }}" method="POST">
+            <form action="{{ route('scores.delete',['student' => $student]) }}" method="POST">
                 @foreach ($student->subjects as $subject)
-                <th> <br> {{$subject->name}} <br> <button class="submit">Delete</button> <a href="{{ route('student.editScore', ['student' => $student , 'subject_id' => $subject->id]) }}">Edit </a> </th>
+                <th> <br> {{$subject->name}} <br> <button class="submit">Delete</button>
+                 <a href="{{ route('scores.edit', ['student' => $student , 'subject_id' => $subject->id , 'score' => $subject->pivot->score ]) }}">Edit </a> </th>
                 <input type="hidden" name="subjects_id" value="{{ $subject->id }}" />
                 @method('DELETE')
                 @csrf
-                <td> {{ $subject->pivot->score }} </td>
-
+                <td>{{ $subject->pivot->score }} </td>
                 @endforeach
             </form>
         </tr>
         </tr>
     </table>
 </div>
-<a href="{{ route('student.showScore', ['student' => $student]) }}">Add Score</a>
+<a href="{{ route('scores.show', ['student' => $student]) }}">Add Score</a>
 <br>
 <a href="{{ route('students.index') }}"> Back </a>
 @endsection

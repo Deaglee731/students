@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\ScoreController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
 use App\Models\Subjects;
@@ -26,8 +27,8 @@ Route::resource('subjects', SubjectController::class)->shallow();
 Route::resource('students', StudentController::class)->shallow();
 
 
-Route::GET('/students/{student}/showScore', [StudentController::class, 'showScore'])->name('student.showScore');
-Route::POST('/students/{student}/addScore', [StudentController::class, 'addScore'])->name('student.addScore');
-Route::DELETE('/students/{student}/deleteScore/', [StudentController::class, 'deleteScore'])->name('student.deleteScore');
-Route::GET('students/{student}/editScore/{subject_id}', [StudentController::class, 'editScore'])->name('student.editScore');
-Route::PATCH('students/{student}/updateScore', [StudentController::class, 'updateScore'])->name('student.updateScore');
+Route::GET('/students/{student}/showScore', [ScoreController::class, 'show'])->name('scores.show');
+Route::POST('/students/{student}/addScore', [ScoreController::class, 'store'])->name('scores.create');
+Route::DELETE('/students/{student}/deleteScore/', [ScoreController::class, 'delete'])->name('scores.delete');
+Route::GET('students/{student}/editScore/{subject_id}', [ScoreController::class, 'edit'])->name('scores.edit');
+Route::PATCH('students/{student}/updateScore', [ScoreController::class, 'update'])->name('scores.update');

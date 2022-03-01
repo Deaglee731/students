@@ -59,7 +59,7 @@ class StudentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Students $student)
-    {   
+    {
         return view('students.show', [
             'student' => $student,
         ]);
@@ -107,57 +107,5 @@ class StudentController extends Controller
         $student->delete();
 
         return back();
-    }
-
-    public function addScore(ScoreRequest $request, Students $student)
-    {
-        $request->validate;
-        $student->subjects()->attach($request->subject_id, [
-            'score' => $request->score,
-            'subjects_id' => $request->subject_id
-        ]);
-
-        return back();
-    }
-
-
-    public function showScore(Request $request, Students $student)
-    {
-        $subjectsAll = Subjects::all();
-        $subjects = $student->subjects;
-        $diffsubject = $subjectsAll->diff($subjects);
-
-        return view('students.showscore', [
-            'student' => $student,
-            'subjects' => $diffsubject
-        ]);
-    }
-
-    public function deleteScore(Request $request, Students $student)
-    {
-        $student->subjects()->detach($request->subjects_id,['subjects_id' => $request->subjects_id]);
-
-        return back();
-    }
-
-    public function editScore(Request $request, Students $student)
-    {
-       
-        $subject = Subjects::where('id', $request->subject_id)->first();
-        
-        return view('students.updateScore', [
-            'student' => $student,
-            'score' => $request->score,
-            'subject' => $subject
-        ]);
-    }
-
-    public function updateScore(Request $request, Students $student)
-    {
-        $student->subjects()->where('subjects_id',$request->subjects_id)->updateExistingPivot($request->subjects_id, [
-            'score' => $request->score,
-        ]);
-
-        return redirect(route('students.index'));
     }
 }

@@ -42,7 +42,7 @@ class SubjectController extends Controller
     public function store(SubjectRequest $request)
     {
         Subjects::create($request->validated());
-        
+
         return back();
     }
 
@@ -54,7 +54,7 @@ class SubjectController extends Controller
      */
     public function show(Subjects $subject)
     {
-        return view ('subjects.show', [
+        return view('subjects.show', [
             'subject' => $subject
         ]);
     }
@@ -67,7 +67,7 @@ class SubjectController extends Controller
      */
     public function edit(Subjects $subject)
     {
-        return view ('subjects.edit', [
+        return view('subjects.edit', [
             'subject' => $subject,
         ]);
     }
@@ -95,7 +95,7 @@ class SubjectController extends Controller
     public function destroy(Subjects $subject)
     {
         $subject->delete();
-        
+
         return back();
     }
 }
