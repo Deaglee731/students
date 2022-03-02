@@ -1,3 +1,3 @@
-<footer style="text-align: right;">
+<footer style="text-align: center;">
         <p>© 2022 ALEX </p>
 </footer>

@@ -9,7 +9,7 @@
         @csrf
     </form>
 
-    <a href="{{ route('subjects.index') }}"> Back </a>
+    <a class="btn btn-dark" href="{{ route('subjects.index') }}"> Back </a>
 </div>
 
 @endsection
