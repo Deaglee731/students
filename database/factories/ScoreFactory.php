@@ -2,9 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Models\Score;
 use App\Models\Student;
 use App\Models\Subject;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Scope;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Score>
@@ -19,7 +21,6 @@ class ScoreFactory extends Factory
     public function definition()
     {
         return [
-            'score' => 5,
             'student_id' => Student::factory(),
             'subject_id' => Subject::factory(),
         ];

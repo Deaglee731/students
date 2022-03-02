@@ -30,10 +30,11 @@
                 </th>
             </tr>
             @endforeach
+            {{ $students->links() }}
         </tbody>
     </table>
 </div>
-{{ $students->links() }}
+
 
 <a href="{{ route('students.create') }}"> Create </a>
 <br>

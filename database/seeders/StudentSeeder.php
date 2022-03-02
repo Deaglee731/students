@@ -21,7 +21,7 @@ class StudentSeeder extends Seeder
     {
         Student::factory()
             ->count(15)
-            ->hasAttached(Subject::factory(5),['score' => 5])
+            ->hasAttached(Subject::factory(5), ['score' => 5])
             ->create();
     }
 }
