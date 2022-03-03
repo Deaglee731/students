@@ -1,8 +1,11 @@
 @extends('app')
 @section('content')
-<h3 style="text-align: center;" class="display-4">FWT_education (Groups)</h1>
-<div class="container" >
-    <table class="table table-striped table-bordered table align-middle table-sm" > 
+<h3 style="text-align: center;" class="display-4">FWT_education (Groups)</h3>
+<div class="container">
+    <div style="display: flex ; justify-content:right">
+        <a class="btn btn-success" style="width: auto;" href="{{ route('groups.create') }}"> Create </a>
+    </div>
+    <table class="table table-striped table-bordered table align-middle table-sm">
         <tbody style="text-align: center;">
             <th>id </th>
             <th>Название </th>
@@ -13,24 +16,25 @@
                 <td>{{ $group->name }}</td>
                 <td>
                     <div class="row">
-                        <div style="text-align: center;">
-                        <a  class ="btn btn-primary" style="width: auto;" href="{{ route('groups.show', ['group' => $group]) }}">Show</a>
-                        
-                        <a  class ="btn btn-secondary" style="width: auto;" href="{{ route('groups.edit', ['group' => $group]) }}">Edit</a>
+                        <div style="text-align: center; display: flex ; justify-content:center">
+                            <a class="btn btn-primary" style="width: auto;" href="{{ route('groups.show', ['group' => $group]) }}">Show</a>
+                            <a class="btn btn-secondary" style="width: auto;" href="{{ route('groups.edit', ['group' => $group]) }}">Edit</a>
+                            <form action="{{ route('groups.destroy', ['group' => $group]) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger">Delete</button>
+                            </form>
                         </div>
-                        <form action="{{ route('groups.destroy', ['group' => $group]) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-danger">Delete</button>
-                        </form>
+                    </div>
                 </td>
             </tr>
             @endforeach
-            {{ $groups->links() }}
         </tbody>
     </table>
-    <th><a class ="btn btn-success" style="width: auto;" href="{{ route('groups.create') }}"> Create </a></th>
+    <th>
+        <div style="display: flex ; justify-content:center">
+            {{ $groups->links() }}
+        </div>
+    </th>
 </div>
-<br>
-
 @endsection

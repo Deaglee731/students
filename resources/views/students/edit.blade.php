@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
 
-<div class="container" style="display: flex; justify-content: center; align-items: center;">
+<div class="container">
     <form action="{{ route('students.update',['student' => $student]) }}" method="POST">
         <h2 style="text-align: center;"> Редактирование студента {{$student->first_name}} {{$student->last_name}} {{$student->middle_name}} </h2>
         <div class="form-floating mb-3">

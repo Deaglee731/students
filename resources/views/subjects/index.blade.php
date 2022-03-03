@@ -1,7 +1,10 @@
 @extends('app')
 @section('content')
-<h3 style="text-align: center;" class="display-4">FWT_education (Subjects)</h1>
+<h3 style="text-align: center;" class="display-4">FWT_education (Subjects)</h3>
 <div class="container">
+    <div style="display: flex ; justify-content:right">
+        <a class="btn btn-success" style="width: auto;" href="{{ route('subjects.create') }}"> Create </a>
+    </div>
     <table class="table table-striped table-bordered table align-middle table-sm">
         <tbody style="text-align: center;">
             <th>id </th>
@@ -12,23 +15,24 @@
                 <th scope="row">{{ $subject->id }}</th>
                 <td>{{ $subject->name }}</td>
                 <td>
-                    <div style="text-align: center;">
-                    <a class="btn btn-primary" style="width: auto;" href="{{ route('subjects.show', ['subject' => $subject]) }}">Show</a>
-                    <a class="btn btn-secondary" style="width: auto;" href="{{ route('subjects.edit', ['subject' => $subject]) }}">Edit</a>
-                    </div>
+                    <div style="text-align: center; display: flex ; justify-content:center">
+                        <a class="btn btn-primary" style="width: auto;" href="{{ route('subjects.show', ['subject' => $subject]) }}">Show</a>
+                        <a class="btn btn-secondary" style="width: auto;" href="{{ route('subjects.edit', ['subject' => $subject]) }}">Edit</a>
                     <form action="{{ route('subjects.destroy', ['subject' => $subject]) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-danger">Delete</button>
                     </form>
+                    </div>
                 </td>
             </tr>
             @endforeach
-            {{ $subjects->links() }}
         </tbody>
     </table>
-    <th><a class="btn btn-success" style="width: auto;" href="{{ route('subjects.create') }}"> Create </a></th>
+    <th>
+        <div style="display: flex ; justify-content:center">
+            {{ $subjects->links() }}
+        </div>
+    </th>
 </div>
-
-<br>
 @endsection
