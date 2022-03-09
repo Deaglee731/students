@@ -15,7 +15,7 @@
             <th> Администрирование </th>
             @foreach ($students as $student)
             <tr>
-                <th scope="row">{{ $student->id }}</th>
+                <th>{{ $student->id }}</th>
                 <th>{{ $student->first_name }}</td>
                 <th>{{ $student->last_name }}</td>
                 <th>{{ $student->middle_name }}</td>

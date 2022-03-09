@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\GroupRequest;
 use App\Models\Group;
+use App\Models\Student;
+use App\Models\Subject;
+use App\Services\JournalServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -97,5 +100,24 @@ class GroupController extends Controller
         $group->delete();
 
         return back();
+    }
+
+    public function showJournal (Group $group)
+    {
+        $allStudents = Student::all()->where('group_id',$group->id);
+        $subjects = Subject::all();
+
+        $goodStudents = JournalServices::getGoodStudents($allStudents);
+        $bestStudents = JournalServices::getBestStudents($allStudents);
+        $students_subjects = JournalServices::getScoresWithSubjects($subjects, $allStudents);
+        $avgScore = JournalServices::getAverageScoreWithSubjects($students_subjects);
+
+        return view('journal.index', [
+            'students_subjects' => $students_subjects,
+            'subjects' => $subjects,
+            'goodStudents' => $goodStudents,
+            'bestStudents' => $bestStudents,
+            'avgScore' => $avgScore
+        ]);
     }
 }

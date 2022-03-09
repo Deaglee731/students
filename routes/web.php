@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\JournalController;
 use App\Http\Controllers\ScoreController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
@@ -32,3 +33,5 @@ Route::POST('/students/{student}/saveScore', [ScoreController::class, 'store'])-
 Route::DELETE('/students/{student}/deleteScore/', [ScoreController::class, 'delete'])->name('scores.delete');
 Route::GET('students/{student}/editScore/{subject_id}', [ScoreController::class, 'edit'])->name('scores.edit');
 Route::PATCH('students/{student}/updateScore', [ScoreController::class, 'update'])->name('scores.update');
+
+Route::GET('/groups/{group}/showJournal' , [GroupController::class, 'showJournal'])->name('group_journal.index');

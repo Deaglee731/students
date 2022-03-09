@@ -19,6 +19,7 @@
                         <div style="text-align: center; display: flex ; justify-content:center">
                             <a class="btn btn-primary" style="width: auto;" href="{{ route('groups.show', ['group' => $group]) }}">Show</a>
                             <a class="btn btn-secondary" style="width: auto;" href="{{ route('groups.edit', ['group' => $group]) }}">Edit</a>
+                            <a class="btn btn-dark" style="width: auto;" href="{{ route('group_journal.index', ['group' => $group]) }}">Journal</a>
                             <form action="{{ route('groups.destroy', ['group' => $group]) }}" method="POST">
                                 @csrf
                                 @method('DELETE')

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Student extends Model
 {
@@ -20,4 +21,5 @@ class Student extends Model
     {
         return $this->belongsToMany(Subject::class, 'scores','student_id','subject_id')->withPivot('score');;
     }
+
 }
