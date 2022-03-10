@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ScoreRequest;
 use App\Http\Requests\StudentRequest;
 use App\Models\Group;
 use App\Models\Student;
-use App\Models\Subject;
-use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
@@ -90,6 +87,8 @@ class StudentController extends Controller
      */
     public function update(StudentRequest $request, Student $student)
     {
+        $address = ['city' => $request->city, 'street' => $request->street, 'home' => $request->home];
+        $student->address = $address;
         $student->update($request->validated());
 
         return redirect(route('students.index'));

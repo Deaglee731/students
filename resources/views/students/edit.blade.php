@@ -16,6 +16,28 @@
             <input type="text" id="inputMiddleName" name="middle_name" value="{{$student->middle_name}}" size="18" class="form-control" style="max-width:max-content ;" />
             <label for="inputMiddleName"> New middle name</label>
         </div>
+        <h2>
+            <th> {{ $student->birthday }} </th>
+        </h2>
+        <div class="form-floating mb-3">
+            <input type="date" id="inputbirthday" name="birthday" value="{{$student->birthday}}" size="18" class="form-control" style="max-width:max-content ;" />
+            <label for="inputbirthday"> New birthday</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" id="inputCity" name="city" size="18" class="form-control" style="max-width:max-content ;" />
+            <label for="inputCity"> New city</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" id="inputStreet" name="street" size="18" class="form-control" style="max-width:max-content ;" />
+            <label for="inputStreet"> New street</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" id="inputHome" name="home" size="18" class="form-control" style="max-width:max-content ;" />
+            <label for="inputHome"> New home</label>
+        </div>
+        <h4>
+            <th> {{ $student->full_address }}</th>
+        </h4>
         <h4 class="display-8">Текущая группа студента {{ $student->group->name }} </h4>
         <p>
             <select name="group_id" class="form-select mb-3" style="max-width: max-content;">

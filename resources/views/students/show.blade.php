@@ -6,7 +6,9 @@
     <br>
     <h3 style="text-align: center;" class="display-7"> Который находится в группе {{ $student->group->name}} </h3>
     <br>
+    <h3 style="text-align: center;" class="display-8"> Проживающий по адрессу {{ $student->full_address }} </h3>
     <h3 style="text-align: center;" class="display-8"> Оценки по предметами</h3>
+    <br>
     <table class="table table-striped table-bordered table align-middle table-sm">
         <tbody style="text-align: center;">
             <th> Предмет </th>

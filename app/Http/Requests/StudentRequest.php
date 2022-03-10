@@ -27,7 +27,11 @@ class StudentRequest extends FormRequest
             'first_name' => 'required',
             'last_name' => 'required',
             'middle_name' => 'required',
-            'group_id' => 'required'
+            'group_id' => 'required',
+            'birthday' => 'required',
+            'city' => 'required',
+            'street' => 'required',
+            'home' => 'required'
         ];
     }
 }

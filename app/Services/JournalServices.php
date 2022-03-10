@@ -15,12 +15,12 @@ class JournalServices
 
             return $student->subjects->min('pivot.score') == 5;
         });
-        
+
         return $bestStudents;
     }
     public static function getGoodStudents($students)
     {
-        $goodStudents = $students->filter(function ($student, $key) {
+        $goodStudents = $students->filter(function ($student) {
 
             return $student->subjects->min('pivot.score') == 4;
         });
@@ -30,7 +30,7 @@ class JournalServices
 
     public static function getOtherStudents($students)
     {
-        $otherStudents = $students->filter(function ($student, $key) {
+        $otherStudents = $students->filter(function ($student) {
 
             return $student->subjects->min('pivot.score') <= 3;
         });

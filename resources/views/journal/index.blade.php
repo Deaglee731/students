@@ -11,10 +11,10 @@
                 @endforeach
             </tr>
             @foreach ($students_subjects as $student)
-            <tr>
-                <th> {{ $student->first_name }}</th>
+            <tr style = "background: {{ $student->color }}">
+                <th> {{ $student->first_name }}    </th>
                 @foreach ($student->subjectsScore as $sub)
-                    <th scope="col">{{ isset($sub->pivot->score) ? $sub->pivot->score: '-' }}</th>
+                    <th scope="col">{{ isset($sub->pivot->score) ? $sub->pivot->score : '-' }}</th>
                 @endforeach                   
             @endforeach
             </tr>
