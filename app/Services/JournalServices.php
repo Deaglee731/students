@@ -12,7 +12,6 @@ class JournalServices
     public static function getBestStudents($students)
     {
         $bestStudents = $students->filter(function ($student) {
-
             return $student->subjects->min('pivot.score') == 5;
         });
 
@@ -21,7 +20,6 @@ class JournalServices
     public static function getGoodStudents($students)
     {
         $goodStudents = $students->filter(function ($student) {
-
             return $student->subjects->min('pivot.score') == 4;
         });
 
@@ -31,7 +29,6 @@ class JournalServices
     public static function getOtherStudents($students)
     {
         $otherStudents = $students->filter(function ($student) {
-
             return $student->subjects->min('pivot.score') <= 3;
         });
 

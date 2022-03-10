@@ -58,11 +58,14 @@ class Student extends Model
         $address['city'] = ucfirst($address['city']);
         $address['street'] = ucfirst($address['street']);
         $address['home'] = ucfirst($address['home']);
+
         $this->attributes['address'] = json_encode($address);
     }
 
     public function getFullAddressAttribute()
     {
-        return  "Город  " . $this->address['city'] . "  Улица  " . $this->address['street'] . " Дом  " . $this->address['home'];
+        return  "Город  " . $this->address['city'] . 
+            "  Улица  " . $this->address['street'] . 
+            " Дом  " . $this->address['home'];
     }
 }

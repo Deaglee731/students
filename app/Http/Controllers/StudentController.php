@@ -87,7 +87,11 @@ class StudentController extends Controller
      */
     public function update(StudentRequest $request, Student $student)
     {
-        $address = ['city' => $request->city, 'street' => $request->street, 'home' => $request->home];
+        $address = [
+            'city' => $request->city,
+            'street' => $request->street,
+            'home' => $request->home
+        ];
         $student->address = $address;
         $student->update($request->validated());
 
