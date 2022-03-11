@@ -12,6 +12,7 @@
                 @csrf
                 <button class="btn">FILTER</button>
             </form>
+            <a class="btn" style="width: auto;" href="{{ route('subjects.index') }}">Reset</a>
             <th>id </th>
             <th>Название группы </th>
             <th>Администрирование </th>
