@@ -18,7 +18,7 @@ class GroupController extends Controller
      */
     public function index(GroupFilterRequest $request)
     {
-        $groups  = Group::groupFilter($request)->paginate(10);
+        $groups  = Group::filter($request)->paginate(10);
 
         return view('groups.index', [
             'groups' => $groups,

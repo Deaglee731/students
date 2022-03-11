@@ -16,8 +16,7 @@ class StudentController extends Controller
      */
     public function index(StudentFilterRequest $request)
     {
-        $request->validated();
-        $students  = Student::studentsFilter($request)->paginate(10);
+        $students  = Student::filter($request)->paginate(10);
 
         return view('students.index', [
             'students' => $students,

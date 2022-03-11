@@ -16,7 +16,7 @@ class Subject extends Model
         return $this->belongsToMany(Student::class);
     }
 
-    public function scopeSubjectsFilter($query, $request)
+    public function scopeFilter($query, $request)
     {      
         if (isset($request->name)) {
             return $query->where('name', 'LIKE', "%$request->name%");

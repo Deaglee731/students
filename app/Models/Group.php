@@ -16,7 +16,7 @@ class Group extends Model
         return $this->hasMany(Student::class);
     }
 
-    public function scopeGroupFilter($query, $request)
+    public function scopeFilter($query, $request)
     {
         if (isset($request->name)) {
             return $query->where('name', 'LIKE', "%$request->name%");

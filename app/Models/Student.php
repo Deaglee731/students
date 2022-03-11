@@ -69,17 +69,20 @@ class Student extends Model
             " Дом  " . $this->address['home'];
     }
 
-    public function scopeStudentsFilter($query, $request)
+    public function scopeFilter($query, $request)
     {
         if (isset($request->firstname)) {
             $query->Where('first_name', 'LIKE', "%$request->firstname%");
         }
+
         if (isset($request->lastname)) {
             $query->Where('last_name', 'LIKE', "%$request->lastname%");
         }
+        
         if (isset($request->middlename)) {
             $query->Where('middle_name', 'LIKE', "%$request->middlename%");
         }
+        
         if (isset($request->birthday)) {
             $query->Where('birthday', $request->birthday);
         }
