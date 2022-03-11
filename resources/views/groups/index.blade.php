@@ -8,7 +8,7 @@
     <table class="table table-striped table-bordered table align-middle table-sm">
         <tbody style="text-align: center;">
             <form action="{{ route('groups.index') }}" method="GET">
-                <input type="text" name="name" style="border: 2px solid grey; border-radius: 4px;" placeholder="Группа">
+                <input type="text" value="{{ isset($request['name']) ? $request['name'] : null }}" name="name" style="border: 2px solid grey; border-radius: 4px;" placeholder="Группа">
                 @csrf
                 <button class="btn">FILTER</button>
             </form>
