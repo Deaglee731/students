@@ -9,7 +9,6 @@ use App\Models\Student;
 use App\Models\Subject;
 use App\Services\JournalServices;
 
-
 class GroupController extends Controller
 {
     /**
@@ -19,7 +18,7 @@ class GroupController extends Controller
      */
     public function index(GroupFilterRequest $request)
     {
-        $groups  = Group::GroupFilter($request->filter)->paginate(5);
+        $groups  = Group::groupFilter($request)->paginate(10);
 
         return view('groups.index', [
             'groups' => $groups,

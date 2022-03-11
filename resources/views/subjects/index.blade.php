@@ -7,8 +7,8 @@
     </div>
     <table class="table table-striped table-bordered table align-middle table-sm">
         <tbody style="text-align: center;">
-            <form action="{{ route('subjects.filter') }}" method="POST">
-                <input type="text" name="filter" style="border: 2px solid grey; border-radius: 4px;" placeholder="Предмет">
+            <form action="{{ route('subjects.index') }}" method="GET">
+                <input type="text" name="name" style="border: 2px solid grey; border-radius: 4px;" placeholder="Предмет">
                 @csrf
                 <button class="btn">FILTER</button>
             </form>

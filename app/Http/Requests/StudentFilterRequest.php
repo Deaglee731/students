@@ -24,9 +24,9 @@ class StudentFilterRequest extends FormRequest
     public function rules()
     {
         return [
-            'filter_firstname' => 'max:25',
-            'filter_lastname' => 'max:25',
-            'filter_middlename' => 'max:25',
+            'firstname' => 'max:25',
+            'lastname' => 'max:25',
+            'middlename' => 'max:25',
         ];
     }
 }

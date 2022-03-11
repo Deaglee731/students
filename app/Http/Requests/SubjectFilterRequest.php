@@ -24,7 +24,7 @@ class SUbjectFilterRequest extends FormRequest
     public function rules()
     {
         return [
-            'filter' => 'max:20'
+            'name' => 'max:20'
         ];
     }
 }

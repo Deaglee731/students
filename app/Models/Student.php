@@ -71,17 +71,17 @@ class Student extends Model
 
     public function scopeStudentsFilter($query, $request)
     {
-        if (isset($request->filter_firstname)) {
-            $query->Where('first_name', 'LIKE', "%$request->filter_firstname%");
+        if (isset($request->firstname)) {
+            $query->Where('first_name', 'LIKE', "%$request->firstname%");
         }
-        if (isset($request->filter_lastname)) {
-            $query->Where('last_name', 'LIKE', "%$request->filter_lastname%");
+        if (isset($request->lastname)) {
+            $query->Where('last_name', 'LIKE', "%$request->lastname%");
         }
-        if (isset($request->filter_middlename)) {
-            $query->Where('middle_name', 'LIKE', "%$request->filter_middlename%");
+        if (isset($request->middlename)) {
+            $query->Where('middle_name', 'LIKE', "%$request->middlename%");
         }
-        if (isset($request->filter_birthday)) {
-            $query->Where('birthday', $request->filter_birthday);
+        if (isset($request->birthday)) {
+            $query->Where('birthday', $request->birthday);
         }
 
         return $query;

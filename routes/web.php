@@ -1,12 +1,9 @@
 <?php
 
 use App\Http\Controllers\GroupController;
-use App\Http\Controllers\JournalController;
 use App\Http\Controllers\ScoreController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
-use App\Models\Group;
-use App\Models\Subject;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,7 +25,6 @@ Route::resource('groups', GroupController::class)->shallow();
 Route::resource('subjects', SubjectController::class)->shallow();
 Route::resource('students', StudentController::class)->shallow();
 
-
 Route::GET('/students/{student}/addScore', [ScoreController::class, 'create'])->name('scores.create');
 Route::POST('/students/{student}/saveScore', [ScoreController::class, 'store'])->name('scores.store');
 Route::DELETE('/students/{student}/deleteScore/', [ScoreController::class, 'delete'])->name('scores.delete');
@@ -36,7 +32,3 @@ Route::GET('students/{student}/editScore/{subject_id}', [ScoreController::class,
 Route::PATCH('students/{student}/updateScore', [ScoreController::class, 'update'])->name('scores.update');
 
 Route::GET('/groups/{group}/showJournal' , [GroupController::class, 'showJournal'])->name('group_journal.index');
-
-Route::POST('/groups', [GroupController::class,'index'])-> name('groups.filter');
-Route::POST('/students', [StudentController::class,'index'])-> name('students.filter');
-Route::POST('/subjects', [SubjectController::class,'index'])-> name('subjects.filter');

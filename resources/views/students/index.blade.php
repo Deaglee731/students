@@ -6,11 +6,11 @@
         <a class="btn btn-success" style="width: auto;" href="{{ route('students.create') }}"> Create </a>
     </div>
     <table class="table table-striped table-bordered table align-middle table-sm">
-        <form action="{{ route('students.filter') }}" method="GET">
-            <input type="text" value="{{ isset($request['filter_firstname']) ? $request['filter_firstname'] : null }}" name="filter_firstname" style="border: 2px solid grey; border-radius: 4px;" placeholder="Имя">
-            <input type="text" value="{{ isset($request['filter_lastname']) ? $request['filter_lastname'] : null }}" name="filter_lastname" style="border: 2px solid grey; border-radius: 4px;" placeholder="Фамилия">
-            <input type="text" value="{{ isset($request['filter_middlename']) ? $request['filter_middlename'] : null }}" name="filter_middlename" style="border: 2px solid grey; border-radius: 4px;" placeholder="Логин">
-            <input type="date" value="{{ isset($request['filter_birthday']) ? $request['filter_birthday'] : 'null' }}" name="filter_birthday" style="border: 2px solid grey; border-radius: 4px;" placeholder="Дата">
+        <form action="{{ route('students.index') }}" method="GET">
+            <input type="text" value="{{ isset($request['firstname']) ? $request['firstname'] : null }}" name="firstname" style="border: 2px solid grey; border-radius: 4px;" placeholder="Имя">
+            <input type="text" value="{{ isset($request['lastname']) ? $request['lastname'] : null }}" name="lastname" style="border: 2px solid grey; border-radius: 4px;" placeholder="Фамилия">
+            <input type="text" value="{{ isset($request['middlename']) ? $request['middlename'] : null }}" name="middlename" style="border: 2px solid grey; border-radius: 4px;" placeholder="Логин">
+            <input type="date" value="{{ isset($request['birthday']) ? $request['birthday'] : 'null' }}" name="birthday" style="border: 2px solid grey; border-radius: 4px;" placeholder="Дата">
             @csrf
             <button class="btn">FILTER</button>
         </form>
