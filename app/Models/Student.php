@@ -64,8 +64,26 @@ class Student extends Model
 
     public function getFullAddressAttribute()
     {
-        return  "Город  " . $this->address['city'] . 
-            "  Улица  " . $this->address['street'] . 
+        return  "Город  " . $this->address['city'] .
+            "  Улица  " . $this->address['street'] .
             " Дом  " . $this->address['home'];
+    }
+
+    public function scopeStudentsFilter($query, $request)
+    {
+        if (isset($request->filter_firstname)) {
+            $query->Where('first_name', 'LIKE', "%$request->filter_firstname%");
+        }
+        if (isset($request->filter_lastname)) {
+            $query->Where('last_name', 'LIKE', "%$request->filter_lastname%");
+        }
+        if (isset($request->filter_middlename)) {
+            $query->Where('middle_name', 'LIKE', "%$request->filter_middlename%");
+        }
+        if (isset($request->filter_birthday)) {
+            $query->Where('birthday', $request->filter_birthday);
+        }
+
+        return $query;
     }
 }

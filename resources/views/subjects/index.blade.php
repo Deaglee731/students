@@ -7,6 +7,11 @@
     </div>
     <table class="table table-striped table-bordered table align-middle table-sm">
         <tbody style="text-align: center;">
+            <form action="{{ route('subjects.filter') }}" method="POST">
+                <input type="text" name="filter" style="border: 2px solid grey; border-radius: 4px;" placeholder="Предмет">
+                @csrf
+                <button class="btn">FILTER</button>
+            </form>
             <th>id </th>
             <th>Название группы </th>
             <th>Администрирование </th>
@@ -18,11 +23,11 @@
                     <div style="text-align: center; display: flex ; justify-content:center">
                         <a class="btn btn-primary" style="width: auto;" href="{{ route('subjects.show', ['subject' => $subject]) }}">Show</a>
                         <a class="btn btn-secondary" style="width: auto;" href="{{ route('subjects.edit', ['subject' => $subject]) }}">Edit</a>
-                    <form action="{{ route('subjects.destroy', ['subject' => $subject]) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-danger">Delete</button>
-                    </form>
+                        <form action="{{ route('subjects.destroy', ['subject' => $subject]) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger">Delete</button>
+                        </form>
                     </div>
                 </td>
             </tr>
@@ -31,7 +36,7 @@
     </table>
     <th>
         <div style="display: flex ; justify-content:center">
-            {{ $subjects->links() }}
+            {{ $subjects->appends($request)->links() }}
         </div>
     </th>
 </div>

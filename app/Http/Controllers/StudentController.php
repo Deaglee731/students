@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StudentFilterRequest;
 use App\Http\Requests\StudentRequest;
 use App\Models\Group;
 use App\Models\Student;
@@ -13,12 +14,14 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(StudentFilterRequest $request)
     {
-        $students  = Student::paginate(5);
+        $request->validated();
+        $students  = Student::StudentsFilter($request)->paginate(2);
 
         return view('students.index', [
             'students' => $students,
+            'request' => $request->validated(),
         ]);
     }
 

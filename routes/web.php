@@ -5,6 +5,7 @@ use App\Http\Controllers\JournalController;
 use App\Http\Controllers\ScoreController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
+use App\Models\Group;
 use App\Models\Subject;
 use Illuminate\Support\Facades\Route;
 
@@ -35,3 +36,7 @@ Route::GET('students/{student}/editScore/{subject_id}', [ScoreController::class,
 Route::PATCH('students/{student}/updateScore', [ScoreController::class, 'update'])->name('scores.update');
 
 Route::GET('/groups/{group}/showJournal' , [GroupController::class, 'showJournal'])->name('group_journal.index');
+
+Route::POST('/groups', [GroupController::class,'index'])-> name('groups.filter');
+Route::POST('/students', [StudentController::class,'index'])-> name('students.filter');
+Route::POST('/subjects', [SubjectController::class,'index'])-> name('subjects.filter');

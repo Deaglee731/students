@@ -7,13 +7,18 @@
     </div>
     <table class="table table-striped table-bordered table align-middle table-sm">
         <tbody style="text-align: center;">
+            <form action="{{ route('groups.filter') }}" method="POST">
+                <input type="text" name="filter" style="border: 2px solid grey; border-radius: 4px;" placeholder="Группа">
+                @csrf
+                <button class="btn">FILTER</button>
+            </form>
             <th>id </th>
-            <th>Название </th>
+            <th> Название <br></th>
             <th>Администрирование </th>
             @foreach ($groups as $group)
             <tr style="text-align: center;">
                 <th scope="row">{{ $group->id }}</th>
-                <td>{{ $group->name }}</td>
+                <td> {{ $group->name }} </td>
                 <td>
                     <div class="row">
                         <div style="text-align: center; display: flex ; justify-content:center">
@@ -34,7 +39,7 @@
     </table>
     <th>
         <div style="display: flex ; justify-content:center">
-            {{ $groups->links() }}
+            {{ $groups->appends($request)->links() }}
         </div>
     </th>
 </div>

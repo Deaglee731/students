@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\GroupFilterRequest;
 use App\Http\Requests\GroupRequest;
 use App\Models\Group;
 use App\Models\Student;
 use App\Models\Subject;
 use App\Services\JournalServices;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+
 
 class GroupController extends Controller
 {
@@ -17,12 +17,13 @@ class GroupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(GroupFilterRequest $request)
     {
-        $groups  = Group::paginate(5);
+        $groups  = Group::GroupFilter($request->filter)->paginate(5);
 
         return view('groups.index', [
-            'groups' => $groups
+            'groups' => $groups,
+            'request' => $request->validated(),
         ]);
     }
 

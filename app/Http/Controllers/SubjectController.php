@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SubjectFilterRequest;
 use App\Http\Requests\SubjectRequest;
 use App\Models\Group;
 use App\Models\Subject;
@@ -14,12 +15,13 @@ class SubjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(SubjectFilterRequest $request)
     {
-        $subjects  = Subject::paginate(5);
+        $subjects  = Subject::SubjectsFilter($request->filter)->paginate(5);
 
         return view('subjects.index', [
-            'subjects' => $subjects
+            'subjects' => $subjects,
+            'request' => $request->validated()
         ]);
     }
 
