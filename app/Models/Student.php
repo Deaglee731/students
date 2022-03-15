@@ -4,20 +4,37 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
-class Student extends Model
+class Student extends Authenticatable
 {
+    use HasApiTokens, HasFactory, Notifiable;
+    
     const COLOR_GREEN = 'green';
     const COLOR_YELLOW = 'yellow';
     const COLOR_RED = 'red';
 
-    use HasFactory;
+    protected $fillable = [
+        'address',
+        'email', 
+        'password', 
+        'first_name', 
+        'last_name', 
+        'middle_name', 
+        'group_id', 
+        'birthday'
+    ];
 
-    protected $fillable = ['first_name', 'last_name', 'middle_name', 'group_id', 'birthday'];
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
 
     protected $casts = [
         'address' => 'array',
+        'email_verified_at' => 'datetime',
     ];
 
     public function group()
@@ -46,11 +63,6 @@ class Student extends Model
         } else {
             return self::COLOR_RED;
         }
-    }
-
-    public function getBirthdayAttribute($date)
-    {
-        return Carbon::parse($date)->format('d-m-Y');
     }
 
     public function setAddressAttribute($address)

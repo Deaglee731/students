@@ -1,16 +1,23 @@
 @extends('app')
 @section('content')
 
-<div>
+<div class="container">
     <form action="{{ route('students.store') }}" method="POST" required="required">
         <h2 style="text-align: center;"> Добавление нового студента </h2>
         <br>
         @csrf
-        <p>
-            <input type="text" name="first_name" placeholder="Введите имя" size="18" />
-        </p>
-        <input type="text" name="last_name" placeholder="Введите фамилию" size="18" /></p>
-        <input type="text" name="middle_name" placeholder="Введите отчество" size="18" /></p>
+        <div class="form-floating mb-3">
+            <input type="text" id="inputFirstName" name="first_name" size="18" class="form-control" style="max-width:max-content ;" />
+            <label for="inputFirstName">First Name</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" id="inputLastName" name="last_name" size="18" class="form-control" style="max-width:max-content ;" />
+            <label for="inputLastName">Last Name</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" id="inputMiddleName" name="middle_name" size="18" class="form-control" style="max-width:max-content ;" />
+            <label for="inputMiddleName">Middle Name</label>
+        </div>
         <h3> Выберите из списка необходимую группу</h3>
         <p>
             <select name="group_id">
@@ -19,7 +26,23 @@
                 @endforeach
             </select>
         </p>
-        <button class="btn">Add student</button>
+        <div class="form-floating mb-3">
+            <input type="date" id="inputbirthday" name="birthday" size="18" class="form-control" style="max-width:max-content ;" />
+            <label for="inputbirthday">Birthday</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" id="inputCity" name="city" size="18" class="form-control" style="max-width:max-content ;" />
+            <label for="inputCity"> City</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" id="inputStreet" name="street" size="18" class="form-control" style="max-width:max-content ;" />
+            <label for="inputStreet"> Street</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" id="inputHome" name="home" size="18" class="form-control" style="max-width:max-content ;" />
+            <label for="inputHome"> Home</label>
+        </div>
+        <button class="btn btn-success">Add Student</button>
     </form>
 </div>
 

@@ -14,9 +14,9 @@
             <th> Предмет </th>
             <th> Оценка </th>
             <th> Администрирование </th>
-            <form action="{{ route('scores.delete',['student' => $student]) }}" method="POST">
-                @foreach ($student->subjects as $subject)
-                <tr>
+            @foreach ($student->subjects as $subject)
+            <tr>
+                <form action="{{ route('scores.delete',['student' => $student]) }}" method="POST">
                     <th score="row">{{$subject->name}} </th>
                     <th> {{ $subject->pivot->score }} </th>
                     <th>
@@ -26,9 +26,9 @@
                     <input type="hidden" name="subjects_id" value="{{ $subject->id }}" />
                     @method('DELETE')
                     @csrf
-                    @endforeach
-                </tr>
-            </form>
+                </form>
+            </tr>
+            @endforeach
         </tbody>
     </table>
     <a class="btn btn-dark" href="{{ route('students.index') }}"> Back </a>

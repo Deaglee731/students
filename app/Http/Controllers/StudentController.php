@@ -6,6 +6,8 @@ use App\Http\Requests\StudentFilterRequest;
 use App\Http\Requests\StudentRequest;
 use App\Models\Group;
 use App\Models\Student;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
 {
@@ -47,7 +49,7 @@ class StudentController extends Controller
     public function store(StudentRequest $request)
     {
         Student::create($request->validated());
-
+      
         return back();
     }
 
@@ -94,6 +96,7 @@ class StudentController extends Controller
             'street' => $request->street,
             'home' => $request->home
         ];
+
         $student->address = $address;
         $student->update($request->validated());
 
