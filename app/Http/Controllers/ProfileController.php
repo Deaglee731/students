@@ -28,7 +28,7 @@ class ProfileController extends Controller
             'street' => $request->street,
             'home' => $request->home
         ];
-        
+
         $student->address = $address;
         $student->update($request->validated());
 

@@ -47,7 +47,7 @@ class RegisteredUserController extends Controller
         $user = Student::create($request->validated());
         $user->address = $address;
         $user->save();
-        
+
         event(new Registered($user));
 
         Auth::login($user);

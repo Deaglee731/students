@@ -44,15 +44,11 @@
         </div>
 
         <p>
-            <select name="group_id" class="form-select mb-3 lead" style="max-width: max-content;">
-                @foreach ($groups as $name => $id)
-                <option value="{{ $id }}"> {{ $name }}</option>
-                @endforeach
-            </select>
+            <x-input.select :groups="$groups" :student="$student"/>
         </p>
 
         <button class="btn btn-primary" type="submit">Отправить</button>
-
+        
     </div>
     @csrf
     @method('POST')

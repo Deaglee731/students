@@ -79,11 +79,7 @@
             <div class="mt-4">
                 <h3> Выберите из списка необходимую группу</h3>
                 <p>
-                    <select name="group_id">
-                        @foreach ($groups as $name => $id)
-                        <option value="{{ $id }}"> {{ $name }}</option>
-                        @endforeach
-                    </select>
+                    <x-input.select :groups="$groups"/>
                 </p>
             </div>
 
