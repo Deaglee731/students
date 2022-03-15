@@ -33,7 +33,6 @@ return new class extends Migration
                 'email',
                 'email_verified_at',
                 'password',
-                'rememberToken'
             ]);
         });
     }
