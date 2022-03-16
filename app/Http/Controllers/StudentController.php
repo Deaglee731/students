@@ -38,7 +38,7 @@ class StudentController extends Controller
         $groups = Group::pluck('id', 'name')->all();
 
         return view('students.create', [
-            'groups' => $groups
+            'groups' => $groups,
         ]);
     }
 

@@ -33,9 +33,6 @@ class PasswordSet extends Mailable
     public function build()
     {
         return $this->to($this->student->email, $this->student->fullName)
-                ->view('mail.setPassword', [
-                    'student' => $this->student,
-                    'password' => $this->password,
-                ]);
+                ->view('mail.setPassword');
     }
 }

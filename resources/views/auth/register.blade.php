@@ -79,7 +79,7 @@
             <div class="mt-4">
                 <h3> Выберите из списка необходимую группу</h3>
                 <p>
-                    <x-input.select :groups="$groups"/>
+                    <x-input.select :groups="$groups" student="$student"/>
                 </p>
             </div>
 

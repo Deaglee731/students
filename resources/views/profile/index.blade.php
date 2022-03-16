@@ -42,9 +42,9 @@
             <input type="text" id="inputHome" name="home" value=" {{$student->address['home'] }}" size="18" class="form-control" style="max-width:max-content ;" />
             <label for="inputHome"> New home</label>
         </div>
-
+ 
         <p>
-            <x-input.select :groups="$groups"/>
+            <x-input.select :groups="$groups" :student="$student"/>
         </p>
 
         <button class="btn btn-primary" type="submit">Отправить</button>
