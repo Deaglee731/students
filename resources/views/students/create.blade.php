@@ -41,7 +41,7 @@
         <!-- Group -->
         <h3> Выберите из списка необходимую группу</h3>
         <p>
-            <x-input.select :groups="$groups" student="$student" />
+            <x-input.select :groups="$groups"/>
         </p>
         <!-- Birthday -->
         <div class="form-floating mb-3">

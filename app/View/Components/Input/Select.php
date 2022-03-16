@@ -15,7 +15,7 @@ class Select extends Component
      *
      * @return void
      */
-    public function __construct($groups, $student)
+    public function __construct(array $groups, ?Student $student)
     {
         $this->groups = $groups;
         $this->student = $student;
