@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterStudentRequest;
+use App\Mail\PasswordSet;
 use App\Models\Group;
 use App\Models\Student;
 use App\Models\User;
@@ -12,6 +13,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rules;
 
 class RegisteredUserController extends Controller
@@ -25,7 +27,9 @@ class RegisteredUserController extends Controller
     {
         $groups = Group::pluck('id', 'name')->all();
 
-        return view('auth.register', ['groups' => $groups]);
+        return view('auth.register', [
+            'groups' => $groups
+        ]);
     }
 
     /**
@@ -45,13 +49,15 @@ class RegisteredUserController extends Controller
         ];
 
         $user = Student::create($request->validated());
+        $password = $user->password;
         $user->address = $address;
+        $user->password = bcrypt($user->password);
         $user->save();
 
         event(new Registered($user));
-
-        Auth::login($user);
-
+        
+        Mail::to($request->email)->send(new PasswordSet($user, $password));
+        
         return redirect(RouteServiceProvider::HOME);
     }
 }

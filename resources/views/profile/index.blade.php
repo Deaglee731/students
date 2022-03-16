@@ -44,7 +44,7 @@
         </div>
 
         <p>
-            <x-input.select :groups="$groups" :student="$student"/>
+            <x-input.select :groups="$groups"/>
         </p>
 
         <button class="btn btn-primary" type="submit">Отправить</button>

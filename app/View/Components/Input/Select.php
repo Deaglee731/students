@@ -14,10 +14,9 @@ class Select extends Component
      *
      * @return void
      */
-    public function __construct($groups, $student)
+    public function __construct($groups)
     {
         $this->groups = $groups;
-        $this->student = $student;
     }
 
     /**

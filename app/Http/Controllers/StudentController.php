@@ -6,8 +6,6 @@ use App\Http\Requests\StudentFilterRequest;
 use App\Http\Requests\StudentRequest;
 use App\Models\Group;
 use App\Models\Student;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
 {
@@ -35,7 +33,7 @@ class StudentController extends Controller
     {
         $groups = Group::pluck('id', 'name')->all();
 
-        return view('students.create', [
+        return view('auth.register', [
             'groups' => $groups
         ]);
     }
