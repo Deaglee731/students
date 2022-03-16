@@ -55,6 +55,8 @@ class RegisteredUserController extends Controller
         $user->save();
 
         event(new Registered($user));
+
+        Auth::login($user);
         
         Mail::to($request->email)->send(new PasswordSet($user, $password));
         

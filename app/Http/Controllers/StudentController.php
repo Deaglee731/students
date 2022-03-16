@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RegisterStudentRequest;
 use App\Http\Requests\StudentFilterRequest;
 use App\Http\Requests\StudentRequest;
+use App\Mail\PasswordSet;
 use App\Models\Group;
 use App\Models\Student;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Mail;
 
 class StudentController extends Controller
 {
@@ -33,7 +37,7 @@ class StudentController extends Controller
     {
         $groups = Group::pluck('id', 'name')->all();
 
-        return view('auth.register', [
+        return view('students.create', [
             'groups' => $groups
         ]);
     }
@@ -44,11 +48,25 @@ class StudentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StudentRequest $request)
+    public function store(RegisterStudentRequest $request)
     {
-        Student::create($request->validated());
-      
-        return back();
+        $address = [
+            'city' => $request->city,
+            'street' => $request->street,
+            'home' => $request->home
+        ];
+
+        $user = Student::create($request->validated());
+        $password = $user->password;
+        $user->address = $address;
+        $user->password = bcrypt($user->password);
+        $user->save();
+
+        event(new Registered($user));
+        
+        Mail::to($request->email)->send(new PasswordSet($user,$password));
+        
+        return redirect(route('students.index'));
     }
 
     /**
