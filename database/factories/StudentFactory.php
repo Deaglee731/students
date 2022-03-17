@@ -30,6 +30,7 @@ class StudentFactory extends Factory
             'email_verified_at' => now(),
             'password' => bcrypt('12345678'),
             'remember_token' => Str::random(10),
+            'role_id' => rand(1,3),
         ];
     }
 }
