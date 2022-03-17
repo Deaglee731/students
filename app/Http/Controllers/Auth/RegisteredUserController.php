@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Events\CreatedStudent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterStudentRequest;
+use App\Models\Dictionaries\RoleDictionary;
 use App\Models\Group;
 use App\Models\Student;
 use App\Providers\RouteServiceProvider;
@@ -20,7 +21,7 @@ class RegisteredUserController extends Controller
     public function create()
     {
         $groups = Group::pluck('id', 'name')->all();
-        $roles = Student::getRoleAttribute();
+        $roles = RoleDictionary::getDictionary();
 
         return view('auth.register', [
             'groups' => $groups,

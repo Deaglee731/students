@@ -6,6 +6,7 @@ use App\Events\CreatedStudent;
 use App\Http\Requests\RegisterStudentRequest;
 use App\Http\Requests\StudentFilterRequest;
 use App\Http\Requests\StudentRequest;
+use App\Models\Dictionaries\RoleDictionary;
 use App\Models\Group;
 use App\Models\Student;
 use Illuminate\Support\Facades\Auth;
@@ -35,7 +36,7 @@ class StudentController extends Controller
     public function create()
     {
         $groups = Group::pluck('id', 'name')->all();
-        $roles = Student::getRoleAttribute();
+        $roles = RoleDictionary::getDictionary();
 
         return view('students.create', [
             'groups' => $groups,

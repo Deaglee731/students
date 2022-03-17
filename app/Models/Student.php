@@ -15,9 +15,6 @@ class Student extends Authenticatable
     const COLOR_GREEN = 'green';
     const COLOR_YELLOW = 'yellow';
     const COLOR_RED = 'red';
-    const ROLE_ADMIN = 1;
-    const ROLE_TEACHER = 2;
-    const ROLE_STUDENT = 3;
 
     protected $fillable = [
         'address',
@@ -83,15 +80,6 @@ class Student extends Authenticatable
         return  "Город  " . $this->address['city'] ?? ' '.
             "  Улица  " . $this->address['street'] ?? ' '.
             " Дом  " . $this->address['home'] ?? ' ';
-    }
-
-    public static function getRoleAttribute(){
-        
-        return [
-            self::ROLE_ADMIN => 'Администратор',
-            self::ROLE_STUDENT => 'Студент',
-            self::ROLE_TEACHER => 'Учитель',
-        ];
     }
 
     public function scopeFilter($query, $request)

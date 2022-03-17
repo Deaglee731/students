@@ -4,8 +4,55 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f5cc51c6248f27184b11d396b9d40d06",
+    "content-hash": "6d224f8fe50119da42a5a11da3eb9ae9",
     "packages": [
+        {
+            "name": "artem-alekseev/dictionaries",
+            "version": "v1.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/artem-alekseev/dictionaries.git",
+                "reference": "0731626e3a468b02b16301d332973cbb4c7c0898"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/artem-alekseev/dictionaries/zipball/0731626e3a468b02b16301d332973cbb4c7c0898",
+                "reference": "0731626e3a468b02b16301d332973cbb4c7c0898",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.0|^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Dictionaries\\Providers\\DictionaryServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Dictionaries\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Artem Alekseev",
+                    "email": "lexx73652@gmail.com"
+                }
+            ],
+            "description": "Use dictionary in laravel",
+            "support": {
+                "issues": "https://github.com/artem-alekseev/dictionaries/issues",
+                "source": "https://github.com/artem-alekseev/dictionaries/tree/v1.0.6"
+            },
+            "time": "2021-11-26T14:13:13+00:00"
+        },
         {
             "name": "brick/math",
             "version": "0.9.3",
