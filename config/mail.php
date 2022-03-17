@@ -91,7 +91,7 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'test@yandex.ru'),
+        'address' => env('MAIL_FROM_ADDRESS', 'test12345678@yandex.ru'),
         'name' => env('MAIL_FROM_NAME', 'educat'),
     ],
 

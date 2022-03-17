@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CreatedStudent;
 use App\Http\Requests\RegisterStudentRequest;
 use App\Http\Requests\StudentFilterRequest;
 use App\Http\Requests\StudentRequest;
-use App\Mail\PasswordSet;
 use App\Models\Group;
 use App\Models\Student;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Support\Facades\Mail;
 
 class StudentController extends Controller
 {
@@ -57,15 +55,13 @@ class StudentController extends Controller
         ];
 
         $user = Student::create($request->validated());
-        $password = $user->password;
         $user->address = $address;
+
+        event(new CreatedStudent($user));
+        
         $user->password = bcrypt($user->password);
         $user->save();
-
-        event(new Registered($user));
-        
-        Mail::to($request->email)->send(new PasswordSet($user,$password));
-        
+                
         return redirect(route('students.index'));
     }
 

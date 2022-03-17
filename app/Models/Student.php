@@ -44,7 +44,7 @@ class Student extends Authenticatable
 
     public function subjects()
     {
-        return $this->belongsToMany(Subject::class, 'scores', 'student_id', 'subject_id')->withPivot('score');;
+        return $this->belongsToMany(Subject::class, 'scores', 'student_id', 'subject_id')->withPivot('score');
     }
 
     public function getFullNameAttribute()
@@ -76,9 +76,9 @@ class Student extends Authenticatable
 
     public function getFullAddressAttribute()
     {
-        return  "Город  " . $this->address['city'] .
-            "  Улица  " . $this->address['street'] .
-            " Дом  " . $this->address['home'];
+        return  "Город  " . $this->address['city'] ?? ' '.
+            "  Улица  " . $this->address['street'] ?? ' '.
+            " Дом  " . $this->address['home'] ?? ' ';
     }
 
     public function scopeFilter($query, $request)
