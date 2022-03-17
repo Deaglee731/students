@@ -86,16 +86,14 @@ class Student extends Authenticatable
     }
 
     public function getRoleAttribute(){
-        if ($this->role_id == 1)
-        {
+        
+        if ($this->role_id == 1){
             return self::ROLE_ADMIN;
         }
-        elseif ($this->role_id == 2)
-        {
+        elseif ($this->role_id == 2){
             return self::ROLE_TEACHER;
         }
-        else
-        {
+        else{
             return self::ROLE_STUDENT;
         }
     }
