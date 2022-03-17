@@ -35,9 +35,11 @@ class StudentController extends Controller
     public function create()
     {
         $groups = Group::pluck('id', 'name')->all();
+        $roles = Student::getRoleAttribute();
 
         return view('students.create', [
             'groups' => $groups,
+            'roles' => $roles,
         ]);
     }
 
@@ -59,10 +61,10 @@ class StudentController extends Controller
         $user->address = $address;
 
         event(new CreatedStudent($user));
-        
+
         $user->password = bcrypt($user->password);
         $user->save();
-                
+
         return redirect(route('students.index'));
     }
 

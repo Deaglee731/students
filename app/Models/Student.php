@@ -85,17 +85,13 @@ class Student extends Authenticatable
             " Дом  " . $this->address['home'] ?? ' ';
     }
 
-    public function getRoleAttribute(){
+    public static function getRoleAttribute(){
         
-        if ($this->role_id == 1){
-            return self::ROLE_ADMIN;
-        }
-        elseif ($this->role_id == 2){
-            return self::ROLE_TEACHER;
-        }
-        else{
-            return self::ROLE_STUDENT;
-        }
+        return [
+            self::ROLE_ADMIN => 'Администратор',
+            self::ROLE_STUDENT => 'Студент',
+            self::ROLE_TEACHER => 'Учитель',
+        ];
     }
 
     public function scopeFilter($query, $request)

@@ -65,9 +65,9 @@
         </div>
 
         <select name="role_id" class="form-select mb-3 lead" style="max-width: max-content;">
-            <option value=1> Администратор</option>
-            <option value=2> Учитель</option>
-            <option value=3 selected> Студент</option>
+            @foreach ($roles as $key => $value)
+            <option value="{{ $key }}"> {{ $value }}</option>
+            @endforeach
         </select>
 
         <button class="btn btn-success">Add Student</button>

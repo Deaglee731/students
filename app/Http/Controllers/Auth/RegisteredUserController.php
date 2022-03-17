@@ -20,9 +20,11 @@ class RegisteredUserController extends Controller
     public function create()
     {
         $groups = Group::pluck('id', 'name')->all();
+        $roles = Student::getRoleAttribute();
 
         return view('auth.register', [
-            'groups' => $groups
+            'groups' => $groups,
+            'roles' => $roles,
         ]);
     }
 
