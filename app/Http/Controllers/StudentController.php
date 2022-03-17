@@ -9,7 +9,6 @@ use App\Http\Requests\StudentRequest;
 use App\Models\Dictionaries\RoleDictionary;
 use App\Models\Group;
 use App\Models\Student;
-use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
 {
@@ -51,7 +50,7 @@ class StudentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(RegisterStudentRequest $request)
-    {
+    {   
         $address = [
             'city' => $request->city,
             'street' => $request->street,

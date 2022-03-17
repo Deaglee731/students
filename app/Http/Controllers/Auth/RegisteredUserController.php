@@ -9,6 +9,7 @@ use App\Models\Dictionaries\RoleDictionary;
 use App\Models\Group;
 use App\Models\Student;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 
 class RegisteredUserController extends Controller

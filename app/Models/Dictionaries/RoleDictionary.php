@@ -10,7 +10,6 @@ class RoleDictionary extends Dictionary
     const ROLE_TEACHER = 2;
     const ROLE_STUDENT = 3;
 
-
     /**
      * @inheritDoc
      */
@@ -18,8 +17,8 @@ class RoleDictionary extends Dictionary
     {
         return [
             self::ROLE_ADMIN => 'Администратор',
+            self::ROLE_TEACHER => 'Учитель',
             self::ROLE_STUDENT => 'Студент',
-            self::ROLE_TEACHER => 'Учитель'
         ];
     }
 }
