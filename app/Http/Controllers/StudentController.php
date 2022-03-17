@@ -8,6 +8,7 @@ use App\Http\Requests\StudentFilterRequest;
 use App\Http\Requests\StudentRequest;
 use App\Models\Group;
 use App\Models\Student;
+use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
 {

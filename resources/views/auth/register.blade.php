@@ -12,8 +12,8 @@
         <form method="POST" action="{{ route('register') }}">
             @csrf
 
-             <!-- First_name -->
-             <div class="mt-4">
+            <!-- First_name -->
+            <div class="mt-4">
                 <x-label for="first_name" :value="__('First Name')" />
 
                 <x-input id="first_name" class="block mt-1 w-full" type="text" name="first_name" :value="old('first_name')" required autofocus />
@@ -53,7 +53,7 @@
 
                 <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required />
             </div>
-           
+
             <!-- City -->
             <div class="mt-4">
                 <x-label for="city" :value="__('City')" />
@@ -79,14 +79,21 @@
             <div class="mt-4">
                 <h3> Выберите из списка необходимую группу</h3>
                 <p>
-                    <x-input.select :groups="$groups"/>
+                    <x-input.select :groups="$groups" />
                 </p>
             </div>
 
+            <!-- Role -->
+            <select name="role_id" class="form-select mb-3 lead" style="max-width: max-content;">
+                <option value=1> Администратор</option>
+                <option value=2> Учитель</option>
+                <option value=3 selected> Студент</option>
+            </select>
+
             <!-- Birthday -->
             <div class="mt-4">
-            <h3> Укажите день рождения </h3>
-                <input type="date"  name="birthday" size="18" class="form-control" style="max-width:max-content ;"/>
+                <h3> Укажите день рождения </h3>
+                <input type="date" name="birthday" size="18" class="form-control" style="max-width:max-content ;" />
             </div>
 
             <div class="flex items-center justify-end mt-4">
@@ -98,7 +105,7 @@
                     {{ __('Register') }}
                 </x-button>
             </div>
-            
+
         </form>
     </x-auth-card>
 </x-guest-layout>

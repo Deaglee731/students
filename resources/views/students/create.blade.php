@@ -41,7 +41,7 @@
         <!-- Group -->
         <h3> Выберите из списка необходимую группу</h3>
         <p>
-            <x-input.select :groups="$groups"/>
+            <x-input.select :groups="$groups" />
         </p>
         <!-- Birthday -->
         <div class="form-floating mb-3">
@@ -63,6 +63,13 @@
             <input type="text" id="inputHome" name="home" size="18" class="form-control" style="max-width:max-content ;" />
             <label for="inputHome"> Home</label>
         </div>
+
+        <select name="role_id" class="form-select mb-3 lead" style="max-width: max-content;">
+            <option value=1> Администратор</option>
+            <option value=2> Учитель</option>
+            <option value=3 selected> Студент</option>
+        </select>
+
         <button class="btn btn-success">Add Student</button>
     </form>
 </div>

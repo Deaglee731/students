@@ -35,6 +35,7 @@ class RegisterStudentRequest extends FormRequest
             'street' => 'required',
             'home' => 'required',
             'birthday' => 'required',
+            'role_id' => 'required'
         ];
     }
 }
