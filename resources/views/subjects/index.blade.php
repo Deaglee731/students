@@ -3,7 +3,9 @@
 <h3 style="text-align: center;" class="display-4">FWT_education (Subjects)</h3>
 <div class="container">
     <div style="display: flex ; justify-content:right">
+        @can('create',App\Models\Subject::class)
         <a class="btn btn-success" style="width: auto;" href="{{ route('subjects.create') }}"> Create </a>
+        @endcan
     </div>
     <table class="table table-striped table-bordered table align-middle table-sm">
         <tbody style="text-align: center;">
@@ -23,12 +25,16 @@
                 <td>
                     <div style="text-align: center; display: flex ; justify-content:center">
                         <a class="btn btn-primary" style="width: auto;" href="{{ route('subjects.show', ['subject' => $subject]) }}">Show</a>
+                        @can('update',$subject)
                         <a class="btn btn-secondary" style="width: auto;" href="{{ route('subjects.edit', ['subject' => $subject]) }}">Edit</a>
+                        @endcan
+                        @can('delete',$subject)
                         <form action="{{ route('subjects.destroy', ['subject' => $subject]) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button class="btn btn-danger">Delete</button>
                         </form>
+                        @endcan
                     </div>
                 </td>
             </tr>

@@ -23,18 +23,27 @@
             <input type="date" id="inputbirthday" name="birthday" value="{{$student->birthday}}" size="18" class="form-control" style="max-width:max-content ;" />
             <label for="inputbirthday"> New birthday</label>
         </div>
+        <div class="form-floating mb-3 lead">
+            <input type="text" id="inputEmail" name="email" value="{{$student->email}}" size="18" class="form-control" style="max-width:max-content ;" />
+            <label for="inputEmail"> New email</label>
+        </div>
         <div class="form-floating mb-3">
-            <input type="text" id="inputCity" name="city" size="18" class="form-control" style="max-width:max-content ;" />
+            <input type="text" id="inputCity" value="{{$student->address['city']}}" name="city" size="18" class="form-control" style="max-width:max-content ;" />
             <label for="inputCity"> New city</label>
         </div>
         <div class="form-floating mb-3">
-            <input type="text" id="inputStreet" name="street" size="18" class="form-control" style="max-width:max-content ;" />
+            <input type="text" id="inputStreet" value="{{$student->address['street']}}" name="street" size="18" class="form-control" style="max-width:max-content ;" />
             <label for="inputStreet"> New street</label>
         </div>
         <div class="form-floating mb-3">
-            <input type="text" id="inputHome" name="home" size="18" class="form-control" style="max-width:max-content ;" />
+            <input type="text" id="inputHome" value="{{$student->address['home']}}" name="home" size="18" class="form-control" style="max-width:max-content ;" />
             <label for="inputHome"> New home</label>
         </div>
+        <div class="form-floating mb-3">
+            <input type="text" id="inputRole" value="{{$student->role_id}}"name="role_id" size="18" class="form-control" style="max-width:max-content ;" />
+            <label for="inputRole"> Role</label>
+        </div>
+
         <h4>
             <th> {{ $student->full_address }}</th>
         </h4>

@@ -23,6 +23,8 @@ class ProfileController extends Controller
 
     public function update(Student $student, StudentRequest $request)
     {
+        $this->authorize('update', [$request]);
+
         $address = [
             'city' => $request->city,
             'street' => $request->street,

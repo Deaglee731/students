@@ -11,6 +11,10 @@ use App\Services\JournalServices;
 
 class GroupController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Group::class, 'group');
+    }
     /**
      * Display a listing of the resource.
      *

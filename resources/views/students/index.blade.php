@@ -2,9 +2,11 @@
 @section('content')
 <h3 style="text-align: center;" class="display-4">FWT_education (Student)</h3>
 <div class="container">
+    @can('create',App\Models\Student::class)
     <div style="display: flex ; justify-content:right">
         <a class="btn btn-success" style="width: auto;" href="{{ route('students.create') }}"> Create </a>
     </div>
+    @endcan
     <table class="table table-striped table-bordered table align-middle table-sm">
         <form action="{{ route('students.index') }}" method="GET">
             <input type="text" value="{{ isset($request['firstname']) ? $request['firstname'] : null }}" name="firstname" style="border: 2px solid grey; border-radius: 4px;" placeholder="Имя">
@@ -34,12 +36,16 @@
                 <th>
                     <div style="text-align: center; display: flex ; justify-content:center">
                         <a class="btn btn-primary" style="width: auto;" href="{{ route('students.show', ['student' => $student]) }}">Show</a>
+                        @can('edit',$student)
                         <a class="btn btn-secondary" style="width: auto;" href="{{ route('students.edit', ['student' => $student]) }}">Edit</a>
+                        @endcan
+                        @can('delete',$student)
                         <form action="{{ route('students.destroy', ['student' => $student]) }}" method="POST">
                             @method('DELETE')
                             @csrf
                             <button class="btn btn-danger">Delete</button>
                         </form>
+                        @endcan
                     </div>
                 </th>
             </tr>

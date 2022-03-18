@@ -9,6 +9,10 @@ use App\Http\Requests\StudentRequest;
 use App\Models\Dictionaries\RoleDictionary;
 use App\Models\Group;
 use App\Models\Student;
+use Dotenv\Util\Str;
+use Illuminate\Auth\Access\Response;
+use Illuminate\Support\Facades\Auth;
+use PHPUnit\Framework\MockObject\Builder\Stub;
 
 class StudentController extends Controller
 {
@@ -19,6 +23,8 @@ class StudentController extends Controller
      */
     public function index(StudentFilterRequest $request)
     {
+        $this->authorize('viewAny', Student::class);
+
         $students  = Student::filter($request)->paginate(10);
 
         return view('students.index', [
@@ -34,6 +40,8 @@ class StudentController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Student::class);
+
         $groups = Group::pluck('id', 'name')->all();
         $roles = RoleDictionary::getDictionary();
 
@@ -50,7 +58,9 @@ class StudentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(RegisterStudentRequest $request)
-    {   
+    {
+        $this->authorize('store', [Student::class, $request]);
+
         $address = [
             'city' => $request->city,
             'street' => $request->street,
@@ -76,8 +86,13 @@ class StudentController extends Controller
      */
     public function show(Student $student)
     {
+        $this->authorize('view', [$student]);
+
+        $groups = Group::pluck('id', 'name')->all();
+
         return view('students.show', [
             'student' => $student,
+            'groups' => $groups,
         ]);
     }
 
@@ -89,6 +104,8 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
+        $this->authorize('edit', [$student]);
+
         $groups = Group::pluck('id', 'name')->all();
 
         return view('students.edit', [
@@ -104,8 +121,10 @@ class StudentController extends Controller
      * @param  \App\Models\Student  $students
      * @return \Illuminate\Http\Response
      */
-    public function update(StudentRequest $request, Student $student)
+    public function update(Student $student, StudentRequest $request)
     {
+        $this->authorize('update', [$student, $request]);
+
         $address = [
             'city' => $request->city,
             'street' => $request->street,
@@ -126,6 +145,8 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
+        $this->authorize('delete', $student);
+
         $student->subjects()->detach();
         $student->delete();
 

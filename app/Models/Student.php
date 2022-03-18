@@ -77,9 +77,9 @@ class Student extends Authenticatable
 
     public function getFullAddressAttribute()
     {
-        return  "Город  " . $this->address['city'] ?? ' '.
-            "  Улица  " . $this->address['street'] ?? ' '.
-            " Дом  " . $this->address['home'] ?? ' ';
+        return  "Город  " . $this->address['city'].
+            "  Улица  " . $this->address['street'] .
+            " Дом  " . $this->address['home'];
     }
 
     public function scopeFilter($query, $request)
@@ -101,5 +101,9 @@ class Student extends Authenticatable
         }
 
         return $query;
+    }
+
+    public function getRoleAttribute(){
+        return $this->role_id;
     }
 }

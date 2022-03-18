@@ -8,6 +8,10 @@ use App\Models\Subject;
 
 class SubjectController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Subject::class, 'subject');
+    }
     /**
      * Display a listing of the resource.
      *

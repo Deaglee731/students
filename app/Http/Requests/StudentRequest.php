@@ -2,7 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Dictionaries\RoleDictionary;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+
 
 class StudentRequest extends FormRequest
 {
@@ -32,7 +35,8 @@ class StudentRequest extends FormRequest
             'email' => 'required',
             'street' => 'required',
             'home' => 'required',
-            'birthday' => '',
+            'birthday' => 'required',
+            'role_id' => ['required', Rule::in(RoleDictionary::getRange())],
         ];
     }
 }

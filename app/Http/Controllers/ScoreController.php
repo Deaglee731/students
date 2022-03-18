@@ -11,6 +11,8 @@ class ScoreController extends Controller
 {
     public function store(ScoreRequest $request, Student $student)
     {
+        $this->authorize('store', [$request]);
+        
         $student->subjects()->attach($request->subject_id, [
             'score' => $request->score,
             'subject_id' => $request->subject_id
@@ -32,6 +34,8 @@ class ScoreController extends Controller
 
     public function delete(Request $request, Student $student)
     {
+        $this->authorize('store', [$request]);
+
         $student->subjects()->detach($request->subjects_id, ['subjects_id' => $request->subjects_id]);
 
         return back();
@@ -39,6 +43,8 @@ class ScoreController extends Controller
 
     public function edit(Request $request, Student $student)
     {
+        $this->authorize('store', [$request]);
+
         $subject = Subject::where('id', $request->subject_id)->first();
 
         return view('scores.edit', [
@@ -49,6 +55,8 @@ class ScoreController extends Controller
 
     public function update(Request $request, Student $student)
     {
+        $this->authorize('store', [$request]);
+        
         $student->subjects()->where('subjects_id', $request->subjects_id)->updateExistingPivot($request->subjects_id, [
             'score' => $request->score,
         ]);
