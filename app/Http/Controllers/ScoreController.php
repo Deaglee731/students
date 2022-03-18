@@ -5,14 +5,16 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ScoreRequest;
 use App\Models\Student;
 use App\Models\Subject;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ScoreController extends Controller
 {
     public function store(ScoreRequest $request, Student $student)
     {
-        $this->authorize('store', [$request]);
-        
+        Gate::authorize('manage-score', [$student]);
+
         $student->subjects()->attach($request->subject_id, [
             'score' => $request->score,
             'subject_id' => $request->subject_id
@@ -24,6 +26,8 @@ class ScoreController extends Controller
 
     public function create(Student $student)
     {
+        Gate::authorize('manage-score', [$student]);
+
         $subject = Subject::whereNotIn('id', $student->subjects->pluck('id'))->get();
 
         return view('scores.create', [
@@ -34,7 +38,7 @@ class ScoreController extends Controller
 
     public function delete(Request $request, Student $student)
     {
-        $this->authorize('store', [$request]);
+        Gate::authorize('manage-score', [$student]);
 
         $student->subjects()->detach($request->subjects_id, ['subjects_id' => $request->subjects_id]);
 
@@ -43,7 +47,7 @@ class ScoreController extends Controller
 
     public function edit(Request $request, Student $student)
     {
-        $this->authorize('store', [$request]);
+        Gate::authorize('manage-score', [$student]);
 
         $subject = Subject::where('id', $request->subject_id)->first();
 
@@ -55,8 +59,8 @@ class ScoreController extends Controller
 
     public function update(Request $request, Student $student)
     {
-        $this->authorize('store', [$request]);
-        
+        Gate::authorize('manage-score', [$student]);
+
         $student->subjects()->where('subjects_id', $request->subjects_id)->updateExistingPivot($request->subjects_id, [
             'score' => $request->score,
         ]);

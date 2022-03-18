@@ -19,7 +19,7 @@
                 <form action="{{ route('scores.delete',['student' => $student]) }}" method="POST">
                     <th score="row">{{$subject->name}} </th>
                     <th> {{ $subject->pivot->score }} </th>
-                    @can('edit',$student)
+                    @can('manage-score',$student)"
                     <th>
                         <button class="btn btn-danger">Delete </button>
                         <a class="btn btn-secondary" href="{{ route('scores.edit', ['student' => $student , 'subject_id' => $subject->id , 'score' => $subject->pivot->score ]) }}">Edit </a>
@@ -34,7 +34,7 @@
         </tbody>
     </table>
     <a class="btn btn-dark" href="{{ route('students.index') }}"> Back </a>
-    @if (Auth::user()->can('create',$student))
+    @if (Auth::user()->can('manage-score',$student))
     <a class="btn btn-success" style="width: auto;" href="{{ route('scores.create', ['student' => $student]) }}">Add Score</a>
     @endif
 </div>
