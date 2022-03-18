@@ -6,6 +6,7 @@ use App\Models\Dictionaries\RoleDictionary;
 use App\Models\Student;
 use App\Models\Subject;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Auth\Access\Response;
 
 class SubjectPolicy
 {
@@ -19,15 +20,17 @@ class SubjectPolicy
      */
     public function before(Student $student)
     {
-        if ($student->role == RoleDictionary::ROLE_ADMIN) {
-            return true;
-        }
+        return $student->role == RoleDictionary::ROLE_ADMIN
+            ? Response::allow()
+            : Response::deny('У вас недостаточно прав');
     }
 
     public function viewAny(Student $student)
     {
         return $student->role == RoleDictionary::ROLE_TEACHER ||
-            $student->role == RoleDictionary::ROLE_STUDENT;
+            $student->role == RoleDictionary::ROLE_STUDENT
+            ? Response::allow()
+            : Response::deny('У вас недостаточно прав');
     }
 
     /**
@@ -39,7 +42,10 @@ class SubjectPolicy
      */
     public function view(Student $student, Subject $subject)
     {
-        return $student->role == RoleDictionary::ROLE_TEACHER || $student->role == RoleDictionary::ROLE_STUDENT;
+        return $student->role == RoleDictionary::ROLE_TEACHER || 
+            $student->role == RoleDictionary::ROLE_STUDENT
+            ? Response::allow()
+            : Response::deny('У вас недостаточно прав');
     }
 
     /**
@@ -50,7 +56,9 @@ class SubjectPolicy
      */
     public function create(Student $student)
     {
-        return $student->role == RoleDictionary::ROLE_TEACHER;
+        return $student->role == RoleDictionary::ROLE_TEACHER
+            ? Response::allow()
+            : Response::deny('У вас недостаточно прав');
     }
 
     /**
@@ -62,42 +70,8 @@ class SubjectPolicy
      */
     public function update(Student $student, Subject $subject)
     {
-        return $student->role == RoleDictionary::ROLE_TEACHER;
-    }
-
-    /**
-     * Determine whether the user can delete the model.
-     *
-     * @param  \App\Models\Student  $student
-     * @param  \App\Models\Subject  $subject
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function delete(Student $student, Subject $subject)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     *
-     * @param  \App\Models\Student  $student
-     * @param  \App\Models\Subject  $subject
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function restore(Student $student, Subject $subject)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     *
-     * @param  \App\Models\Student  $student
-     * @param  \App\Models\Subject  $subject
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function forceDelete(Student $student, Subject $subject)
-    {
-        //
+        return $student->role == RoleDictionary::ROLE_TEACHER
+            ? Response::allow()
+            : Response::deny('У вас недостаточно прав');
     }
 }

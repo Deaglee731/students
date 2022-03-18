@@ -6,6 +6,7 @@ use App\Models\Dictionaries\RoleDictionary;
 use App\Models\Group;
 use App\Models\Student;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Auth\Access\Response;
 
 class GroupPolicy
 {
@@ -19,7 +20,7 @@ class GroupPolicy
      */
     public function viewAny(Student $student)
     {
-        return true;
+        return Response::allow();
     }
 
     /**
@@ -31,9 +32,15 @@ class GroupPolicy
      */
     public function view(Student $student, Group $group)
     {
-        return $student->role == RoleDictionary::ROLE_ADMIN ||
+        if (
+            $student->role == RoleDictionary::ROLE_ADMIN ||
             $student->role == RoleDictionary::ROLE_TEACHER ||
-            $student->group_id == $group->id;
+            $student->group_id == $group->id
+        ) {
+            return Response::allow();
+        } else {
+            return Response::deny('У вас нет прав для просмотра.');
+        }
     }
 
     /**
@@ -44,7 +51,11 @@ class GroupPolicy
      */
     public function create(Student $student)
     {
-        return $student->role == RoleDictionary::ROLE_ADMIN;
+        if ($student->role == RoleDictionary::ROLE_ADMIN) {
+            return Response::allow();
+        } else {
+            return Response::deny('У вас недостаточно прав!');
+        }
     }
 
     /**
@@ -56,8 +67,14 @@ class GroupPolicy
      */
     public function update(Student $student, Group $group)
     {
-        return $student->role == RoleDictionary::ROLE_ADMIN &&
-            $student->group_id == $group->id;
+        if (
+            $student->role == RoleDictionary::ROLE_ADMIN &&
+            $student->group_id == $group->id
+        ) {
+            return Response::allow();
+        } else {
+            return Response::deny('Вы не можете редактировать группу!');
+        }
     }
 
     /**
@@ -69,30 +86,6 @@ class GroupPolicy
      */
     public function delete(Student $student, Group $group)
     {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     *
-     * @param  \App\Models\Student  $student
-     * @param  \App\Models\Group  $group
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function restore(Student $student, Group $group)
-    {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     *
-     * @param  \App\Models\Student  $student
-     * @param  \App\Models\Group  $group
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function forceDelete(Student $student, Group $group)
-    {
-        return false;
+        return Response::deny('У вас нет возможности удалять группы!');
     }
 }
