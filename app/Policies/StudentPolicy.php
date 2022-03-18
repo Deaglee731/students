@@ -58,19 +58,26 @@ class StudentPolicy
     {
         if (
             $student->role == RoleDictionary::ROLE_ADMIN
-            && ($request->role_id == RoleDictionary::ROLE_TEACHER || $request->role_id == RoleDictionary::ROLE_STUDENT)
+            && ($request->role_id == RoleDictionary::ROLE_TEACHER
+                || $request->role_id == RoleDictionary::ROLE_STUDENT)
         ) {
             return Response::allow();
         }
 
-        if (($student->role == RoleDictionary::ROLE_TEACHER || $student->role == RoleDictionary::ROLE_STUDENT) &&
-            $request->role_id == RoleDictionary::ROLE_ADMIN || $request->role_id == RoleDictionary::ROLE_TEACHER
+        if (
+            $student->role != RoleDictionary::ROLE_ADMIN
+            && $request->role_id != RoleDictionary::ROLE_STUDENT
         ) {
             return Response::deny('Вам нельзя создавать данный тип пользователей !');
         }
 
-        return $student->role == RoleDictionary::ROLE_TEACHER &&
-            $request->group_id == $student->group_id;
+        if (
+            $student->role == RoleDictionary::ROLE_TEACHER &&
+            $request->group_id == $student->group_id
+        ) {
+            return Response::allow();
+        }
+        return Response::deny('Нет доступа');
     }
 
     /**
@@ -87,12 +94,15 @@ class StudentPolicy
         }
 
         if (
-            $student->role == RoleDictionary::ROLE_TEACHER &&
-            ($request->role_id == RoleDictionary::ROLE_ADMIN || $request->role_id == RoleDictionary::ROLE_TEACHER)
+            $student->role == RoleDictionary::ROLE_TEACHER
+            && $request->role_id != RoleDictionary::ROLE_STUDENT
         ) {
             return Response::deny('Вы не можете выдавать такие привилегии!');
         }
-        if ($student->role == RoleDictionary::ROLE_STUDENT && $request->role_id != $student->role) {
+        if (
+            $student->role == RoleDictionary::ROLE_STUDENT
+            && $request->role_id != $student->role
+        ) {
             return Response::deny('Вы не можете поменять свою роль!');
         }
 
@@ -106,10 +116,10 @@ class StudentPolicy
     public function edit(Student $student, Student $otherStudent)
     {
         if (
-            $student->role == RoleDictionary::ROLE_ADMIN ||
-            ($student->role == RoleDictionary::ROLE_TEACHER
-                && $student->group_id == $otherStudent->group_id) ||
-            $otherStudent->id == $student->id
+            $student->role == RoleDictionary::ROLE_ADMIN 
+            || ($student->role == RoleDictionary::ROLE_TEACHER
+                && $student->group_id == $otherStudent->group_id) 
+            || $otherStudent->id == $student->id
         ) {
             return Response::allow();
         } else {

@@ -33,9 +33,9 @@ class GroupPolicy
     public function view(Student $student, Group $group)
     {
         if (
-            $student->role == RoleDictionary::ROLE_ADMIN ||
-            $student->role == RoleDictionary::ROLE_TEACHER ||
-            $student->group_id == $group->id
+            $student->role == RoleDictionary::ROLE_ADMIN 
+            || $student->role == RoleDictionary::ROLE_TEACHER
+            || $student->group_id == $group->id
         ) {
             return Response::allow();
         } else {
@@ -68,8 +68,8 @@ class GroupPolicy
     public function update(Student $student, Group $group)
     {
         if (
-            $student->role == RoleDictionary::ROLE_ADMIN &&
-            $student->group_id == $group->id
+            $student->role == RoleDictionary::ROLE_ADMIN 
+            && $student->group_id == $group->id
         ) {
             return Response::allow();
         } else {
