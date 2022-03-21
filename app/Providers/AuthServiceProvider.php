@@ -7,6 +7,7 @@ use App\Models\Group;
 use App\Models\Student;
 use App\Models\Subject;
 use App\Policies\GroupPolicy;
+use App\Policies\ScorePolicy;
 use App\Policies\StudentPolicy;
 use App\Policies\SubjectPolicy;
 use Illuminate\Support\Facades\Gate;
@@ -34,13 +35,6 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::define('manage-score', function (Student $student , Student $user) {
-            if (
-                $student->role != RoleDictionary::ROLE_STUDENT 
-                && ($student->group_id == $user->group_id)
-            ) {
-                return true;
-            }
-        });
+        Gate::define('manage-score', [ScorePolicy::class, 'manageScore']);
     }
 }

@@ -11,7 +11,7 @@
             <input type="text" id="inputLastName" name="last_name" value="{{$student->last_name}}" size="18" class="form-control" style="max-width:max-content ;" />
             <label for="inputLastName"> New last name</label>
         </div>
-
+        
         <div class="form-floating mb-3 lead">
             <input type="text" id="inputMiddleName" name="middle_name" value="{{$student->middle_name}}" size="18" class="form-control" style="max-width:max-content ;" />
             <label for="inputMiddleName"> New middle_name</label>

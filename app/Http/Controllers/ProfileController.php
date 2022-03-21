@@ -17,7 +17,7 @@ class ProfileController extends Controller
 
         return view('profile.index', [
             'student' => $student,
-            'groups' => $groups
+            'groups' => $groups,
         ]);
     }
 
