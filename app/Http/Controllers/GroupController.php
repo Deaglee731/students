@@ -106,15 +106,15 @@ class GroupController extends Controller
         return back();
     }
 
-    public function showJournal (Group $group)
+    public function showJournal (Group $group , JournalServices $journal)
     {
-        $allStudents = Student::all()->where('group_id',$group->id);
+        $allStudents = Student::all()->where('group_id',$group->id);    
         $subjects = Subject::all();
 
-        $goodStudents = JournalServices::getGoodStudents($allStudents);
-        $bestStudents = JournalServices::getBestStudents($allStudents);
-        $students_subjects = JournalServices::getScoresWithSubjects($subjects, $allStudents);
-        $avgScore = JournalServices::getAverageScoreWithSubjects($students_subjects);
+        $goodStudents = $journal->getGoodStudents($allStudents);
+        $bestStudents = $journal->getBestStudents($allStudents);
+        $students_subjects = $journal->getScoresWithSubjects($subjects, $allStudents);
+        $avgScore = $journal->getAverageScoreWithSubjects($students_subjects);
 
         return view('journal.index', [
             'students_subjects' => $students_subjects,

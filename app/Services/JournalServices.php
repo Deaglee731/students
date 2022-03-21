@@ -9,7 +9,7 @@ use function PHPUnit\Framework\isEmpty;
 
 class JournalServices
 {
-    public static function getBestStudents($students)
+    public function getBestStudents($students)
     {
         $bestStudents = $students->filter(function ($student) {
             return $student->subjects->min('pivot.score') == 5;
@@ -17,7 +17,7 @@ class JournalServices
 
         return $bestStudents;
     }
-    public static function getGoodStudents($students)
+    public function getGoodStudents($students)
     {
         $goodStudents = $students->filter(function ($student) {
             return $student->subjects->min('pivot.score') == 4;
@@ -26,7 +26,7 @@ class JournalServices
         return $goodStudents;
     }
 
-    public static function getOtherStudents($students)
+    public function getOtherStudents($students)
     {
         $otherStudents = $students->filter(function ($student) {
             return $student->subjects->min('pivot.score') <= 3;
@@ -35,7 +35,7 @@ class JournalServices
         return $otherStudents;
     }
 
-    public static function getScoresWithSubjects($subjects, $students)
+    public function getScoresWithSubjects($subjects, $students)
     {
         $students_subjects = $students->map(function ($student) use ($subjects) {
             $student->subjectsScore = $subjects->merge($student->subjects);
@@ -47,7 +47,7 @@ class JournalServices
     }
 
 
-    public static function getAverageScoreWithSubjects($students)
+    public function getAverageScoreWithSubjects($students)
     {
         $average_scores = collect();
 
