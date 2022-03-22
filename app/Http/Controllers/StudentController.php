@@ -158,11 +158,11 @@ class StudentController extends Controller
         return back();
     }
 
-    public function downloadList ()
+    public function downloadList()
     {
         $this->authorize('create', Student::class);
 
-        $students  = Student::all();
+        $students = Student::all();
 
         return FileServices::getStudentList($students);
     }

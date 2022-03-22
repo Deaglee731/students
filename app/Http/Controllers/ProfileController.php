@@ -46,14 +46,10 @@ class ProfileController extends Controller
 
     public function updateAvatar(AvatarRequest $request, Student $student)
     {
-        Storage::disk('avatars')->deleteDirectory("$student->id");
-
         $filename = $request->file('avatar')->getClientOriginalName();
-        $path = $request->file('avatar')->storeAs(
-            "avatars/$student->id", $filename
-        );
-   
-        $student->update(['avatar_path' => $path]);
+        $student->update(['avatar_path' => $filename]);
+
+        FileServices::updateAvatar($student, $request, $filename);
 
         return redirect()->route('profile.index');
     }

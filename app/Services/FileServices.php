@@ -14,14 +14,40 @@ class FileServices
     public static function getAvatarLink(Student $student)
     {
         if ($student->avatar_path){
-            Image::make($student->avatar_path)->resize(250, 250, function ($constraint) {
-                $constraint->aspectRatio();
-            })->save("$student->avatar_path"."_resized.jpg");
+            if (Storage::disk('avatars')->exists("$student->id/$student->avatar_path"."_resized.jpg")){
+                return "avatars/$student->id/$student->avatar_path"."_resized.jpg";
+            }
 
-            return "$student->avatar_path"."_resized.jpg";
+            elseif (Storage::disk('avatars')->exists("$student->id/$student->avatar_path")){
+                return "avatars/$student->id/$student->avatar_path";
+            }
+            
         }
-        else {
+        else{
             return Storage::disk('avatars')->url("default.jpg");
+        }
+    }
+
+    public static function updateAvatar($student , $request, $file) {
+        
+        if (Storage::disk('avatars')->exists("$student->id/$file")){
+            if (Storage::disk('avatars')->exists("$student->id/$file"."_resized.jpg")){
+                return true;
+            }
+            else {
+                Image::make("avatars/$student->id/$file")->resize(250, 250, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->save("avatars/$student->id/$file"."_resized.jpg");
+            }
+        }
+        else{
+            $path = $request->file('avatar')->storeAs(
+                "avatars/$student->id", $file
+            );
+            
+            Image::make($path)->resize(250, 250, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save("avatars/$student->id/$file"."_resized.jpg");
         }
     }
 
@@ -34,4 +60,5 @@ class FileServices
         
         return $pdf->download('StudentList.pdf');
     }
+
 }
