@@ -6,6 +6,12 @@
     <div style="display: flex ; justify-content:right">
         <a class="btn btn-success" style="width: auto;" href="{{ route('students.create') }}"> Create </a>
     </div>
+    <form action="{{ route('students.download') }}" method="POST">
+        <div style="display: flex ; justify-content:right">
+            <button class="btn btn-success">Download</button>
+        </div>
+        @csrf
+    </form>
     @endcan
     <table class="table table-striped table-bordered table align-middle table-sm">
         <form action="{{ route('students.index') }}" method="GET">
@@ -27,13 +33,13 @@
             <th> Администрирование </th>
             @foreach ($students as $student)
             <tr>
-                <th>{{ $student->id }}</th>
-                <th>{{ $student->first_name }}</td>
-                <th>{{ $student->last_name }}</td>
-                <th>{{ $student->middle_name }}</td>
-                <th> {{ $student->group->name }} </td>
-                <th> {{ $student->birthday }} </th>
-                <th>
+                <td>{{ $student->id }}</td>
+                <td>{{ $student->first_name }}</td>
+                <td>{{ $student->last_name }}</td>
+                <td>{{ $student->middle_name }}</td>
+                <td> {{ $student->group->name }} </td>
+                <td> {{ $student->birthday }} </td>
+                <td>
                     <div style="text-align: center; display: flex ; justify-content:center">
                         <a class="btn btn-primary" style="width: auto;" href="{{ route('students.show', ['student' => $student]) }}">Show</a>
                         @can('edit',$student)
@@ -47,16 +53,14 @@
                         </form>
                         @endcan
                     </div>
-                </th>
+                </td>
             </tr>
             @endforeach
         </tbody>
     </table>
-    <th>
-        <div style="display: flex ; justify-content:center">
-            {{ $students->appends($request)->links() }}
-        </div>
-    </th>
+    <div style="display: flex ; justify-content:center">
+        {{ ($students->appends($request)->links()) }}
+    </div>
 </div>
 <br>
 @endsection

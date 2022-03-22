@@ -1,7 +1,18 @@
 @extends('app')
 @section('content')
-<form method="POST" action="{{ route('profile.update',['student' => $student]) }}">
-    <div class="container">
+
+
+<div class="container">
+    <img src="{{ $avatar }}" class="rounded mx-auto d-block">
+    <form method="POST" enctype="multipart/form-data" action="{{ route('profile.update.avatar',['student' => $student]) }}">
+        <div class="form mb-3">
+            <input name="avatar" type="file" accept="image/*" class="form-control" id="avatar">
+        </div>
+        <button class="btn btn-primary" type="submit">Сохранить</button>
+        @csrf
+        @method('POST')
+    </form>
+    <form method="POST" action="{{ route('profile.update',['student' => $student]) }}">
         <div class="form-floating mb-3 lead">
             <input type="text" id="inputFirstName" name="first_name" value="{{$student->first_name}}" size="18" class="form-control" style="max-width:max-content ;" />
             <label for="inputFirstName"> New first_name</label>
@@ -11,7 +22,7 @@
             <input type="text" id="inputLastName" name="last_name" value="{{$student->last_name}}" size="18" class="form-control" style="max-width:max-content ;" />
             <label for="inputLastName"> New last name</label>
         </div>
-        
+
         <div class="form-floating mb-3 lead">
             <input type="text" id="inputMiddleName" name="middle_name" value="{{$student->middle_name}}" size="18" class="form-control" style="max-width:max-content ;" />
             <label for="inputMiddleName"> New middle_name</label>
@@ -45,15 +56,14 @@
             <input type="text" id="inputRole" name="role_id" value=" {{$student->role_id }}" size="18" class="form-control" style="max-width:max-content ;" />
             <label for="inputRole"> New role</label>
         </div>
-
         <p>
             <x-input.select :groups="$groups" :student="$student" />
         </p>
 
         <button class="btn btn-primary" type="submit">Отправить</button>
 
-    </div>
-    @csrf
-    @method('POST')
+</div>
+@csrf
+@method('POST')
 </form>
 @endsection

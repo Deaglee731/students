@@ -2,12 +2,14 @@
 @section('content')
 
 <div class="container">
-    <h2 style="text-align: center;" class="display-6"> Отображение студента {{$student->first_name}} {{$student->last_name}} {{$student->middle_name}}</h2>
+    <img src="{{ $avatar }}" class="rounded mx-auto d-block">
+    <h2 style="text-align: center;" class="display-6"> Студент {{$student->first_name}} {{$student->last_name}} {{$student->middle_name}}</h2>
     <br>
-    <h3 style="text-align: center;" class="display-7"> Который находится в группе {{ $student->group->name}} </h3>
+    <h3 style="text-align: center;" class="display-7"> Группа {{ $student->group->name}} </h3>
     <br>
-    <h3 style="text-align: center;" class="display-8"> Проживающий по адрессу {{ $student->full_address }} </h3>
-    <h3 style="text-align: center;" class="display-8"> Оценки по предметами</h3>
+    <h3 style="text-align: center;" class="display-8"> Адрес проживания <br> {{ $student->full_address }} </h3>
+    <br>
+    <h4 style="text-align: center;" class="display-8"> Оценки по предметами</h4>
     <br>
     <table class="table table-striped table-bordered table align-middle table-sm">
         <tbody style="text-align: center;">

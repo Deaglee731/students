@@ -25,7 +25,8 @@ class Student extends Authenticatable
         'middle_name', 
         'group_id', 
         'birthday',
-        'role_id'
+        'role_id',
+        'avatar_path'
     ];
 
     protected $hidden = [

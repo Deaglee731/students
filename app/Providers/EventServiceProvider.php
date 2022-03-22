@@ -5,6 +5,8 @@ namespace App\Providers;
 use App\Events\CreatedStudent;
 use App\Listeners\CreateRandomScore;
 use App\Listeners\SendMailWithPassword;
+use App\Models\Student;
+use App\Observers\StudentObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -30,7 +32,7 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Student::observe(StudentObserver::class);
     }
 
     /**

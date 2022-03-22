@@ -9,10 +9,9 @@ use App\Http\Requests\StudentRequest;
 use App\Models\Dictionaries\RoleDictionary;
 use App\Models\Group;
 use App\Models\Student;
-use Dotenv\Util\Str;
-use Illuminate\Auth\Access\Response;
-use Illuminate\Support\Facades\Auth;
-use PHPUnit\Framework\MockObject\Builder\Stub;
+use App\Services\FileServices;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
@@ -88,11 +87,14 @@ class StudentController extends Controller
     {
         $this->authorize('view', [$student]);
 
+        $avatar = FileServices::getAvatarLink($student);
+
         $groups = Group::pluck('id', 'name')->all();
 
         return view('students.show', [
             'student' => $student,
             'groups' => $groups,
+            'avatar' => $avatar,
         ]);
     }
 
@@ -106,11 +108,14 @@ class StudentController extends Controller
     {
         $this->authorize('edit', [$student]);
 
+        $avatar = FileServices::getAvatarLink($student);
+
         $groups = Group::pluck('id', 'name')->all();
 
         return view('students.edit', [
             'student' => $student,
             'groups' => $groups,
+            'avatar' => $avatar
         ]);
     }
 
@@ -151,5 +156,14 @@ class StudentController extends Controller
         $student->delete();
 
         return back();
+    }
+
+    public function downloadList ()
+    {
+        $this->authorize('create', Student::class);
+
+        $students  = Student::all();
+
+        return FileServices::getStudentList($students);
     }
 }

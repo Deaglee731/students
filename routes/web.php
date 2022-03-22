@@ -46,3 +46,6 @@ Route::GET('/groups/{group}/showJournal', [GroupController::class, 'showJournal'
 
 Route::GET('/profile/', [ProfileController::class, 'index'])->name('profile.index')->middleware('auth');
 Route::POST('/profile/{student}', [ProfileController::class, 'update'])->name('profile.update')->middleware('auth');
+Route::POST('/profile/{student}/updateAvatar', [ProfileController::class, 'updateAvatar'])->name('profile.update.avatar')->middleware('auth');
+
+Route::POST('/students/pdf/download', [StudentController::class, 'downloadList'])->name('students.download')->middleware('auth');
