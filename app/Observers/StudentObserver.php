@@ -26,7 +26,12 @@ class StudentObserver
      */
     public function updated(Student $student)
     {
-        //
+
+    }
+
+    public function updating(Student $student)
+    {
+        
     }
 
     /**
@@ -37,7 +42,7 @@ class StudentObserver
      */
     public function deleted(Student $student)
     {
-        Storage::disk('avatars')->delete(["$student->id/avatar.jpg", "$student->id/avatar_resize.jpg"]);
+        Storage::disk('avatars')->deleteDirectory("$student->id");
     }   
 
     /**

@@ -13,11 +13,14 @@ class FileServices
 {
     public static function getAvatarLink(Student $student)
     {
-        if (Storage::disk('avatars')->exists("$student->id/avatar_resize.jpg")) {
-            return Storage::disk('avatars')->url("$student->id/avatar_resize.jpg");
-        } elseif (Storage::disk('avatars')->exists("$student->id/avatar.jpg")) {
-            return Storage::disk('avatars')->url("$student->id/avatar.jpg");
-        } else {
+        if ($student->avatar_path){
+            Image::make($student->avatar_path)->resize(250, 250, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save("$student->avatar_path"."_resized.jpg");
+
+            return "$student->avatar_path"."_resized.jpg";
+        }
+        else {
             return Storage::disk('avatars')->url("default.jpg");
         }
     }
@@ -28,7 +31,7 @@ class FileServices
             'students' => $students,
 
         ])->setOptions(['defaultFont' => 'sans-serif']);
-
+        
         return $pdf->download('StudentList.pdf');
     }
 }

@@ -9,6 +9,7 @@ use App\Models\Student;
 use App\Services\FileServices;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Laravel\Telescope\Avatar;
 
@@ -45,15 +46,13 @@ class ProfileController extends Controller
 
     public function updateAvatar(AvatarRequest $request, Student $student)
     {
-        
+        Storage::disk('avatars')->deleteDirectory("$student->id");
+
+        $filename = $request->file('avatar')->getClientOriginalName();
         $path = $request->file('avatar')->storeAs(
-            "avatars/$student->id", 'avatar.jpg'
+            "avatars/$student->id", $filename
         );
-
-        Image::make($path)->resize(250, null, function ($constraint) {
-            $constraint->aspectRatio();
-        })->save("avatars/$student->id/avatar_resize.jpg");
-
+   
         $student->update(['avatar_path' => $path]);
 
         return redirect()->route('profile.index');
