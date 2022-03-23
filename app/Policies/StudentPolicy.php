@@ -33,7 +33,10 @@ class StudentPolicy
      */
     public function view(Student $student, Student $otherStudent)
     {
-        if ($otherStudent->trashed() && $student->role != RoleDictionary::ROLE_ADMIN) {
+        if (
+            $otherStudent->trashed() 
+            && $student->role != RoleDictionary::ROLE_ADMIN
+        ) {
             return Response::deny('Вы не можете просматривать этого пользователя! Поскольку он удален');
         }
         return Response::allow();
@@ -92,7 +95,10 @@ class StudentPolicy
      */
     public function update(Student $student, Student $otherStudent, StudentRequest $request)
     {
-        if ($student->role == RoleDictionary::ROLE_ADMIN && $request->role_id == RoleDictionary::ROLE_ADMIN) {
+        if (
+            $student->role == RoleDictionary::ROLE_ADMIN 
+            && $request->role_id == RoleDictionary::ROLE_ADMIN
+        ) {
             return Response::deny('Вы не можете выдавать такие привилегии! !');
         }
 
