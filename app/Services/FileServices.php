@@ -23,8 +23,8 @@ class FileServices
         }
     }
 
-    public static function updateAvatar($student , $request) {
-
+    public static function updateAvatar($student , $request) 
+    {
         $filename = $request->file('avatar')->getClientOriginalName();
         $student->update(['avatar_path' => $filename]);
 
