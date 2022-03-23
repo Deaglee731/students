@@ -2,15 +2,18 @@
 
 namespace App\Models;
 
+use App\Models\Dictionaries\RoleDictionary;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\HasApiTokens;
 
 class Student extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
     
     const COLOR_GREEN = 'green';
     const COLOR_YELLOW = 'yellow';
@@ -99,6 +102,10 @@ class Student extends Authenticatable
         
         if (isset($request->birthday)) {
             $query->Where('birthday', $request->birthday);
+        }
+
+        if (Auth::user()->role == RoleDictionary::ROLE_ADMIN){
+            $query->withTrashed()->orderByDesc('deleted_at');
         }
 
         return $query;

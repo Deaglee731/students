@@ -33,6 +33,9 @@ class StudentPolicy
      */
     public function view(Student $student, Student $otherStudent)
     {
+        if ($otherStudent->trashed() && $student->role != RoleDictionary::ROLE_ADMIN) {
+            return Response::deny('Вы не можете просматривать этого пользователя! Поскольку он удален');
+        }
         return Response::allow();
     }
 
@@ -116,14 +119,14 @@ class StudentPolicy
     public function edit(Student $student, Student $otherStudent)
     {
         if (
-            $student->role == RoleDictionary::ROLE_ADMIN 
+            $student->role == RoleDictionary::ROLE_ADMIN
             || ($student->role == RoleDictionary::ROLE_TEACHER
-                && $student->group_id == $otherStudent->group_id) 
+                && $student->group_id == $otherStudent->group_id)
             || $otherStudent->id == $student->id
         ) {
             return Response::allow();
         } else {
-            return Response::deny('Вы не редактировать !');
+            return Response::deny('Вы не можете редактировать !');
         }
     }
 
@@ -136,10 +139,37 @@ class StudentPolicy
      */
     public function delete(Student $student, Student $otherStudent)
     {
-        if ($student->role == RoleDictionary::ROLE_ADMIN) {
+        if ($student->role == RoleDictionary::ROLE_ADMIN
+            && $otherStudent->group_id == $student->group_id
+            && $otherStudent->role != RoleDictionary::ROLE_ADMIN
+         || $student->role == RoleDictionary::ROLE_TEACHER
+            && $otherStudent->group_id == $student->group_id
+            && $otherStudent->role == RoleDictionary::ROLE_STUDENT
+        ) {
             return Response::allow();
         } else {
             return Response::deny('У вас нет прав удалять студентов !');
+        }
+    }
+
+    public function restore(Student $student)
+    {
+        if ($student->role == RoleDictionary::ROLE_ADMIN) {
+            return Response::allow();
+        } else {
+            return Response::deny('У вас недостаточно прав');
+        }
+    }
+
+    public function forceDelete(Student $student, Student $otherStudent)
+    {
+        if (
+            $student->role == RoleDictionary::ROLE_ADMIN
+            && $otherStudent->role != RoleDictionary::ROLE_ADMIN
+        ) {
+            return Response::allow();
+        } else {
+            return Response::deny('У вас недстаточно прав');
         }
     }
 }

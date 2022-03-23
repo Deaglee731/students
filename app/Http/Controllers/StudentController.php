@@ -10,8 +10,7 @@ use App\Models\Dictionaries\RoleDictionary;
 use App\Models\Group;
 use App\Models\Student;
 use App\Services\FileServices;
-use Barryvdh\DomPDF\Facade\Pdf;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
 {
@@ -24,7 +23,7 @@ class StudentController extends Controller
     {
         $this->authorize('viewAny', Student::class);
 
-        $students  = Student::filter($request)->paginate(10);
+        $students  = Student::withTrashed()->filter($request)->paginate(10);
 
         return view('students.index', [
             'students' => $students,
@@ -86,7 +85,7 @@ class StudentController extends Controller
     public function show(Student $student)
     {
         $this->authorize('view', [$student]);
-
+        
         $avatar = FileServices::getAvatarLink($student);
 
         $groups = Group::pluck('id', 'name')->all();
@@ -165,5 +164,25 @@ class StudentController extends Controller
         $students = Student::all();
 
         return FileServices::getStudentList($students);
+    }
+
+
+    public function restore(Student $student)
+    {
+        $this->authorize('restore', [Auth::user()]);
+
+        $student->restore();
+        
+        return back();
+    }
+
+    public function forceDelete(Student $student)
+    {
+        $this->authorize('forceDelete', [Student::class, $student]);
+
+        $student->subjects()->detach();
+        $student->forceDelete();
+        
+        return back();
     }
 }

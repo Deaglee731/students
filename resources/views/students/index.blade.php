@@ -30,6 +30,7 @@
             <th>Отчество</th>
             <th>Группа</th>
             <th>День рождения</th>
+            <th>Роль</th>
             <th>Администрирование</th>
             @foreach ($students as $student)
             <tr>
@@ -39,18 +40,37 @@
                 <td>{{ $student->middle_name }}</td>
                 <td>{{ $student->group->name }}</td>
                 <td>{{ $student->birthday }}</td>
+                <td>{{ $student->role }}</td>
                 <td>
                     <div style="text-align: center; display: flex ; justify-content:center">
                         <a class="btn btn-primary" style="width: auto;" href="{{ route('students.show', ['student' => $student]) }}">Show</a>
-                        @can('edit',$student)
+                        @can('edit', $student)
                         <a class="btn btn-secondary" style="width: auto;" href="{{ route('students.edit', ['student' => $student]) }}">Edit</a>
                         @endcan
-                        @can('delete',$student)
+                        @can('delete', $student)
+                        @if (!$student->trashed())
                         <form action="{{ route('students.destroy', ['student' => $student]) }}" method="POST">
                             @method('DELETE')
                             @csrf
                             <button class="btn btn-danger">Delete</button>
                         </form>
+                        @endif
+                        @endcan
+                        @can('forceDelete', $student)
+                        <form action="{{ route('students.forceDelete', ['student' => $student]) }}" method="POST">
+                            @method('POST')
+                            @csrf
+                            <button class="btn btn-dark">Force delete</button>
+                        </form>
+                        @endcan
+                        @can('restore', $student)
+                        @if($student->trashed())
+                        <form action="{{ route('students.restore', ['student' => $student]) }}" method="POST">
+                            @method('POST')
+                            @csrf
+                            <button class="btn btn-info">Restore</button>
+                        </form>
+                        @endif
                         @endcan
                     </div>
                 </td>

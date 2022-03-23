@@ -16,7 +16,7 @@ class ProfileController extends Controller
         $student = Auth::user();
         $groups = Group::pluck('id', 'name')->all();
         $avatar = FileServices::getAvatarLink($student);
-
+        
         return view('profile.index', [
             'student' => $student,
             'groups' => $groups,
