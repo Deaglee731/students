@@ -15,11 +15,11 @@ class FileServices
     {
         if ($student->avatar_path){
             if (Storage::disk('avatars')->exists("$student->id/$student->avatar_path"."_resized.jpg")){
-                return "avatars/$student->id/$student->avatar_path"."_resized.jpg";
+                return Storage::disk('avatars')->url("$student->id/$student->avatar_path"."_resized.jpg");
             }
 
             elseif (Storage::disk('avatars')->exists("$student->id/$student->avatar_path")){
-                return "avatars/$student->id/$student->avatar_path";
+                return Storage::disk('avatars')->url("$student->id/$student->avatar_path");
             }
             
         }

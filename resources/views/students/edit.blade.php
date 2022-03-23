@@ -2,8 +2,8 @@
 @section('content')
 
 <div class="container">
+    <img src="{{ $avatar }}" class="mx-auto d-block">
     <form action="{{ route('students.update',['student' => $student]) }}" method="POST">
-    <img src="{{ $avatar }}" class="rounded mx-auto d-block">
         <h2 style="text-align: center;"> Редактирование студента {{$student->first_name}} {{$student->last_name}} {{$student->middle_name}} </h2>
         <div class="form-floating mb-3">
             <input type="text" id="inputName" name="first_name" value="{{$student->first_name}}" size="18" class="form-control" style="max-width:max-content ;" />
