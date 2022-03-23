@@ -7,7 +7,7 @@
         <h4 style="text-align: center;" class="display-7"> Выберите из списка необходимый предмет</h4>
         <select class="form-select mb-3" style="max-width: max-content;" name="subject_id">
             @foreach ($subjects as $subject)
-            <option value="{{ $subject->id }}"> {{ $subject->name }}</option>
+            <option value="{{ $subject->id }}">{{ $subject->name }}</option>
             @endforeach
         </select>
         <div class="form-floating mb-3">

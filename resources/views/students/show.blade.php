@@ -13,14 +13,14 @@
     <br>
     <table class="table table-striped table-bordered table align-middle table-sm">
         <tbody style="text-align: center;">
-            <th> Предмет </th>
-            <th> Оценка </th>
-            <th> Администрирование </th>
+            <th>Предмет</th>
+            <th>Оценка</th>
+            <th>Администрирование</th>
             @foreach ($student->subjects as $subject)
             <tr>
                 <form action="{{ route('scores.delete',['student' => $student]) }}" method="POST">
-                    <th score="row">{{$subject->name}} </th>
-                    <th> {{ $subject->pivot->score }} </th>
+                    <th score="row">{{$subject->name}}</th>
+                    <th>{{ $subject->pivot->score }}</th>
                     @can('manage-score',$student)
                     <th>
                         <button class="btn btn-danger">Delete </button>
@@ -35,7 +35,7 @@
             @endforeach
         </tbody>
     </table>
-    <a class="btn btn-dark" href="{{ route('students.index') }}"> Back </a>
+    <a class="btn btn-dark" href="{{ route('students.index') }}">Back</a>
     @if (Auth::user()->can('manage-score',$student))
     <a class="btn btn-success" style="width: auto;" href="{{ route('scores.create', ['student' => $student]) }}">Add Score</a>
     @endif

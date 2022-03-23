@@ -15,13 +15,13 @@
                 <button class="btn">FILTER</button>
             </form>
             <a class="btn" style="width: auto;" href="{{ route('groups.index') }}">Reset</a>
-            <th>id </th>
-            <th> Название <br></th>
-            <th>Администрирование </th>
+            <th>id</th>
+            <th>Название<br></th>
+            <th>Администрирование</th>
             @foreach ($groups as $group)
             <tr style="text-align: center;">
                 <th scope="row">{{ $group->id }}</th>
-                <td> {{ $group->name }} </td>
+                <td>{{ $group->name }}</td>
                 <td>
                     <div class="row">
                         <div style="text-align: center; display: flex ; justify-content:center">
