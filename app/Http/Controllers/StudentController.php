@@ -22,7 +22,7 @@ class StudentController extends Controller
     public function index(StudentFilterRequest $request)
     {
         $this->authorize('viewAny', Student::class);
-
+        
         $students  = Student::filter($request)->paginate(10);
 
         return view('students.index', [
@@ -169,7 +169,7 @@ class StudentController extends Controller
 
     public function restore(Student $student)
     {
-        $this->authorize('restore', [Auth::user()]);
+        $this->authorize('restore', $student);
 
         $student->restore();
         
@@ -178,7 +178,7 @@ class StudentController extends Controller
 
     public function forceDelete(Student $student)
     {
-        $this->authorize('forceDelete', [Student::class, $student]);
+        $this->authorize('forceDelete', $student);
 
         $student->subjects()->detach();
         $student->forceDelete();

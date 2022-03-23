@@ -27,6 +27,7 @@ class StudentFilterRequest extends FormRequest
             'firstname' => 'max:25',
             'lastname' => 'max:25',
             'middlename' => 'max:25',
+            'isAdmin' => 'string',
         ];
     }
 }

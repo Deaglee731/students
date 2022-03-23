@@ -29,7 +29,7 @@ class Student extends Authenticatable
         'group_id', 
         'birthday',
         'role_id',
-        'avatar_path'
+        'avatar_path',
     ];
 
     protected $hidden = [
@@ -104,7 +104,7 @@ class Student extends Authenticatable
             $query->Where('birthday', $request->birthday);
         }
 
-        if (Auth::user()->role == RoleDictionary::ROLE_ADMIN){
+        if (isset($request->isAdmin)) {
             $query->withTrashed()->orderByDesc('deleted_at');
         }
 

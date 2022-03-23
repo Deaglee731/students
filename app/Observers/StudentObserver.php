@@ -5,6 +5,7 @@ namespace App\Observers;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class StudentObserver
 {
@@ -19,7 +20,7 @@ class StudentObserver
         }
     }
 
-    public function deleted(Student $student)
+    public function forceDeleted(Student $student)
     {
         $oldAvatar = $student->avatar_path; 
         $oldAvatar_resize = "$oldAvatar"."_resized.jpg";
@@ -27,4 +28,5 @@ class StudentObserver
         Storage::disk('avatars')->delete("$student->id/$oldAvatar");
         Storage::disk('avatars')->delete("$student->id/$oldAvatar_resize");
     }
+
 }

@@ -15,6 +15,9 @@
     @endcan
     <table class="table table-striped table-bordered table align-middle table-sm">
         <form action="{{ route('students.index') }}" method="GET">
+            @can('restore', Auth::user())
+            <input type="checkbox" name ="isAdmin" @isset($request['isAdmin']) checked @endisset value='1'> Deleted Users
+            @endcan
             <input type="text" value="{{ isset($request['firstname']) ? $request['firstname'] : null }}" name="firstname" style="border: 2px solid grey; border-radius: 4px;" placeholder="Имя">
             <input type="text" value="{{ isset($request['lastname']) ? $request['lastname'] : null }}" name="lastname" style="border: 2px solid grey; border-radius: 4px;" placeholder="Фамилия">
             <input type="text" value="{{ isset($request['middlename']) ? $request['middlename'] : null }}" name="middlename" style="border: 2px solid grey; border-radius: 4px;" placeholder="Логин">

@@ -168,7 +168,7 @@ class StudentPolicy
     }
 
     public function forceDelete(Student $student, Student $otherStudent)
-    {
+    {   
         if (
             $student->role == RoleDictionary::ROLE_ADMIN
             && $otherStudent->role != RoleDictionary::ROLE_ADMIN
