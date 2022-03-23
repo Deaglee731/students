@@ -2,10 +2,8 @@
 
 namespace App\Services;
 
-use App\Http\Requests\AvatarRequest;
 use App\Models\Student;
 use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
-use Barryvdh\DomPDF\PDF;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
@@ -13,42 +11,26 @@ class FileServices
 {
     public static function getAvatarLink(Student $student)
     {
-        if ($student->avatar_path){
-            if (Storage::disk('avatars')->exists("$student->id/$student->avatar_path"."_resized.jpg")){
-                return Storage::disk('avatars')->url("$student->id/$student->avatar_path"."_resized.jpg");
+        if ($student->avatar_path) {
+            if (!Storage::disk('avatars')->exists("$student->id/$student->avatar_path"."_resized.jpg")) {
+                Image::make("avatars/$student->id/$student->avatar_path")->resize(250, 250, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->save("avatars/$student->id/$student->avatar_path"."_resized.jpg");
             }
-
-            elseif (Storage::disk('avatars')->exists("$student->id/$student->avatar_path")){
-                return Storage::disk('avatars')->url("$student->id/$student->avatar_path");
-            }
-            
-        }
-        else{
+            return Storage::disk('avatars')->url("$student->id/$student->avatar_path"."_resized.jpg");
+        } else {
             return Storage::disk('avatars')->url("default.jpg");
         }
     }
 
-    public static function updateAvatar($student , $request, $file) {
-        
-        if (Storage::disk('avatars')->exists("$student->id/$file")){
-            if (Storage::disk('avatars')->exists("$student->id/$file"."_resized.jpg")){
-                return true;
-            }
-            else {
-                Image::make("avatars/$student->id/$file")->resize(250, 250, function ($constraint) {
-                    $constraint->aspectRatio();
-                })->save("avatars/$student->id/$file"."_resized.jpg");
-            }
-        }
-        else{
-            $path = $request->file('avatar')->storeAs(
-                "avatars/$student->id", $file
-            );
-            
-            Image::make($path)->resize(250, 250, function ($constraint) {
-                $constraint->aspectRatio();
-            })->save("avatars/$student->id/$file"."_resized.jpg");
-        }
+    public static function updateAvatar($student , $request) {
+
+        $filename = $request->file('avatar')->getClientOriginalName();
+        $student->update(['avatar_path' => $filename]);
+
+        $request->file('avatar')->storeAs(
+            "avatars/$student->id", $filename
+        );
     }
 
     public static function getStudentList($students)

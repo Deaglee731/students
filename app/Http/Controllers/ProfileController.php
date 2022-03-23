@@ -7,11 +7,7 @@ use App\Http\Requests\StudentRequest;
 use App\Models\Group;
 use App\Models\Student;
 use App\Services\FileServices;
-use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
-use Intervention\Image\Facades\Image;
-use Laravel\Telescope\Avatar;
 
 class ProfileController extends Controller
 {
@@ -35,7 +31,7 @@ class ProfileController extends Controller
         $address = [
             'city' => $request->city,
             'street' => $request->street,
-            'home' => $request->home,
+            'home' => $request->home
         ];
 
         $student->address = $address;
@@ -46,10 +42,7 @@ class ProfileController extends Controller
 
     public function updateAvatar(AvatarRequest $request, Student $student)
     {
-        $filename = $request->file('avatar')->getClientOriginalName();
-        $student->update(['avatar_path' => $filename]);
-
-        FileServices::updateAvatar($student, $request, $filename);
+        FileServices::updateAvatar($student, $request);
 
         return redirect()->route('profile.index');
     }
