@@ -10,7 +10,7 @@ class StudentObserver
 {
     public function updated(Student $student)
     {
-        if ($student->getAttribute('avatar_path')!= $student->getOriginal('avatar_path')){
+        if ($student->getAttribute('avatar_path') != $student->getOriginal('avatar_path')) {
             $oldAvatar = $student->getOriginal('avatar_path');
             $oldAvatar_resize = "$oldAvatar"."_resized.jpg";
     

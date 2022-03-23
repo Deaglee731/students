@@ -12,8 +12,8 @@
                 <td>{{ $student->first_name }}</td>
                 <td>{{ $student->last_name }}</td>
                 <td>{{ $student->middle_name }}</td>
-                <td> {{ $student->group->name }} </td>
-                <td> {{ $student->birthday }} </td>
+                <td>{{ $student->group->name }}</td>
+                <td>{{ $student->birthday }}</td>
             </tr>
             @endforeach
         </tbody>

@@ -24,21 +24,21 @@
         </form>
         <a class="btn" style="width: auto;" href="{{ route('students.index') }}">Reset</a>
         <tbody style="text-align: center;">
-            <th>id </th>
-            <th>Имя </th>
-            <th>фамилия </th>
-            <th>Отчество </th>
-            <th>Группа </th>
-            <th> День рождения </th>
-            <th> Администрирование </th>
+            <th>id</th>
+            <th>Имя</th>
+            <th>фамилия</th>
+            <th>Отчество</th>
+            <th>Группа</th>
+            <th>День рождения</th>
+            <th>Администрирование</th>
             @foreach ($students as $student)
             <tr>
                 <td>{{ $student->id }}</td>
                 <td>{{ $student->first_name }}</td>
                 <td>{{ $student->last_name }}</td>
                 <td>{{ $student->middle_name }}</td>
-                <td> {{ $student->group->name }} </td>
-                <td> {{ $student->birthday }} </td>
+                <td>{{ $student->group->name }}</td>
+                <td>{{ $student->birthday }}</td>
                 <td>
                     <div style="text-align: center; display: flex ; justify-content:center">
                         <a class="btn btn-primary" style="width: auto;" href="{{ route('students.show', ['student' => $student]) }}">Show</a>
