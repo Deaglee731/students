@@ -23,7 +23,7 @@ class StudentController extends Controller
     {
         $this->authorize('viewAny', Student::class);
 
-        $students  = Student::withTrashed()->filter($request)->paginate(10);
+        $students  = Student::filter($request)->paginate(10);
 
         return view('students.index', [
             'students' => $students,
