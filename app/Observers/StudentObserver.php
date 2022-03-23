@@ -10,11 +10,13 @@ class StudentObserver
 {
     public function updated(Student $student)
     {
-        $oldAvatar = $student->getOriginal('avatar_path');
-        $oldAvatar_resize = "$oldAvatar"."_resized.jpg";
-
-        Storage::disk('avatars')->delete("$student->id/$oldAvatar");
-        Storage::disk('avatars')->delete("$student->id/$oldAvatar_resize");
+        if ($student->getAttribute('avatar_path')!= $student->getOriginal('avatar_path')){
+            $oldAvatar = $student->getOriginal('avatar_path');
+            $oldAvatar_resize = "$oldAvatar"."_resized.jpg";
+    
+            Storage::disk('avatars')->delete("$student->id/$oldAvatar");
+            Storage::disk('avatars')->delete("$student->id/$oldAvatar_resize");
+        }
     }
 
     public function deleted(Student $student)

@@ -35,7 +35,7 @@ class ProfileController extends Controller
         $address = [
             'city' => $request->city,
             'street' => $request->street,
-            'home' => $request->home
+            'home' => $request->home,
         ];
 
         $student->address = $address;

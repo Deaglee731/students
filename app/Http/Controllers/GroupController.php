@@ -62,7 +62,7 @@ class GroupController extends Controller
     public function show(Group $group)
     {
         return view('groups.show', [
-            'group' => $group
+            'group' => $group,
         ]);
     }
 
@@ -75,7 +75,7 @@ class GroupController extends Controller
     public function edit(Group $group)
     {
         return view('groups.edit', [
-            'group' => $group
+            'group' => $group,
         ]);
     }
 
@@ -121,7 +121,7 @@ class GroupController extends Controller
             'subjects' => $subjects,
             'goodStudents' => $goodStudents,
             'bestStudents' => $bestStudents,
-            'avgScore' => $avgScore
+            'avgScore' => $avgScore,
         ]);
     }
 }

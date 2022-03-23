@@ -17,7 +17,7 @@ class ScoreController extends Controller
 
         $student->subjects()->attach($request->subject_id, [
             'score' => $request->score,
-            'subject_id' => $request->subject_id
+            'subject_id' => $request->subject_id,
         ]);
 
         return back();
@@ -32,7 +32,7 @@ class ScoreController extends Controller
 
         return view('scores.create', [
             'student' => $student,
-            'subjects' => $subject
+            'subjects' => $subject,
         ]);
     }
 
@@ -53,7 +53,7 @@ class ScoreController extends Controller
 
         return view('scores.edit', [
             'student' => $student,
-            'subject' => $subject
+            'subject' => $subject,
         ]);
     }
 

@@ -23,7 +23,7 @@ class SubjectController extends Controller
 
         return view('subjects.index', [
             'subjects' => $subjects,
-            'request' => $request->validated()
+            'request' => $request->validated(),
         ]);
     }
 
@@ -59,7 +59,7 @@ class SubjectController extends Controller
     public function show(Subject $subject)
     {
         return view('subjects.show', [
-            'subject' => $subject
+            'subject' => $subject,
         ]);
     }
 

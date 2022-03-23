@@ -63,7 +63,7 @@ class StudentController extends Controller
         $address = [
             'city' => $request->city,
             'street' => $request->street,
-            'home' => $request->home
+            'home' => $request->home,
         ];
 
         $user = Student::create($request->validated());
@@ -115,7 +115,7 @@ class StudentController extends Controller
         return view('students.edit', [
             'student' => $student,
             'groups' => $groups,
-            'avatar' => $avatar
+            'avatar' => $avatar,
         ]);
     }
 
@@ -133,7 +133,7 @@ class StudentController extends Controller
         $address = [
             'city' => $request->city,
             'street' => $request->street,
-            'home' => $request->home
+            'home' => $request->home,
         ];
 
         $student->address = $address;
