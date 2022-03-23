@@ -37,7 +37,6 @@ class FileServices
     {
         $pdf = FacadePdf::loadView('students.list', [
             'students' => $students,
-
         ])->setOptions(['defaultFont' => 'sans-serif']);
         
         return $pdf->download('StudentList.pdf');
