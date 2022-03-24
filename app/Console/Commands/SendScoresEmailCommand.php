@@ -14,7 +14,7 @@ class SendScoresEmailCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'mail:SendScoreMails';
+    protected $signature = 'mail:score-mails';
 
     /**
      * The console command description.

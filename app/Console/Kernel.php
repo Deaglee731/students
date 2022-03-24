@@ -15,7 +15,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('mail:SendScoreMails')->everyMinute();
+        $schedule->command('mail:score-mails')->everyMinute();
         $schedule->command('telescope:prune')->daily();
     }   
 
