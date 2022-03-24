@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\AvatarRequest;
-use App\Http\Requests\StudentRequest;
 use App\Models\Group;
 use App\Models\Student;
 use App\Services\FileServices;
+use App\Http\Requests\AvatarRequest;
+use App\Http\Requests\StudentRequest;
 use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller

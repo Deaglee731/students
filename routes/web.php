@@ -5,8 +5,6 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ScoreController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
-use App\Models\Student;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,10 +35,10 @@ Route::resource('students', StudentController::class)->shallow()->middleware('au
 Route::GET('/students/{student}', [StudentController::class, 'show'])->name('students.show')->withTrashed()->middleware('auth');
 
 Route::GET('/students/{student}/addScore', [ScoreController::class, 'create'])->name('scores.create')->middleware('auth')->can('edit', 'student');
-Route::POST('/students/{student}/saveScore', [ScoreController::class, 'store'])->name('scores.store')->middleware('auth')->can('edit', 'student');;
-Route::DELETE('/students/{student}/deleteScore/', [ScoreController::class, 'delete'])->name('scores.delete')->middleware('auth')->can('edit', 'student');;
-Route::GET('students/{student}/editScore/{subject_id}', [ScoreController::class, 'edit'])->name('scores.edit')->middleware('auth')->can('edit', 'student');;
-Route::PATCH('students/{student}/updateScore', [ScoreController::class, 'update'])->name('scores.update')->middleware('auth')->can('edit', 'student');;
+Route::POST('/students/{student}/saveScore', [ScoreController::class, 'store'])->name('scores.store')->middleware('auth')->can('edit', 'student');
+Route::DELETE('/students/{student}/deleteScore/', [ScoreController::class, 'delete'])->name('scores.delete')->middleware('auth')->can('edit', 'student');
+Route::GET('students/{student}/editScore/{subject_id}', [ScoreController::class, 'edit'])->name('scores.edit')->middleware('auth')->can('edit', 'student');
+Route::PATCH('students/{student}/updateScore', [ScoreController::class, 'update'])->name('scores.update')->middleware('auth')->can('edit', 'student');
 
 Route::GET('/groups/{group}/showJournal', [GroupController::class, 'showJournal'])->name('group_journal.index')->middleware('auth')->can('view', 'group');
 

@@ -11,8 +11,8 @@ class StudentScores extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $student;
-    
+    protected $student;
+
     /**
      * Create a new message instance.
      *
@@ -31,6 +31,6 @@ class StudentScores extends Mailable
     public function build()
     {
         return $this->to($this->student->email, $this->student->fullName)
-                ->view('mail.StudentScores');
+            ->view('mail.StudentScores');
     }
 }

@@ -17,13 +17,13 @@ class ScorePolicy
      */
     public function __construct()
     {
-        //
     }
 
-    public function manageScore (Student $student , Student $user){
+    public function manageScore(Student $student, Student $user)
+    {
         if (
-            $student->role != RoleDictionary::ROLE_STUDENT 
-            && ($student->group_id == $user->group_id)
+            $student->role !== RoleDictionary::ROLE_STUDENT
+            && ($student->group_id === $user->group_id)
         ) {
             return true;
         }

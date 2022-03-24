@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\CreatedStudent;
-use App\Http\Requests\RegisterStudentRequest;
-use App\Http\Requests\StudentFilterRequest;
-use App\Http\Requests\StudentRequest;
-use App\Models\Dictionaries\RoleDictionary;
 use App\Models\Group;
 use App\Models\Student;
+use App\Events\CreatedStudent;
 use App\Services\FileServices;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\StudentRequest;
+use App\Http\Requests\StudentFilterRequest;
+use App\Models\Dictionaries\RoleDictionary;
+use App\Http\Requests\RegisterStudentRequest;
 
 class StudentController extends Controller
 {
@@ -22,8 +21,8 @@ class StudentController extends Controller
     public function index(StudentFilterRequest $request)
     {
         $this->authorize('viewAny', Student::class);
-        
-        $students  = Student::filter($request)->paginate(10);
+
+        $students = Student::filter($request)->paginate(10);
 
         return view('students.index', [
             'students' => $students,
@@ -85,7 +84,7 @@ class StudentController extends Controller
     public function show(Student $student)
     {
         $this->authorize('view', [$student]);
-        
+
         $avatar = FileServices::getAvatarLink($student);
 
         $groups = Group::pluck('id', 'name')->all();
@@ -166,13 +165,12 @@ class StudentController extends Controller
         return FileServices::getStudentList($students);
     }
 
-
     public function restore(Student $student)
     {
         $this->authorize('restore', $student);
 
         $student->restore();
-        
+
         return back();
     }
 
@@ -182,7 +180,7 @@ class StudentController extends Controller
 
         $student->subjects()->detach();
         $student->forceDelete();
-        
+
         return back();
     }
 }

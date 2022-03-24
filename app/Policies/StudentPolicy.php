@@ -2,12 +2,12 @@
 
 namespace App\Policies;
 
-use App\Http\Requests\RegisterStudentRequest;
 use App\Http\Requests\StudentRequest;
-use App\Models\Dictionaries\RoleDictionary;
+use App\Http\Requests\RegisterStudentRequest;
 use App\Models\Student;
-use Illuminate\Auth\Access\HandlesAuthorization;
+use App\Models\Dictionaries\RoleDictionary;
 use Illuminate\Auth\Access\Response;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
 class StudentPolicy
 {
@@ -19,7 +19,7 @@ class StudentPolicy
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function viewAny(Student $student)
+    public function viewAny()
     {
         return Response::allow();
     }
@@ -34,11 +34,12 @@ class StudentPolicy
     public function view(Student $student, Student $otherStudent)
     {
         if (
-            $otherStudent->trashed() 
-            && $student->role != RoleDictionary::ROLE_ADMIN
+            $otherStudent->trashed()
+            && $student->role !== RoleDictionary::ROLE_ADMIN
         ) {
             return Response::deny('Вы не можете просматривать этого пользователя! Поскольку он удален');
         }
+
         return Response::allow();
     }
 
@@ -51,38 +52,38 @@ class StudentPolicy
     public function create(Student $student)
     {
         if (
-            $student->role == RoleDictionary::ROLE_ADMIN
-            || $student->role == RoleDictionary::ROLE_TEACHER
+            $student->role === RoleDictionary::ROLE_ADMIN
+            || $student->role === RoleDictionary::ROLE_TEACHER
         ) {
             return Response::allow();
-        } else {
-            return Response::deny('Вы не можете создавать пользователей!');
         }
+
+        return Response::deny('Вы не можете создавать пользователей!');
     }
 
     public function store(Student $student, RegisterStudentRequest $request)
     {
         if (
-            $student->role == RoleDictionary::ROLE_ADMIN
-            && ($request->role_id == RoleDictionary::ROLE_TEACHER
-                || $request->role_id == RoleDictionary::ROLE_STUDENT)
+            $student->role === RoleDictionary::ROLE_ADMIN
+            && $request->role_id !== RoleDictionary::ROLE_ADMIN
         ) {
             return Response::allow();
         }
 
         if (
-            $student->role != RoleDictionary::ROLE_ADMIN
-            && $request->role_id != RoleDictionary::ROLE_STUDENT
+            $student->role !== RoleDictionary::ROLE_ADMIN
+            && $request->role_id !== RoleDictionary::ROLE_STUDENT
         ) {
             return Response::deny('Вам нельзя создавать данный тип пользователей !');
         }
 
         if (
-            $student->role == RoleDictionary::ROLE_TEACHER &&
-            $request->group_id == $student->group_id
+            $student->role === RoleDictionary::ROLE_TEACHER &&
+            $request->group_id === $student->group_id
         ) {
             return Response::allow();
         }
+
         return Response::deny('Нет доступа');
     }
 
@@ -96,26 +97,27 @@ class StudentPolicy
     public function update(Student $student, Student $otherStudent, StudentRequest $request)
     {
         if (
-            $student->role == RoleDictionary::ROLE_ADMIN 
-            && $request->role_id == RoleDictionary::ROLE_ADMIN
+            $student->role === RoleDictionary::ROLE_ADMIN
+            && $request->role_id === RoleDictionary::ROLE_ADMIN
         ) {
             return Response::deny('Вы не можете выдавать такие привилегии! !');
         }
 
         if (
-            $student->role == RoleDictionary::ROLE_TEACHER
-            && $request->role_id != RoleDictionary::ROLE_STUDENT
+            $student->role === RoleDictionary::ROLE_TEACHER
+            && $request->role_id !== RoleDictionary::ROLE_STUDENT
         ) {
             return Response::deny('Вы не можете выдавать такие привилегии!');
         }
+
         if (
-            $student->role == RoleDictionary::ROLE_STUDENT
-            && $request->role_id != $student->role
+            $student->role === RoleDictionary::ROLE_STUDENT
+            && $request->role_id !== $student->role
         ) {
             return Response::deny('Вы не можете поменять свою роль!');
         }
 
-        if ($student == $otherStudent) {
+        if ($student === $otherStudent) {
             return Response::deny('Вы не можете менять себе роль');
         }
 
@@ -125,15 +127,15 @@ class StudentPolicy
     public function edit(Student $student, Student $otherStudent)
     {
         if (
-            $student->role == RoleDictionary::ROLE_ADMIN
-            || ($student->role == RoleDictionary::ROLE_TEACHER
-                && $student->group_id == $otherStudent->group_id)
-            || $otherStudent->id == $student->id
+            $student->role === RoleDictionary::ROLE_ADMIN
+            || ($student->role === RoleDictionary::ROLE_TEACHER
+                && $student->group_id === $otherStudent->group_id)
+            || $otherStudent->id === $student->id
         ) {
             return Response::allow();
-        } else {
-            return Response::deny('Вы не можете редактировать !');
         }
+
+        return Response::deny('Вы не можете редактировать !');
     }
 
     /**
@@ -145,37 +147,38 @@ class StudentPolicy
      */
     public function delete(Student $student, Student $otherStudent)
     {
-        if ($student->role == RoleDictionary::ROLE_ADMIN
-            && $otherStudent->group_id == $student->group_id
-            && $otherStudent->role != RoleDictionary::ROLE_ADMIN
-         || $student->role == RoleDictionary::ROLE_TEACHER
-            && $otherStudent->group_id == $student->group_id
-            && $otherStudent->role == RoleDictionary::ROLE_STUDENT
+        if (
+            $student->role === RoleDictionary::ROLE_ADMIN
+            && $otherStudent->group_id === $student->group_id
+            && $otherStudent->role !== RoleDictionary::ROLE_ADMIN
+            || $student->role === RoleDictionary::ROLE_TEACHER
+            && $otherStudent->group_id === $student->group_id
+            && $otherStudent->role === RoleDictionary::ROLE_STUDENT
         ) {
             return Response::allow();
-        } else {
-            return Response::deny('У вас нет прав удалять студентов !');
         }
+
+        return Response::deny('У вас нет прав удалять студентов !');
     }
 
     public function restore(Student $student)
     {
-        if ($student->role == RoleDictionary::ROLE_ADMIN) {
+        if ($student->role === RoleDictionary::ROLE_ADMIN) {
             return Response::allow();
-        } else {
-            return Response::deny('У вас недостаточно прав');
         }
+
+        return Response::deny('У вас недостаточно прав');
     }
 
     public function forceDelete(Student $student, Student $otherStudent)
-    {   
+    {
         if (
-            $student->role == RoleDictionary::ROLE_ADMIN
-            && $otherStudent->role != RoleDictionary::ROLE_ADMIN
+            $student->role === RoleDictionary::ROLE_ADMIN
+            && $otherStudent->role !== RoleDictionary::ROLE_ADMIN
         ) {
             return Response::allow();
-        } else {
-            return Response::deny('У вас недстаточно прав');
         }
+
+        return Response::deny('У вас недстаточно прав');
     }
 }

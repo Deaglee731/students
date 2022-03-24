@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\GroupFilterRequest;
-use App\Http\Requests\GroupRequest;
 use App\Models\Group;
 use App\Models\Student;
 use App\Models\Subject;
 use App\Services\JournalServices;
+use App\Http\Requests\GroupRequest;
+use App\Http\Requests\GroupFilterRequest;
 
 class GroupController extends Controller
 {
@@ -106,9 +106,9 @@ class GroupController extends Controller
         return back();
     }
 
-    public function showJournal (Group $group , JournalServices $journal)
+    public function showJournal(Group $group, JournalServices $journal)
     {
-        $allStudents = Student::all()->where('group_id',$group->id);    
+        $allStudents = Student::all()->where('group_id', $group->id);
         $subjects = Subject::all();
 
         $goodStudents = $journal->getGoodStudents($allStudents);

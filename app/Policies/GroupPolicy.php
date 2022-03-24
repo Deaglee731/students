@@ -18,7 +18,7 @@ class GroupPolicy
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function viewAny(Student $student)
+    public function viewAny()
     {
         return Response::allow();
     }
@@ -33,14 +33,14 @@ class GroupPolicy
     public function view(Student $student, Group $group)
     {
         if (
-            $student->role == RoleDictionary::ROLE_ADMIN 
+            $student->role == RoleDictionary::ROLE_ADMIN
             || $student->role == RoleDictionary::ROLE_TEACHER
             || $student->group_id == $group->id
         ) {
             return Response::allow();
-        } else {
-            return Response::deny('У вас нет прав для просмотра.');
         }
+
+        return Response::deny('У вас нет прав для просмотра.');
     }
 
     /**
@@ -53,9 +53,9 @@ class GroupPolicy
     {
         if ($student->role == RoleDictionary::ROLE_ADMIN) {
             return Response::allow();
-        } else {
-            return Response::deny('У вас недостаточно прав!');
         }
+
+        return Response::deny('У вас недостаточно прав!');
     }
 
     /**
@@ -68,13 +68,13 @@ class GroupPolicy
     public function update(Student $student, Group $group)
     {
         if (
-            $student->role == RoleDictionary::ROLE_ADMIN 
+            $student->role == RoleDictionary::ROLE_ADMIN
             && $student->group_id == $group->id
         ) {
             return Response::allow();
-        } else {
-            return Response::deny('Вы не можете редактировать группу!');
         }
+        
+        return Response::deny('Вы не можете редактировать группу!');
     }
 
     /**
@@ -84,7 +84,7 @@ class GroupPolicy
      * @param  \App\Models\Group  $group
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(Student $student, Group $group)
+    public function delete()
     {
         return Response::deny('У вас нет возможности удалять группы!');
     }

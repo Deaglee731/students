@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Dictionaries\RoleDictionary;
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules;
+use Illuminate\Foundation\Http\FormRequest;
+use App\Models\Dictionaries\RoleDictionary;
 
 class RegisterStudentRequest extends FormRequest
 {

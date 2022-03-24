@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Subject;
 use App\Http\Requests\SubjectFilterRequest;
 use App\Http\Requests\SubjectRequest;
-use App\Models\Subject;
 
 class SubjectController extends Controller
 {
@@ -19,7 +19,7 @@ class SubjectController extends Controller
      */
     public function index(SubjectFilterRequest $request)
     {
-        $subjects  = Subject::filter($request)->paginate(10);
+        $subjects = Subject::filter($request)->paginate(10);
 
         return view('subjects.index', [
             'subjects' => $subjects,

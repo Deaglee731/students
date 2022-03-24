@@ -2,10 +2,8 @@
 
 namespace App\Listeners;
 
-use App\Events\CreatedStudent;
 use App\Models\Subject;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
+use App\Events\CreatedStudent;
 
 class CreateRandomScore
 {
@@ -16,7 +14,6 @@ class CreateRandomScore
      */
     public function __construct()
     {
-        //
     }
 
     /**
@@ -30,9 +27,9 @@ class CreateRandomScore
         $student = $event->student;
         $subjects = Subject::all();
 
-        foreach($subjects as $subject){
+        foreach ($subjects as $subject) {
             $student->subjects()->attach($subject->id, [
-                'score' => rand(1, 5)
+                'score' => rand(1, 5),
             ]);
         }
     }

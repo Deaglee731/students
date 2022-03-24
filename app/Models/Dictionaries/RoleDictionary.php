@@ -6,9 +6,9 @@ use Dictionaries\Dictionary;
 
 class RoleDictionary extends Dictionary
 {
-    const ROLE_ADMIN = 1;
-    const ROLE_TEACHER = 2;
-    const ROLE_STUDENT = 3;
+    public const ROLE_ADMIN = 1;
+    public const ROLE_TEACHER = 2;
+    public const ROLE_STUDENT = 3;
 
     /**
      * @inheritDoc

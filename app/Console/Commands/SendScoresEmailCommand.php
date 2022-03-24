@@ -2,12 +2,9 @@
 
 namespace App\Console\Commands;
 
-use App\Jobs\ProcessMail;
-use App\Jobs\ProcessMailSend;
-use App\Mail\StudentScores;
 use App\Models\Student;
+use App\Jobs\ProcessMailSend;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Mail;
 
 class SendScoresEmailCommand extends Command
 {

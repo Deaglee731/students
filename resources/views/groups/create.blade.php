@@ -1,18 +1,16 @@
 @extends('app')
 @section('content')
 
-<div>
+<div class="container" style="display: flex; justify-content: center; align-items: center;">
     <form action="{{ route('groups.store') }}" method="POST">
-        <h2 style="text-align: center;">Добавление новой группы</h2>
-        <br>
+        <h3 style="text-align: center;" class="display-7"> Введите название новой группы </h3>
+        <div class="form-floating mb-3">
+            <input type="text" id="group_name" name="name" size="18" class="form-control" style="max-width:max-content ;" />
+            <label for="group_name">New group name</label>
+        </div>
         @csrf
-        <p>
-            <input type="text" name="name" placeholder="Введите название группы" size="18" />
-        </p>
-        <button class="btn">Add group</button>
+        <button class="btn btn-success">Save</button>
     </form>
 </div>
-
-<a href="{{ route('groups.index') }}">Back</a>
 
 @endsection

@@ -2,31 +2,28 @@
 
 namespace App\Models;
 
-use App\Models\Dictionaries\RoleDictionary;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\HasApiTokens;
 
 class Student extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
-    
-    const COLOR_GREEN = 'green';
-    const COLOR_YELLOW = 'yellow';
-    const COLOR_RED = 'red';
+
+    public const COLOR_GREEN = 'green';
+    public const COLOR_YELLOW = 'yellow';
+    public const COLOR_RED = 'red';
 
     protected $fillable = [
         'address',
-        'email', 
-        'password', 
-        'first_name', 
-        'last_name', 
-        'middle_name', 
-        'group_id', 
+        'email',
+        'password',
+        'first_name',
+        'last_name',
+        'middle_name',
+        'group_id',
         'birthday',
         'role_id',
         'avatar_path',
@@ -54,20 +51,21 @@ class Student extends Authenticatable
 
     public function getFullNameAttribute()
     {
-        return "$this->first_name $this->last_name";
+        return "{$this->first_name} {$this->last_name}";
     }
 
     public function getColorAttribute()
     {
-        $min_score  = $this->subjects()->min('score');
+        $min_score = $this->subjects()->min('score');
 
         if ($min_score == 5) {
             return self::COLOR_GREEN;
-        } elseif ($min_score == 4) {
-            return self::COLOR_YELLOW;
-        } else {
-            return self::COLOR_RED;
         }
+        if ($min_score == 4) {
+            return self::COLOR_YELLOW;
+        }
+
+        return self::COLOR_RED;
     }
 
     public function setAddressAttribute($address)
@@ -81,25 +79,25 @@ class Student extends Authenticatable
 
     public function getFullAddressAttribute()
     {
-        return  "Город  " . $this->address['city'].
-            "  Улица  " . $this->address['street'] .
-            " Дом  " . $this->address['home'];
+        return "Город {$this->address['city']}
+                Улица {$this->address['street']} 
+                Дом {$this->address['home']}";
     }
 
     public function scopeFilter($query, $request)
     {
         if (isset($request->firstname)) {
-            $query->Where('first_name', 'LIKE', "%$request->firstname%");
+            $query->Where('first_name', 'LIKE', "%{$request->firstname}%");
         }
 
         if (isset($request->lastname)) {
-            $query->Where('last_name', 'LIKE', "%$request->lastname%");
+            $query->Where('last_name', 'LIKE', "%{$request->lastname}%");
         }
-        
+
         if (isset($request->middlename)) {
-            $query->Where('middle_name', 'LIKE', "%$request->middlename%");
+            $query->Where('middle_name', 'LIKE', "%{$request->middlename}%");
         }
-        
+
         if (isset($request->birthday)) {
             $query->Where('birthday', $request->birthday);
         }
@@ -111,7 +109,8 @@ class Student extends Authenticatable
         return $query;
     }
 
-    public function getRoleAttribute(){
+    public function getRoleAttribute()
+    {
         return $this->role_id;
     }
 }

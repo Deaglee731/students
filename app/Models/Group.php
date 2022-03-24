@@ -19,7 +19,7 @@ class Group extends Model
     public function scopeFilter($query, $request)
     {
         if (isset($request->name)) {
-            return $query->where('name', 'LIKE', "%$request->name%");
+            return $query->where('name', 'LIKE', "%{$request->name}%");
         }
     }
 }

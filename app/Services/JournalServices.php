@@ -2,65 +2,57 @@
 
 namespace App\Services;
 
-use App\Models\Student;
-
-use function GuzzleHttp\Promise\each;
-use function PHPUnit\Framework\isEmpty;
-
 class JournalServices
 {
     public function getBestStudents($students)
     {
-        $bestStudents = $students->filter(function ($student) {
-            return $student->subjects->min('pivot.score') == 5;
+        $students->filter(function ($student) {
+            return $student->subjects->min('pivot.score') === '5';
         });
 
-        return $bestStudents;
+        return $students;
     }
     public function getGoodStudents($students)
     {
-        $goodStudents = $students->filter(function ($student) {
-            return $student->subjects->min('pivot.score') == 4;
+        $students->filter(function ($student) {
+            return $student->subjects->min('pivot.score') === '4';
         });
 
-        return $goodStudents;
+        return $students;
     }
 
     public function getOtherStudents($students)
     {
-        $otherStudents = $students->filter(function ($student) {
+        $students->filter(function ($student) {
             return $student->subjects->min('pivot.score') <= 3;
         });
 
-        return $otherStudents;
+        return $students;
     }
 
     public function getScoresWithSubjects($subjects, $students)
     {
-        $students_subjects = $students->map(function ($student) use ($subjects) {
-            $student->subjectsScore = $subjects->merge($student->subjects);
-
-            return $student;
+        $students->map(function ($student) use ($subjects) {
+            return $student->subjectsScore = $subjects->merge($student->subjects);
         });
 
-        return $students_subjects;
+        return $students;
     }
-
 
     public function getAverageScoreWithSubjects($students)
     {
         $average_scores = collect();
 
-        $subjects_scores = $students->each(function ($student) use (&$average_scores) {
+        $students->each(function ($student) use (&$average_scores) {
             $student->subjects->each(function ($subject) use (&$average_scores) {
                 $average_scores[$subject->id] = array_merge($average_scores[$subject->id] ?? [], [$subject->pivot->score ?? null]);
             });
         });
 
-        $average_scores = $average_scores->map(function ($subject) {
+        $average_scores->map(function ($subject) {
             return array_sum($subject) / count($subject);
         });
-       
+
         return $average_scores;
     }
 }

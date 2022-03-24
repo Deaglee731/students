@@ -11,25 +11,29 @@ class FileServices
 {
     public static function getAvatarLink(Student $student)
     {
+        $path = "{$student->id}/{$student->avatar_path}";
+
         if ($student->avatar_path) {
-            if (!Storage::disk('avatars')->exists("$student->id/$student->avatar_path"."_resized.jpg")) {
-                Image::make("avatars/$student->id/$student->avatar_path")->resize(250, 250, function ($constraint) {
+            if (!Storage::disk('avatars')->exists("{$path}_resized.jpg")) {
+                Image::make("avatars/{$path}")->resize(250, 250, function ($constraint) {
                     $constraint->aspectRatio();
-                })->save("avatars/$student->id/$student->avatar_path"."_resized.jpg");
+                })->save("avatars/{$path}_resized.jpg");
             }
-            return Storage::disk('avatars')->url("$student->id/$student->avatar_path"."_resized.jpg");
-        } else {
-            return Storage::disk('avatars')->url("default.jpg");
+
+            return Storage::disk('avatars')->url("{$path}_resized.jpg");
         }
+        
+        return Storage::disk('avatars')->url('default.jpg');
     }
 
-    public static function updateAvatar($student , $request) 
+    public static function updateAvatar($student, $request)
     {
         $filename = $request->file('avatar')->getClientOriginalName();
         $student->update(['avatar_path' => $filename]);
 
         $request->file('avatar')->storeAs(
-            "avatars/$student->id", $filename
+            "avatars/{$student->id}",
+            $filename
         );
     }
 
@@ -38,8 +42,7 @@ class FileServices
         $pdf = FacadePdf::loadView('students.list', [
             'students' => $students,
         ])->setOptions(['defaultFont' => 'sans-serif']);
-        
+
         return $pdf->download('StudentList.pdf');
     }
-
 }

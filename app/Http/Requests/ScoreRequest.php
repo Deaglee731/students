@@ -25,7 +25,7 @@ class ScoreRequest extends FormRequest
     {
         return [
             'subject_id' => 'required',
-            'score' => 'required|regex:/[1-5]/'
+            'score' => 'required|regex:/[1-5]/',
         ];
     }
 }

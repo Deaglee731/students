@@ -21,10 +21,6 @@ class Select extends Component
         $this->student = $student;
     }
 
-    public function isStudent($student)
-    {
-        return $student instanceof (Student::class);
-    }
     /**
      * Get the view / contents that represent the component.
      *
