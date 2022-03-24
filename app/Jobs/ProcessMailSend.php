@@ -18,13 +18,12 @@ class ProcessMailSend implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+    public $student;
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public $student;
-
     public function __construct(Student $student)
     {
         $this->student = $student;
@@ -40,7 +39,7 @@ class ProcessMailSend implements ShouldQueue
         try {
             Mail::send(new StudentScores($this->student));
         } catch (Exception $e) {
-            Log::critical('Проблема с пользователем: ' . $this->student->id ."\n" .$e->getMessage());
+            Log::critical('Проблема с пользователем: ' . $this->student->id . "\n" . $e->getMessage());
         }
     }
 }

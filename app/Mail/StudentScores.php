@@ -12,12 +12,13 @@ class StudentScores extends Mailable
     use Queueable, SerializesModels;
 
     public $student;
+    
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($student)
+    public function __construct(Student $student)
     {
         $this->student = $student;
     }
