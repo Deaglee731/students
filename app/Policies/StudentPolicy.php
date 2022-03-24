@@ -2,12 +2,12 @@
 
 namespace App\Policies;
 
-use App\Http\Requests\StudentRequest;
 use App\Http\Requests\RegisterStudentRequest;
-use App\Models\Student;
+use App\Http\Requests\StudentRequest;
 use App\Models\Dictionaries\RoleDictionary;
-use Illuminate\Auth\Access\Response;
+use App\Models\Student;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Auth\Access\Response;
 
 class StudentPolicy
 {
@@ -17,6 +17,7 @@ class StudentPolicy
      * Determine whether the user can view any models.
      *
      * @param  \App\Models\Student  $student
+     *
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function viewAny()
@@ -29,6 +30,7 @@ class StudentPolicy
      *
      * @param  \App\Models\Student  $student
      * @param  \App\Models\Student  $student
+     *
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function view(Student $student, Student $otherStudent)
@@ -47,6 +49,7 @@ class StudentPolicy
      * Determine whether the user can create models.
      *
      * @param  \App\Models\Student  $student
+     *
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function create(Student $student)
@@ -92,6 +95,7 @@ class StudentPolicy
      *
      * @param  \App\Models\Student  $student
      * @param  \App\Models\Student  $student
+     *
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function update(Student $student, Student $otherStudent, StudentRequest $request)
@@ -143,6 +147,7 @@ class StudentPolicy
      *
      * @param  \App\Models\Student  $student
      * @param  \App\Models\Student  $student
+     *
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function delete(Student $student, Student $otherStudent)

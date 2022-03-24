@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CreatedStudent;
+use App\Http\Requests\RegisterStudentRequest;
+use App\Http\Requests\StudentFilterRequest;
+use App\Http\Requests\StudentRequest;
+use App\Models\Dictionaries\RoleDictionary;
 use App\Models\Group;
 use App\Models\Student;
-use App\Events\CreatedStudent;
 use App\Services\FileServices;
-use App\Http\Requests\StudentRequest;
-use App\Http\Requests\StudentFilterRequest;
-use App\Models\Dictionaries\RoleDictionary;
-use App\Http\Requests\RegisterStudentRequest;
 
 class StudentController extends Controller
 {
@@ -52,6 +52,7 @@ class StudentController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(RegisterStudentRequest $request)
@@ -79,6 +80,7 @@ class StudentController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Student  $students
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Student $student)
@@ -100,6 +102,7 @@ class StudentController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Student  $students
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(Student $student)
@@ -122,6 +125,7 @@ class StudentController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Student  $students
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Student $student, StudentRequest $request)
@@ -144,6 +148,7 @@ class StudentController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Student  $students
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Student $student)

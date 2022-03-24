@@ -16,6 +16,7 @@ class GroupPolicy
      * Determine whether the user can view any models.
      *
      * @param  \App\Models\Student  $student
+     *
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function viewAny()
@@ -28,14 +29,15 @@ class GroupPolicy
      *
      * @param  \App\Models\Student  $student
      * @param  \App\Models\Group  $group
+     *
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function view(Student $student, Group $group)
     {
         if (
-            $student->role == RoleDictionary::ROLE_ADMIN
-            || $student->role == RoleDictionary::ROLE_TEACHER
-            || $student->group_id == $group->id
+            $student->role === RoleDictionary::ROLE_ADMIN
+            || $student->role === RoleDictionary::ROLE_TEACHER
+            || $student->group_id === $group->id
         ) {
             return Response::allow();
         }
@@ -47,11 +49,12 @@ class GroupPolicy
      * Determine whether the user can create models.
      *
      * @param  \App\Models\Student  $student
+     *
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function create(Student $student)
     {
-        if ($student->role == RoleDictionary::ROLE_ADMIN) {
+        if ($student->role === RoleDictionary::ROLE_ADMIN) {
             return Response::allow();
         }
 
@@ -63,17 +66,18 @@ class GroupPolicy
      *
      * @param  \App\Models\Student  $student
      * @param  \App\Models\Group  $group
+     *
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function update(Student $student, Group $group)
     {
         if (
-            $student->role == RoleDictionary::ROLE_ADMIN
-            && $student->group_id == $group->id
+            $student->role === RoleDictionary::ROLE_ADMIN
+            && $student->group_id === $group->id
         ) {
             return Response::allow();
         }
-        
+
         return Response::deny('Вы не можете редактировать группу!');
     }
 
@@ -82,6 +86,7 @@ class GroupPolicy
      *
      * @param  \App\Models\Student  $student
      * @param  \App\Models\Group  $group
+     *
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function delete()

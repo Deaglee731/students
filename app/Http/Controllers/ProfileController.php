@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AvatarRequest;
+use App\Http\Requests\StudentRequest;
 use App\Models\Group;
 use App\Models\Student;
 use App\Services\FileServices;
-use App\Http\Requests\AvatarRequest;
-use App\Http\Requests\StudentRequest;
 use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
@@ -16,7 +16,7 @@ class ProfileController extends Controller
         $student = Auth::user();
         $groups = Group::pluck('id', 'name')->all();
         $avatar = FileServices::getAvatarLink($student);
-        
+
         return view('profile.index', [
             'student' => $student,
             'groups' => $groups,
@@ -31,7 +31,7 @@ class ProfileController extends Controller
         $address = [
             'city' => $request->city,
             'street' => $request->street,
-            'home' => $request->home
+            'home' => $request->home,
         ];
 
         $student->address = $address;
@@ -46,5 +46,4 @@ class ProfileController extends Controller
 
         return redirect()->route('profile.index');
     }
-
 }

@@ -15,6 +15,7 @@ class SubjectPolicy
      * Determine whether the user can view any models.
      *
      * @param  \App\Models\Student  $student
+     *
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function before(Student $student)
@@ -37,11 +38,12 @@ class SubjectPolicy
      *
      * @param  \App\Models\Student  $student
      * @param  \App\Models\Subject  $subject
+     *
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function view(Student $student)
     {
-        return $student->role === RoleDictionary::ROLE_TEACHER || 
+        return $student->role === RoleDictionary::ROLE_TEACHER ||
             $student->role === RoleDictionary::ROLE_STUDENT
             ? Response::allow()
             : Response::deny('У вас недостаточно прав');
@@ -51,6 +53,7 @@ class SubjectPolicy
      * Determine whether the user can create models.
      *
      * @param  \App\Models\Student  $student
+     *
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function create(Student $student)
@@ -65,6 +68,7 @@ class SubjectPolicy
      *
      * @param  \App\Models\Student  $student
      * @param  \App\Models\Subject  $subject
+     *
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function update(Student $student)

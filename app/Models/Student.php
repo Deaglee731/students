@@ -58,10 +58,11 @@ class Student extends Authenticatable
     {
         $min_score = $this->subjects()->min('score');
 
-        if ($min_score == 5) {
+        if ($min_score === 5) {
             return self::COLOR_GREEN;
         }
-        if ($min_score == 4) {
+
+        if ($min_score === 4) {
             return self::COLOR_YELLOW;
         }
 

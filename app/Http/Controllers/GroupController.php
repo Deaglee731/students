@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\GroupFilterRequest;
+use App\Http\Requests\GroupRequest;
 use App\Models\Group;
 use App\Models\Student;
 use App\Models\Subject;
 use App\Services\JournalServices;
-use App\Http\Requests\GroupRequest;
-use App\Http\Requests\GroupFilterRequest;
 
 class GroupController extends Controller
 {
@@ -22,7 +22,7 @@ class GroupController extends Controller
      */
     public function index(GroupFilterRequest $request)
     {
-        $groups  = Group::filter($request)->paginate(10);
+        $groups = Group::filter($request)->paginate(10);
 
         return view('groups.index', [
             'groups' => $groups,
@@ -44,6 +44,7 @@ class GroupController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(GroupRequest $request)
@@ -57,6 +58,7 @@ class GroupController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Group  $groups
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Group $group)
@@ -70,6 +72,7 @@ class GroupController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Group  $groups
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(Group $group)
@@ -84,6 +87,7 @@ class GroupController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Group  $groups
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(GroupRequest $request, Group $group)
@@ -97,6 +101,7 @@ class GroupController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Group  $groups
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Group $group)

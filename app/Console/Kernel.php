@@ -11,13 +11,14 @@ class Kernel extends ConsoleKernel
      * Define the application's command schedule.
      *
      * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
+     *
      * @return void
      */
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('mail:score-mails')->everyMinute();
         $schedule->command('telescope:prune')->daily();
-    }   
+    }
 
     /**
      * Register the commands for the application.

@@ -2,8 +2,8 @@
 
 namespace App\Listeners;
 
-use App\Mail\PasswordSet;
 use App\Events\CreatedStudent;
+use App\Mail\PasswordSet;
 use Illuminate\Support\Facades\Mail;
 
 class SendMailWithPassword
@@ -21,6 +21,7 @@ class SendMailWithPassword
      * Handle the event.
      *
      * @param  \App\Events\CreatedStudent  $event
+     *
      * @return void
      */
     public function handle(CreatedStudent $event)

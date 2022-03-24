@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ScoreRequest;
 use App\Models\Student;
 use App\Models\Subject;
 use Illuminate\Http\Request;
-use App\Http\Requests\ScoreRequest;
 use Illuminate\Support\Facades\Gate;
 
 class ScoreController extends Controller

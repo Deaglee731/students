@@ -2,8 +2,8 @@
 
 namespace App\Listeners;
 
-use App\Models\Subject;
 use App\Events\CreatedStudent;
+use App\Models\Subject;
 
 class CreateRandomScore
 {
@@ -20,6 +20,7 @@ class CreateRandomScore
      * Handle the event.
      *
      * @param  \App\Events\CreatedStudent  $event
+     *
      * @return void
      */
     public function handle(CreatedStudent $event)

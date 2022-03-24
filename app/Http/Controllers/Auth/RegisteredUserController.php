@@ -9,7 +9,6 @@ use App\Models\Dictionaries\RoleDictionary;
 use App\Models\Group;
 use App\Models\Student;
 use App\Providers\RouteServiceProvider;
-use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 
 class RegisteredUserController extends Controller
@@ -34,6 +33,7 @@ class RegisteredUserController extends Controller
      * Handle an incoming registration request.
      *
      * @param  \Illuminate\Http\Request  $request
+     *
      * @return \Illuminate\Http\RedirectResponse
      *
      * @throws \Illuminate\Validation\ValidationException
@@ -43,7 +43,7 @@ class RegisteredUserController extends Controller
         $address = [
             'city' => $request->city,
             'street' => $request->street,
-            'home' => $request->home
+            'home' => $request->home,
         ];
 
         $user = Student::create($request->validated());
@@ -55,7 +55,7 @@ class RegisteredUserController extends Controller
         $user->save();
 
         Auth::login($user);
-        
+
         return redirect(RouteServiceProvider::HOME);
     }
 }
