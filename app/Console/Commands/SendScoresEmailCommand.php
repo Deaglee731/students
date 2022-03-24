@@ -2,6 +2,8 @@
 
 namespace App\Console\Commands;
 
+use App\Jobs\ProcessMail;
+use App\Jobs\ProcessMailSend;
 use App\Mail\StudentScores;
 use App\Models\Student;
 use Illuminate\Console\Command;
@@ -43,7 +45,7 @@ class SendScoresEmailCommand extends Command
         $students = Student::all();
         
         foreach ($students as $student){
-            Mail::send(new StudentScores($student));
+            ProcessMailSend::dispatch($student);
         }
     }
 }

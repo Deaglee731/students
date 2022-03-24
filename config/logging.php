@@ -50,10 +50,15 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['single'],
+            'channels' => ['single','email'],
             'ignore_exceptions' => false,
         ],
 
+        'email' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/email.log'),
+        ],
+        
         'single' => [
             'driver' => 'single',
             'path' => storage_path('logs/laravel.log'),

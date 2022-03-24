@@ -17,7 +17,7 @@ class StudentScores extends Mailable
      *
      * @return void
      */
-    public function __construct(Student $student)
+    public function __construct($student)
     {
         $this->student = $student;
     }
