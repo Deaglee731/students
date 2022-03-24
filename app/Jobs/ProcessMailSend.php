@@ -40,7 +40,7 @@ class ProcessMailSend implements ShouldQueue
         try {
             Mail::send(new StudentScores($this->student));
         } catch (Exception $e) {
-            Log::info('Проблема с пользователем: ' . $this->student->id . $this->student->fullName ."\n" .$e->getMessage());
+            Log::warning('Проблема с пользователем: ' . $this->student->id . $this->student->fullName ."\n" .$e->getMessage());
         }
     }
 }
