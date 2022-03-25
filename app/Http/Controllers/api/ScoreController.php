@@ -1,12 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\api;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\ScoreRequest;
+use App\Http\Resources\ScoreResource;
+use App\Http\Resources\StudentResource;
+use App\Http\Resources\SubjectResource;
 use App\Models\Student;
 use App\Models\Subject;
+use Illuminate\Auth\Access\Gate;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
 
 class ScoreController extends Controller
 {
@@ -19,18 +23,8 @@ class ScoreController extends Controller
             'subject_id' => $request->subject_id,
         ]);
 
-        return back();
-    }
-
-    public function create(Student $student)
-    {
-        Gate::authorize('manage-score', [$student]);
-
-        $subject = Subject::whereNotIn('id', $student->subjects->pluck('id'))->get();
-
-        return view('scores.create', [
-            'student' => $student,
-            'subjects' => $subject,
+        return response()->json([
+            'message' => 'Добавление оценки завершено.',
         ]);
     }
 
@@ -40,18 +34,8 @@ class ScoreController extends Controller
 
         $student->subjects()->detach($request->subjects_id, ['subjects_id' => $request->subjects_id]);
 
-        return back();
-    }
-
-    public function edit(Request $request, Student $student)
-    {
-        Gate::authorize('manage-score', [$student]);
-
-        $subject = Subject::where('id', $request->subject_id)->first();
-
-        return view('scores.edit', [
-            'student' => $student,
-            'subject' => $subject,
+        return response()->json([
+            'message' => 'Удаление оценки  завершено.',
         ]);
     }
 
@@ -63,6 +47,8 @@ class ScoreController extends Controller
             'score' => $request->score,
         ]);
 
-        return redirect(route('students.index'));
+        return response()->json([
+            'message' => 'Обновление оценки завершено.',
+        ]);
     }
 }

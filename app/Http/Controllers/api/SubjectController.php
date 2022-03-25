@@ -1,9 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\web;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\SubjectFilterRequest;
 use App\Http\Requests\SubjectRequest;
+use App\Http\Resources\StudentResource;
+use App\Http\Resources\SubjectResource;
 use App\Models\Subject;
 
 class SubjectController extends Controller
@@ -21,34 +24,14 @@ class SubjectController extends Controller
     {
         $subjects = Subject::filter($request)->paginate(10);
 
-        return view('subjects.index', [
-            'subjects' => $subjects,
-            'request' => $request->validated(),
-        ]);
+        return SubjectResource::collection($subjects);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('subjects.create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function store(SubjectRequest $request)
     {
-        Subject::create($request->validated());
+        $student = Subject::create($request->validated());
 
-        return back();
+        return new StudentResource($student)
     }
 
     /**
@@ -60,23 +43,7 @@ class SubjectController extends Controller
      */
     public function show(Subject $subject)
     {
-        return view('subjects.show', [
-            'subject' => $subject,
-        ]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Subject  $subjects
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Subject $subject)
-    {
-        return view('subjects.edit', [
-            'subject' => $subject,
-        ]);
+        return new SubjectResource($subject);
     }
 
     /**
@@ -91,7 +58,7 @@ class SubjectController extends Controller
     {
         $subject->update($request->validated());
 
-        return redirect(route('subjects.index'));
+        return new SubjectResource($subject)
     }
 
     /**
@@ -105,6 +72,9 @@ class SubjectController extends Controller
     {
         $subject->delete();
 
-        return back();
+        return response()->json([
+            'message' => 'Удаление завершено.',
+        ]);
+
     }
 }

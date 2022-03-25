@@ -1,9 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\api;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\GroupFilterRequest;
 use App\Http\Requests\GroupRequest;
+use App\Http\Resources\GroupResource;
+use App\Http\Resources\SubjectResource;
 use App\Models\Group;
 use App\Models\Student;
 use App\Models\Subject;
@@ -24,20 +27,7 @@ class GroupController extends Controller
     {
         $groups = Group::filter($request)->paginate(10);
 
-        return view('groups.index', [
-            'groups' => $groups,
-            'request' => $request->validated(),
-        ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('groups.create');
+        return GroupResource::collection($groups);
     }
 
     /**
@@ -51,7 +41,10 @@ class GroupController extends Controller
     {
         Group::create($request->validated());
 
-        return back();
+        return response()->json([
+            'message' => 'Группа создана успешно',
+        ]);
+
     }
 
     /**
@@ -63,9 +56,7 @@ class GroupController extends Controller
      */
     public function show(Group $group)
     {
-        return view('groups.show', [
-            'group' => $group,
-        ]);
+        return new GroupResource($group);
     }
 
     /**
@@ -77,9 +68,7 @@ class GroupController extends Controller
      */
     public function edit(Group $group)
     {
-        return view('groups.edit', [
-            'group' => $group,
-        ]);
+        return new GroupResource($group);
     }
 
     /**
@@ -94,7 +83,7 @@ class GroupController extends Controller
     {
         $group->update($request->validated());
 
-        return redirect(route('groups.index'));
+        return new GroupResource($group);
     }
 
     /**
@@ -108,25 +97,10 @@ class GroupController extends Controller
     {
         $group->delete();
 
-        return back();
-    }
-
-    public function showJournal(Group $group, JournalServices $journal)
-    {
-        $allStudents = Student::all()->where('group_id', $group->id);
-        $subjects = Subject::all();
-
-        $goodStudents = $journal->getGoodStudents($allStudents);
-        $bestStudents = $journal->getBestStudents($allStudents);
-        $students_subjects = $journal->getScoresWithSubjects($subjects, $allStudents);
-        $avgScore = $journal->getAverageScoreWithSubjects($students_subjects);
-
-        return view('journal.index', [
-            'students_subjects' => $students_subjects,
-            'subjects' => $subjects,
-            'goodStudents' => $goodStudents,
-            'bestStudents' => $bestStudents,
-            'avgScore' => $avgScore,
+        return response()->json([
+            'message' => 'Удаление завершено.',
         ]);
+
     }
+
 }

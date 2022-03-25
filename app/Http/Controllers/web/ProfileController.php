@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\web;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\AvatarRequest;
 use App\Http\Requests\StudentRequest;
 use App\Models\Group;

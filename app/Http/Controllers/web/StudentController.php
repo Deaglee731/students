@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\web;
 
 use App\Events\CreatedStudent;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterStudentRequest;
 use App\Http\Requests\StudentFilterRequest;
 use App\Http\Requests\StudentRequest;
