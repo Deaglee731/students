@@ -14,7 +14,7 @@ class FileServices
         $path = "{$student->id}/{$student->avatar_path}";
 
         if ($student->avatar_path) {
-            if (! Storage::disk('avatars')->exists("{$path}_resized.jpg")) {
+            if (!Storage::disk('avatars')->exists("{$path}_resized.jpg")) {
                 Image::make("avatars/{$path}")->resize(250, 250, function ($constraint) {
                     $constraint->aspectRatio();
                 })->save("avatars/{$path}_resized.jpg");
@@ -52,7 +52,7 @@ class FileServices
             'students' => $students,
         ])->output();
 
-        Storage::disk('public')->put('download/pdf/students.pdf',$pdf);
+        Storage::disk('public')->put('download/pdf/students.pdf', $pdf);
 
         $link = Storage::disk('public')->url('download/pdf/students.pdf');
 
