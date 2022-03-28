@@ -65,7 +65,7 @@ class StudentController extends Controller
             'street' => $request->street,
             'home' => $request->home,
         ];
-        
+
         $user = Student::create($request->validated());
         $user->address = $address;
 

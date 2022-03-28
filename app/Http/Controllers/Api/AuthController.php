@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Password;
 
 class AuthController extends Controller
 {
-    public function login (LoginRequest $request)
+    public function login(LoginRequest $request)
     {
         $request->authenticate();
 
@@ -21,7 +21,7 @@ class AuthController extends Controller
         ]);
     }
 
-    public function logout (Request $request)
+    public function logout(Request $request)
     {
         $request->user()->token()->revoke();
 
@@ -30,12 +30,12 @@ class AuthController extends Controller
         ]);
     }
 
-    public function resetPassword (Request $request)
+    public function resetPassword(Request $request)
     {
         $request->validate([
             'email' => 'required',
         ]);
-        
+
         $status = Password::sendResetLink(
             $request->only('email')
         );
@@ -44,5 +44,4 @@ class AuthController extends Controller
             'status' => $status,
         ]);
     }
-
 }

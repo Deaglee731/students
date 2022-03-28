@@ -40,7 +40,6 @@ class GroupController extends Controller
         return response()->json([
             'message' => 'Группа создана успешно',
         ]);
-
     }
 
     /**
@@ -84,7 +83,5 @@ class GroupController extends Controller
         return response()->json([
             'message' => 'Удаление завершено.',
         ]);
-
     }
-
 }

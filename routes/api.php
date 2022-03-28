@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\api\AuthController;
-use App\Http\Controllers\api\GroupController;
-use App\Http\Controllers\api\StudentController;
-use App\Http\Controllers\api\SubjectController;
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\GroupController;
+use App\Http\Controllers\Api\StudentController;
+use App\Http\Controllers\Api\SubjectController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,7 +27,6 @@ Route::POST('login', [AuthController::class, 'login'])->name('api.login');
 Route::POST('reset-password', [AuthController::class, 'resetPassword'])->name('api.reset.password');
 
 Route::middleware('auth:api')->group(function () {
-
     Route::POST('logout', [AuthController::class, 'logout'])->name('api.logout');
 
     Route::resource('groups', GroupController::class)->shallow()->middleware('auth:api');
@@ -38,7 +37,7 @@ Route::middleware('auth:api')->group(function () {
         ->name('students.show')
         ->withTrashed()
         ->middleware('auth:api');
-        
+
     Route::POST('/students/pdf/download', [StudentController::class, 'downloadList'])
         ->name('students.download')
         ->middleware('auth');

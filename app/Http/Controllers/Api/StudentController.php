@@ -43,7 +43,6 @@ class StudentController extends Controller
         $user->password = bcrypt($user->password);
         $user->save();
 
-
         return new StudentResource($user);
     }
 
@@ -119,9 +118,9 @@ class StudentController extends Controller
 
         $student->restore();
 
-       return response()->json([
-            'message' => 'Восстановление завершено.',
-        ]);
+        return response()->json([
+           'message' => 'Восстановление завершено.',
+       ]);
     }
 
     public function forceDelete(Student $student)
