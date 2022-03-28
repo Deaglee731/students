@@ -4,13 +4,9 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ScoreRequest;
-use App\Http\Resources\ScoreResource;
-use App\Http\Resources\StudentResource;
-use App\Http\Resources\SubjectResource;
 use App\Models\Student;
-use App\Models\Subject;
-use Illuminate\Auth\Access\Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class ScoreController extends Controller
 {

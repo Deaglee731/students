@@ -60,18 +60,6 @@ class GroupController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Group  $groups
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Group $group)
-    {
-        return new GroupResource($group);
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
