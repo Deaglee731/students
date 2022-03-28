@@ -1,16 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\api;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\GroupFilterRequest;
 use App\Http\Requests\GroupRequest;
 use App\Http\Resources\GroupResource;
-use App\Http\Resources\SubjectResource;
 use App\Models\Group;
-use App\Models\Student;
-use App\Models\Subject;
-use App\Services\JournalServices;
 
 class GroupController extends Controller
 {
