@@ -38,4 +38,8 @@ Route::middleware('auth:api')->group(function () {
         ->name('students.show')
         ->withTrashed()
         ->middleware('auth:api');
+        
+    Route::POST('/students/pdf/download', [StudentController::class, 'downloadList'])
+        ->name('students.download')
+        ->middleware('auth');
 });

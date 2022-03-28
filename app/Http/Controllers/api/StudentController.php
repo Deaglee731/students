@@ -110,7 +110,7 @@ class StudentController extends Controller
 
         $students = Student::all();
 
-        return FileServices::getStudentList($students);
+        return FileServices::getStudentListLink($students);
     }
 
     public function restore(Student $student)

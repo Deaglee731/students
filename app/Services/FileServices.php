@@ -45,4 +45,20 @@ class FileServices
 
         return $pdf->download('StudentList.pdf');
     }
+
+    public static function getStudentListLink($students)
+    {
+        $pdf = FacadePdf::loadView('students.list', [
+            'students' => $students,
+        ])->output();
+
+        Storage::disk('public')->put('download/pdf/students.pdf',$pdf);
+
+        $link = Storage::disk('public')->url('download/pdf/students.pdf');
+
+        return response()->json([
+            'message' => 'Download Student_url',
+            'link' => $link,
+        ]);
+    }
 }
