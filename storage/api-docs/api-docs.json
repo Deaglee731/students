@@ -90,6 +90,44 @@
                 }
             }
         },
+        "/api/reset-password": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "description": "Api authenticate with passport",
+                "operationId": "0a6624b616e4ba5a310a61d9f7418c35",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "email address",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Password sent with mail"
+                    }
+                }
+            }
+        },
         "/api/groups": {
             "get": {
                 "tags": [

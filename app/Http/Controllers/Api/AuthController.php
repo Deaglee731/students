@@ -15,33 +15,18 @@ class AuthController extends Controller
      *     summary="Api authenticate with passport",
      *     description="Api authenticate with passport",
      *     tags={"auth"},
-     * @OA\Parameter(
+     *     @OA\Parameter(
      *          required=true,
      *          name="email",
      *          description="email address",
      *          in="query",
      *     ),
-     * @OA\Parameter(
+     *     @OA\Parameter(
      *          required=true,
      *          name="password",
      *          description="password",
      *          in="query",
      *      ),
-     *     @OA\RequestBody(
-     *         required=true,
-     *             @OA\JsonContent(
-     *                 @OA\Property(
-     *                     property="email",
-     *                     type="string",
-     *                     format="email",
-     *                 ),
-     *                 @OA\Property(
-     *                     property="password",
-     *                     type="string",
-     *                     format="password",
-     *                 ),
-     *             )
-     *         ),
      *      @OA\Response(
      *         response=200,
      *         description="Login sucessfull",
@@ -99,10 +84,9 @@ class AuthController extends Controller
         ]);
     }
 
-     /*
+     /**
      * @OA\Post(
      *     path="/api/reset-password",
-     *     summary="Api authenticate with passport",
      *     description="Api authenticate with passport",
      *     tags={"auth"},
      *     @OA\Parameter(
@@ -111,16 +95,6 @@ class AuthController extends Controller
      *          description="email address",
      *          in="query",
      *     ),
-     *     @OA\RequestBody(
-     *         required=true,
-     *             @OA\JsonContent(
-     *                 @OA\Property(
-     *                     property="email",
-     *                     type="string",
-     *                     format="email",
-     *                 ),
-     *             )
-     *         ),
      *      @OA\Response(
      *         response=200,
      *         description="Password sent with mail",
