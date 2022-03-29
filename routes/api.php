@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\GroupController;
+use App\Http\Controllers\Api\ScoreController;
 use App\Http\Controllers\Api\StudentController;
 use App\Http\Controllers\Api\SubjectController;
 use Illuminate\Http\Request;
@@ -40,5 +41,40 @@ Route::middleware('auth:api')->group(function () {
 
     Route::POST('/students/pdf/download', [StudentController::class, 'downloadList'])
         ->name('students.download')
+        ->middleware('auth');
+
+    Route::GET('/students/{student}/addScore', [ScoreController::class, 'create'])
+        ->name('scores.create')
+        ->middleware('auth')
+        ->can('edit', 'student');
+
+    Route::POST('/students/{student}/saveScore', [ScoreController::class, 'store'])
+        ->name('scores.store')
+        ->middleware('auth')
+        ->can('edit', 'student');
+
+    Route::DELETE('/students/{student}/deleteScore/', [ScoreController::class, 'delete'])
+        ->name('scores.delete')
+        ->middleware('auth')
+        ->can('edit', 'student');
+
+    Route::GET('students/{student}/editScore/{subject_id}', [ScoreController::class, 'edit'])
+        ->name('scores.edit')
+        ->middleware('auth')
+        ->can('edit', 'student');
+
+    Route::PATCH('students/{student}/updateScore', [ScoreController::class, 'update'])
+        ->name('scores.update')
+        ->middleware('auth')
+        ->can('edit', 'student');
+
+    Route::POST('/students/{student}/restore', [StudentController::class, 'restore'])
+        ->name('students.restore')
+        ->withTrashed()
+        ->middleware('auth');
+
+    Route::POST('/students/{student}/forceDelete', [StudentController::class, 'forceDelete'])
+        ->name('students.forceDelete')
+        ->withTrashed()
         ->middleware('auth');
 });

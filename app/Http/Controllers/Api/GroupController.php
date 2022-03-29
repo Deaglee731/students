@@ -14,10 +14,28 @@ class GroupController extends Controller
     {
         $this->authorizeResource(Group::class, 'group');
     }
+
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @OA\Get(
+     *     path="/api/groups",
+     *     description="Groups list",
+     *     tags={"group"},
+     *      @OA\Response(
+     *         response=200,
+     *         description="Group list",
+     *         @OA\JsonContent(
+     *              @OA\Property (
+     *                  property="data", 
+     *                  type="object",
+     *                  @OA\Property (ref="#/components/schemas/Group"),
+     *              ),
+     *         )
+     *     ),
+     *       @OA\Response(
+     *         response=401,
+     *         description="Unauthorized user",
+     *     ),
+     * )
      */
     public function index(GroupFilterRequest $request)
     {
@@ -27,11 +45,32 @@ class GroupController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     *
-     * @return \Illuminate\Http\Response
+     * @OA\Post(
+     *     path="/api/groups/",
+     *     description="Groups store",
+     *     tags={"group"},
+     *     @OA\Parameter(
+     *          required=true,
+     *          name="name",
+     *          description="Group name",
+     *          in="query",
+     *     ),
+     *      @OA\Response(
+     *         response=200,
+     *         description="Group create sucessfull",
+     *         @OA\JsonContent(
+     *              @OA\Property (
+     *                  property="data", 
+     *                  type="object",
+     *                  @OA\Property (ref="#/components/schemas/Group"),
+     *              ),
+     *         )
+     *     ),
+     *       @OA\Response(
+     *         response=401,
+     *         description="Unauthorized user",
+     *     ),
+     * )
      */
     public function store(GroupRequest $request)
     {
@@ -43,11 +82,33 @@ class GroupController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Group  $groups
-     *
-     * @return \Illuminate\Http\Response
+     * @OA\Get(
+     *     path="/api/groups/{group}",
+     *     description="Show group",
+     *     tags={"group"},
+     *     @OA\Parameter(
+     *          required=true,
+     *          name="group",
+     *          description="Object group",
+     *          in="path",
+     *     ),
+
+     *      @OA\Response(
+     *         response=200,
+     *         description="group show sucessfull",
+     *         @OA\JsonContent(
+     *              @OA\Property (
+     *                  property="data", 
+     *                  type="object",
+     *                  @OA\Property (ref="#/components/schemas/Group"),
+     *              ),
+     *         )
+     *     ),
+     *       @OA\Response(
+     *         response=401,
+     *         description="Unauthorized user",
+     *     ),
+     * )
      */
     public function show(Group $group)
     {
@@ -55,12 +116,38 @@ class GroupController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Group  $groups
-     *
-     * @return \Illuminate\Http\Response
+     * @OA\Put(
+     *     path="/api/groups/{group}",
+     *     description="Group Update",
+     *     tags={"group"},
+     *     @OA\Parameter(
+     *          required=true,
+     *          name="name",
+     *          description="group name",
+     *          in="query",
+     *     ),
+     *     @OA\Parameter(
+     *          required=true,
+     *          name="group",
+     *          description="Object group",
+     *          in="path",
+     *     ),
+     *      @OA\Response(
+     *         response=200,
+     *         description="Group update sucessfull",
+     *         @OA\JsonContent(
+     *              @OA\Property (
+     *                  property="data", 
+     *                  type="object",
+     *                  @OA\Property (ref="#/components/schemas/Group"),
+     *              ),
+     *         )
+     *     ),
+     *       @OA\Response(
+     *         response=401,
+     *         description="Unauthorized user",
+     *     ),
+     * )
      */
     public function update(GroupRequest $request, Group $group)
     {
@@ -70,11 +157,25 @@ class GroupController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Group  $groups
-     *
-     * @return \Illuminate\Http\Response
+     * @OA\Delete(
+     *     path="/api/groups/{group}",
+     *     description="Groups delete",
+     *     tags={"group"},
+     *     @OA\Parameter(
+     *          required=true,
+     *          name="group",
+     *          description="Object group",
+     *          in="path",
+     *     ),
+     *      @OA\Response(
+     *         response=200,
+     *         description="Group delete sucessfull",
+     *     ),
+     *       @OA\Response(
+     *         response=401,
+     *         description="Unauthorized user",
+     *     ),
+     * )
      */
     public function destroy(Group $group)
     {

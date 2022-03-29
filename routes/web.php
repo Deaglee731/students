@@ -1,10 +1,10 @@
 <?php
 
-use App\Http\Controllers\web\GroupController;
-use App\Http\Controllers\web\ProfileController;
-use App\Http\Controllers\web\ScoreController;
-use App\Http\Controllers\web\StudentController;
-use App\Http\Controllers\web\SubjectController;
+use App\Http\Controllers\Web\GroupController;
+use App\Http\Controllers\Web\ProfileController;
+use App\Http\Controllers\Web\ScoreController;
+use App\Http\Controllers\Web\StudentController;
+use App\Http\Controllers\Web\SubjectController;
 use Illuminate\Support\Facades\Route;
 
 /*

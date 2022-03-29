@@ -8,6 +8,42 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 
+/**
+ * @OA\Schema(
+ *      schema="Student",
+ *      required={"id", "first_name", "last_name", "middle_name", "group_id", "birthday", "role_id"},
+ * 
+ *      @OA\Property (
+ *          property="id", description="id",
+ *          type="number", example="1",
+ *      ),
+ *      @OA\Property (
+ *          property="first_name", description="first_name",
+ *          type="string", example="Alex",
+ *      ),
+ *      @OA\Property (
+ *          property="last_name", description="last_name",
+ *          type="string", example="Ivanov",
+ *      ),
+ *      @OA\Property (
+ *          property="middle_name", description="middle_name",
+ *          type="string", example="Timurovich",
+ *      ),
+ *      @OA\Property (
+ *          property="group_id", description="group_id",
+ *          type="number", example="10",
+ *      ),
+ *      @OA\Property (
+ *          property="birthday", description="birthday",
+ *          type="date", example="1998-02-02",
+ *      ),
+ *      @OA\Property (
+ *          property="role_id", description="role_id",
+ *          type="nubmer", example="2",
+ *      ),
+ * )
+ *
+ */
 class Student extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;

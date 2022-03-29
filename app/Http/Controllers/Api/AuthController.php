@@ -9,6 +9,60 @@ use Illuminate\Support\Facades\Password;
 
 class AuthController extends Controller
 {
+    /**
+     * @OA\Post(
+     *     path="/api/login",
+     *     summary="Api authenticate with passport",
+     *     description="Api authenticate with passport",
+     *     tags={"auth"},
+     * @OA\Parameter(
+     *          required=true,
+     *          name="email",
+     *          description="email address",
+     *          in="query",
+     *     ),
+     * @OA\Parameter(
+     *          required=true,
+     *          name="password",
+     *          description="password",
+     *          in="query",
+     *      ),
+     * 
+     *     @OA\RequestBody(
+     *         required=true,
+     *             @OA\JsonContent(
+     *                 @OA\Property(
+     *                     property="email",
+     *                     type="string",
+     *                     format="email",
+     *                 ),
+     *                 @OA\Property(
+     *                     property="password",
+     *                     type="string",
+     *                     format="password",
+     *                 ),
+     *             )
+     *         ),
+     *      @OA\Response(
+     *         response=200,
+     *         description="Login sucessfull",
+     *         @OA\JsonContent(
+     *             @OA\Property(
+     *                     property="message",
+     *                     type="string",
+     *                 ),
+     *            @OA\Property(
+     *                     property="token",
+     *                     type="string",
+     *                 ),
+     *         )
+     *     ),
+     *       @OA\Response(
+     *         response=401,
+     *         description="Unauthorized user",
+     *     ),
+     * )
+     */
     public function login(LoginRequest $request)
     {
         $request->authenticate();
@@ -21,6 +75,22 @@ class AuthController extends Controller
         ]);
     }
 
+     /**
+     * @OA\Post(
+     *     path="/api/logout",
+     *     summary="Api authenticate with passport",
+     *     description="Api authenticate with passport",
+     *     tags={"auth"},
+     *      @OA\Response(
+     *         response=200,
+     *         description="Logout Sucessfull",
+     *     ),
+     *       @OA\Response(
+     *         response=401,
+     *         description="Unauthorized user",
+     *     ),
+     * )
+     */
     public function logout(Request $request)
     {
         $request->user()->token()->revoke();
@@ -30,6 +100,28 @@ class AuthController extends Controller
         ]);
     }
 
+     /*
+     * @OA\Post(
+     *     path="/api/reset-password",
+     *     summary="Api authenticate with passport",
+     *     description="Api authenticate with passport",
+     *     tags={"Auth"},
+     *     @OA\RequestBody(
+     *         required=true,
+     *             @OA\JsonContent(
+     *                 @OA\Property(
+     *                     property="email",
+     *                     type="string",
+     *                     format="email",
+     *                 ),
+     *             )
+     *         ),
+     *      @OA\Response(
+     *         response=200,
+     *         description="OK",
+     *     ),
+     * )
+     */
     public function resetPassword(Request $request)
     {
         $request->validate([

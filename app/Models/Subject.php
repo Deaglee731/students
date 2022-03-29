@@ -5,6 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @OA\Schema(
+ *      schema="Subject",
+ *      required={"id", "name"},
+ *      @OA\Property (
+ *          property="id", description="id",
+ *          type="number", example="1",
+ *      ),
+ *      @OA\Property (
+ *          property="name", description="Subject name",
+ *          type="string", example="Subject-3212",
+ *      ),
+ * )
+ *
+ */
 class Subject extends Model
 {
     use HasFactory;

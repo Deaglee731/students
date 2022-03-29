@@ -12,6 +12,28 @@ use App\Services\FileServices;
 
 class StudentController extends Controller
 {
+    /**
+     * @OA\Get(
+     *     path="/api/students",
+     *     description="Students list",
+     *     tags={"students"},
+     *      @OA\Response(
+     *         response=200,
+     *         description="Student list",
+     *         @OA\JsonContent(
+     *              @OA\Property (
+     *                  property="data", 
+     *                  type="object",
+     *                  @OA\Property (ref="#/components/schemas/Student"),
+     *              ),
+     *         )
+     *     ),
+     *       @OA\Response(
+     *         response=401,
+     *         description="Unauthorized user",
+     *     ),
+     * )
+     */
     public function index(StudentFilterRequest $request)
     {
         $this->authorize('viewAny', Student::class);
@@ -22,12 +44,96 @@ class StudentController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     *
-     * @return \Illuminate\Http\Response
+     * @OA\Post (
+     *     path="/api/students",
+     *     description="Student create",
+     *     tags={"students"},
+     *     @OA\Parameter(
+     *          required=true,
+     *          name="first_name",
+     *          description="First name",
+     *          in="query",
+     *     ),
+     *     @OA\Parameter(
+     *          required=true,
+     *          name="last_name",
+     *          description="Last name",
+     *          in="query",
+     *     ),
+     *     @OA\Parameter(
+     *          required=true,
+     *          name="middle_name",
+     *          description="Middle name",
+     *          in="query",
+     *     ),
+     *     @OA\Parameter(
+     *          required=true,
+     *          name="group_id",
+     *          description="Group",
+     *          in="query",
+     *     ),
+     *     @OA\Parameter(
+     *          required=true,
+     *          name="email",
+     *          description="Email",
+     *          in="query",
+     *     ),
+     *     @OA\Parameter(
+     *          required=true,
+     *          name="city",
+     *          description="City",
+     *          in="query",
+     *     ),
+     *     @OA\Parameter(
+     *          required=true,
+     *          name="street",
+     *          description="Street",
+     *          in="query",
+     *     ),
+     *     @OA\Parameter(
+     *          required=true,
+     *          name="home",
+     *          description="Home",
+     *          in="query",
+     *     ),
+     *     @OA\Parameter(
+     *          required=true,
+     *          name="birthday",
+     *          description="Birthday",
+     *          in="query",
+     *     ),
+     *     @OA\Parameter(
+     *          required=true,
+     *          name="role_id",
+     *          description="Role",
+     *          in="query",
+     *     ),
+     *     @OA\Parameter(
+     *          required=true,
+     *          name="password",
+     *          description="Password",
+     *          in="query",
+     *     ),
+     *     @OA\Parameter(
+     *          required=true,
+     *          name="password_confirmation",
+     *          description="Password Conformation",
+     *          in="query",
+     *     ),
+     *     @OA\Response (
+     *          response=200,
+     *          description="Created student",
+     *          @OA\JsonContent(
+     *              @OA\Property (
+     *                  property="student", 
+     *                  type="object",
+     *                  @OA\Property (ref="#/components/schemas/Student"),
+     *              ),
+     *          ),
+     *     ),
+     * ),
      */
+
     public function store(RegisterStudentRequest $request)
     {
         $this->authorize('store', [Student::class, $request]);
@@ -47,11 +153,33 @@ class StudentController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Student  $students
-     *
-     * @return \Illuminate\Http\Response
+     * @OA\Get(
+     *     path="/api/students/{student}",
+     *     description="Show student",
+     *     tags={"students"},
+     *     @OA\Parameter(
+     *          required=true,
+     *          name="student",
+     *          description="Student subject",
+     *          in="path",
+     *     ),
+
+     *      @OA\Response(
+     *         response=200,
+     *         description="Student show sucessfull",
+     *         @OA\JsonContent(
+     *              @OA\Property (
+     *                  property="data", 
+     *                  type="object",
+     *                  @OA\Property (ref="#/components/schemas/Student"),
+     *              ),
+     *         )
+     *     ),
+     *       @OA\Response(
+     *         response=401,
+     *         description="Unauthorized user",
+     *     ),
+     * )
      */
     public function show(Student $student)
     {
@@ -61,12 +189,92 @@ class StudentController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Student  $students
-     *
-     * @return \Illuminate\Http\Response
+     * @OA\Put(
+     *     path="/api/students/{student}",
+     *     description="Student Update",
+     *     tags={"students"},
+     *     @OA\Parameter(
+     *          required=true,
+     *          name="student",
+     *          description="Object student",
+     *          in="path",
+     *     ),
+     *     @OA\Parameter(
+     *          required=true,
+     *          name="first_name",
+     *          description="First name",
+     *          in="query",
+     *     ),
+     *     @OA\Parameter(
+     *          required=true,
+     *          name="last_name",
+     *          description="Last name",
+     *          in="query",
+     *     ),
+     *     @OA\Parameter(
+     *          required=true,
+     *          name="middle_name",
+     *          description="Middle name",
+     *          in="query",
+     *     ),
+     *     @OA\Parameter(
+     *          required=true,
+     *          name="group_id",
+     *          description="Group",
+     *          in="query",
+     *     ),
+     *     @OA\Parameter(
+     *          required=true,
+     *          name="email",
+     *          description="Email",
+     *          in="query",
+     *     ),
+     *     @OA\Parameter(
+     *          required=true,
+     *          name="city",
+     *          description="City",
+     *          in="query",
+     *     ),
+     *     @OA\Parameter(
+     *          required=true,
+     *          name="street",
+     *          description="Street",
+     *          in="query",
+     *     ),
+     *     @OA\Parameter(
+     *          required=true,
+     *          name="home",
+     *          description="Home",
+     *          in="query",
+     *     ),
+     *     @OA\Parameter(
+     *          required=true,
+     *          name="birthday",
+     *          description="Birthday",
+     *          in="query",
+     *     ),
+     *     @OA\Parameter(
+     *          required=true,
+     *          name="role_id",
+     *          description="Role",
+     *          in="query",
+     *     ),
+     *      @OA\Response(
+     *         response=200,
+     *         description="Student update sucessfull",
+     *         @OA\JsonContent(
+     *              @OA\Property (
+     *                  property="data", 
+     *                  type="object",
+     *                  @OA\Property (ref="#/components/schemas/Student"),
+     *              ),
+     *         )
+     *     ),
+     *       @OA\Response(
+     *         response=401,
+     *         description="Unauthorized user",
+     *     ),
+     * )
      */
     public function update(Student $student, StudentRequest $request)
     {
@@ -85,11 +293,25 @@ class StudentController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Student  $students
-     *
-     * @return \Illuminate\Http\Response
+     * @OA\Delete(
+     *     path="/api/students/{student}",
+     *     description="Student delete",
+     *     tags={"students"},
+     *     @OA\Parameter(
+     *          required=true,
+     *          name="student",
+     *          description="Object student",
+     *          in="path",
+     *     ),
+     *      @OA\Response(
+     *         response=200,
+     *         description="Student delete sucessfull",
+     *     ),
+     *       @OA\Response(
+     *         response=401,
+     *         description="Unauthorized user",
+     *     ),
+     * )
      */
     public function destroy(Student $student)
     {
@@ -103,6 +325,21 @@ class StudentController extends Controller
         ]);
     }
 
+    /**
+     * @OA\Post(
+     *     path="/students/pdf/download",
+     *     description="Student delete",
+     *     tags={"students"},
+     *      @OA\Response(
+     *         response=200,
+     *         description="Student link is ready",
+     *     ),
+     *       @OA\Response(
+     *         response=401,
+     *         description="Unauthorized user",
+     *     ),
+     * )
+     */
     public function downloadList()
     {
         $this->authorize('create', Student::class);
@@ -112,6 +349,27 @@ class StudentController extends Controller
         return FileServices::getStudentListLink($students);
     }
 
+    /**
+     * @OA\Post(
+     *     path="/students/{student}/restore",
+     *     description="Student restore",
+     *     tags={"students"},
+     *     @OA\Parameter(
+     *          required=true,
+     *          name="student",
+     *          description="Object student",
+     *          in="path",
+     *     ),
+     *      @OA\Response(
+     *         response=200,
+     *         description="Student restore sucessfull",
+     *     ),
+     *       @OA\Response(
+     *         response=401,
+     *         description="Unauthorized user",
+     *     ),
+     * )
+     */
     public function restore(Student $student)
     {
         $this->authorize('restore', $student);
@@ -123,6 +381,27 @@ class StudentController extends Controller
        ]);
     }
 
+    /**
+     * @OA\Post(
+     *     path="/students/{student}/forceDelete",
+     *     description="Student forceDelete",
+     *     tags={"students"},
+     *     @OA\Parameter(
+     *          required=true,
+     *          name="student",
+     *          description="Object student",
+     *          in="path",
+     *     ),
+     *      @OA\Response(
+     *         response=200,
+     *         description="Student force delete sucessfull",
+     *     ),
+     *       @OA\Response(
+     *         response=401,
+     *         description="Unauthorized user",
+     *     ),
+     * )
+     */
     public function forceDelete(Student $student)
     {
         $this->authorize('forceDelete', $student);

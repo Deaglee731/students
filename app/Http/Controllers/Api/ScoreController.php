@@ -10,6 +10,46 @@ use Illuminate\Support\Facades\Gate;
 
 class ScoreController extends Controller
 {
+    /**
+     * @OA\Post(
+     *     path="/api/students/{student}/addScore/",
+     *     description="Groups store",
+     *     tags={"score"},
+     *     @OA\Parameter(
+     *          required=true,
+     *          name="student_id",
+     *          description="Student id",
+     *          in="query",
+     *     ),
+     *     @OA\Parameter(
+     *          required=true,
+     *          name="score",
+     *          description="Score",
+     *          in="query",
+     *     ),
+     *     @OA\Parameter(
+     *          required=true,
+     *          name="subject_id",
+     *          description="Subject",
+     *          in="query",
+     *     ),
+     *      @OA\Response(
+     *         response=200,
+     *         description="Score create sucessfull",
+     *         @OA\JsonContent(
+     *              @OA\Property (
+     *                  property="data", 
+     *                  type="object",
+     *                  @OA\Property (ref="#/components/schemas/Score"),
+     *              ),
+     *         )
+     *     ),
+     *       @OA\Response(
+     *         response=401,
+     *         description="Unauthorized user",
+     *     ),
+     * )
+     */
     public function store(ScoreRequest $request, Student $student)
     {
         Gate::authorize('manage-score', [$student]);
@@ -24,6 +64,33 @@ class ScoreController extends Controller
         ]);
     }
 
+    /**
+     * @OA\Delete(
+     *     path="/api/students/{student}/deleteScore/",
+     *     description="Score delete",
+     *     tags={"score"},
+     *     @OA\Parameter(
+     *          required=true,
+     *          name="student",
+     *          description="Student_id",
+     *          in="path",
+     *     ),
+     *     @OA\Parameter(
+     *          required=true,
+     *          name="subject_id",
+     *          description="Subject id",
+     *          in="query",
+     *     ),
+     *      @OA\Response(
+     *         response=200,
+     *         description="Score delete sucessfull",
+     *     ),
+     *       @OA\Response(
+     *         response=401,
+     *         description="Unauthorized user",
+     *     ),
+     * )
+     */
     public function delete(Request $request, Student $student)
     {
         Gate::authorize('manage-score', [$student]);
@@ -35,6 +102,46 @@ class ScoreController extends Controller
         ]);
     }
 
+        /**
+     * @OA\Patch(
+     *     path="/api/students/{student}/updateScore",
+     *     description="Score Update",
+     *     tags={"score"},
+     *     @OA\Parameter(
+     *          required=true,
+     *          name="student_id",
+     *          description="Student id",
+     *          in="query",
+     *     ),
+     *     @OA\Parameter(
+     *          required=true,
+     *          name="score",
+     *          description="Score",
+     *          in="query",
+     *     ),
+     *     @OA\Parameter(
+     *          required=true,
+     *          name="subject_id",
+     *          description="Subject",
+     *          in="query",
+     *     ),
+     *      @OA\Response(
+     *         response=200,
+     *         description="Score update sucessfull",
+     *         @OA\JsonContent(
+     *              @OA\Property (
+     *                  property="data", 
+     *                  type="object",
+     *                  @OA\Property (ref="#/components/schemas/Score"),
+     *              ),
+     *         )
+     *     ),
+     *       @OA\Response(
+     *         response=401,
+     *         description="Unauthorized user",
+     *     ),
+     * )
+     */
     public function update(Request $request, Student $student)
     {
         Gate::authorize('manage-score', [$student]);

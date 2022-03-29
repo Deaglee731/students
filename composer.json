@@ -8,6 +8,7 @@
         "php": "^8.0.2",
         "artem-alekseev/dictionaries": "1.*",
         "barryvdh/laravel-dompdf": "^1.0",
+        "darkaonline/l5-swagger": "^8.3",
         "fruitcake/laravel-cors": "^2.0.5",
         "guzzlehttp/guzzle": "^7.4",
         "intervention/image": "^2.7",

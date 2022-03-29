@@ -1,0 +1,1104 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "My the best API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Api authenticate with passport",
+                "description": "Api authenticate with passport",
+                "operationId": "222b2625838e3c57e017987f73598fda",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "email address",
+                        "required": true
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "password",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Login sucessfull",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "token": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized user"
+                    }
+                }
+            }
+        },
+        "/api/logout": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Api authenticate with passport",
+                "description": "Api authenticate with passport",
+                "operationId": "ad65cbbd4e9f201619eae184a5961a98",
+                "responses": {
+                    "200": {
+                        "description": "Logout Sucessfull"
+                    },
+                    "401": {
+                        "description": "Unauthorized user"
+                    }
+                }
+            }
+        },
+        "/api/groups": {
+            "get": {
+                "tags": [
+                    "group"
+                ],
+                "description": "Groups list",
+                "operationId": "ac30b3897794f3ee24af2af44d36ce5d",
+                "responses": {
+                    "200": {
+                        "description": "Group list",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "": {
+                                                    "$ref": "#/components/schemas/Group"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized user"
+                    }
+                }
+            }
+        },
+        "/api/groups/": {
+            "post": {
+                "tags": [
+                    "group"
+                ],
+                "description": "Groups store",
+                "operationId": "cae7c984381268a4a6de74ad8b9125aa",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Group name",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Group create sucessfull",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "": {
+                                                    "$ref": "#/components/schemas/Group"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized user"
+                    }
+                }
+            }
+        },
+        "/api/groups/{group}": {
+            "get": {
+                "tags": [
+                    "group"
+                ],
+                "description": "Show group",
+                "operationId": "e2d6a534a8d1765ee2f8b583628fd816",
+                "parameters": [
+                    {
+                        "name": "group",
+                        "in": "path",
+                        "description": "Object group",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "group show sucessfull",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "": {
+                                                    "$ref": "#/components/schemas/Group"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized user"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "group"
+                ],
+                "description": "Group Update",
+                "operationId": "e92f78d7006c10c6ee089b9bb58153e6",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "group name",
+                        "required": true
+                    },
+                    {
+                        "name": "group",
+                        "in": "path",
+                        "description": "Object group",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Group update sucessfull",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "": {
+                                                    "$ref": "#/components/schemas/Group"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized user"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "group"
+                ],
+                "description": "Groups delete",
+                "operationId": "b94c1c749a1c9c46a0121a71adbde115",
+                "parameters": [
+                    {
+                        "name": "group",
+                        "in": "path",
+                        "description": "Object group",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Group delete sucessfull"
+                    },
+                    "401": {
+                        "description": "Unauthorized user"
+                    }
+                }
+            }
+        },
+        "/api/students/{student}/addScore/": {
+            "post": {
+                "tags": [
+                    "score"
+                ],
+                "description": "Groups store",
+                "operationId": "1871b52d8d61285f3669f968f65a2bb8",
+                "parameters": [
+                    {
+                        "name": "student_id",
+                        "in": "query",
+                        "description": "Student id",
+                        "required": true
+                    },
+                    {
+                        "name": "score",
+                        "in": "query",
+                        "description": "Score",
+                        "required": true
+                    },
+                    {
+                        "name": "subject_id",
+                        "in": "query",
+                        "description": "Subject",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Score create sucessfull",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "": {
+                                                    "$ref": "#/components/schemas/Score"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized user"
+                    }
+                }
+            }
+        },
+        "/api/students/{student}/deleteScore/": {
+            "delete": {
+                "tags": [
+                    "score"
+                ],
+                "description": "Score delete",
+                "operationId": "2924ea7c67721e3f03dd37a558dfc950",
+                "parameters": [
+                    {
+                        "name": "student",
+                        "in": "path",
+                        "description": "Student_id",
+                        "required": true
+                    },
+                    {
+                        "name": "subject_id",
+                        "in": "query",
+                        "description": "Subject id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Score delete sucessfull"
+                    },
+                    "401": {
+                        "description": "Unauthorized user"
+                    }
+                }
+            }
+        },
+        "/api/students/{student}/updateScore": {
+            "patch": {
+                "tags": [
+                    "score"
+                ],
+                "description": "Score Update",
+                "operationId": "487320b597967360f8812e94aff57056",
+                "parameters": [
+                    {
+                        "name": "student_id",
+                        "in": "query",
+                        "description": "Student id",
+                        "required": true
+                    },
+                    {
+                        "name": "score",
+                        "in": "query",
+                        "description": "Score",
+                        "required": true
+                    },
+                    {
+                        "name": "subject_id",
+                        "in": "query",
+                        "description": "Subject",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Score update sucessfull",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "": {
+                                                    "$ref": "#/components/schemas/Score"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized user"
+                    }
+                }
+            }
+        },
+        "/api/students": {
+            "get": {
+                "tags": [
+                    "students"
+                ],
+                "description": "Students list",
+                "operationId": "5a54d6df45ca455ad022d2f7b9da9731",
+                "responses": {
+                    "200": {
+                        "description": "Student list",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "": {
+                                                    "$ref": "#/components/schemas/Student"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized user"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "students"
+                ],
+                "description": "Student create",
+                "operationId": "aa0044bcc7e0cbaa736f0c20a4a6765c",
+                "parameters": [
+                    {
+                        "name": "first_name",
+                        "in": "query",
+                        "description": "First name",
+                        "required": true
+                    },
+                    {
+                        "name": "last_name",
+                        "in": "query",
+                        "description": "Last name",
+                        "required": true
+                    },
+                    {
+                        "name": "middle_name",
+                        "in": "query",
+                        "description": "Middle name",
+                        "required": true
+                    },
+                    {
+                        "name": "group_id",
+                        "in": "query",
+                        "description": "Group",
+                        "required": true
+                    },
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Email",
+                        "required": true
+                    },
+                    {
+                        "name": "city",
+                        "in": "query",
+                        "description": "City",
+                        "required": true
+                    },
+                    {
+                        "name": "street",
+                        "in": "query",
+                        "description": "Street",
+                        "required": true
+                    },
+                    {
+                        "name": "home",
+                        "in": "query",
+                        "description": "Home",
+                        "required": true
+                    },
+                    {
+                        "name": "birthday",
+                        "in": "query",
+                        "description": "Birthday",
+                        "required": true
+                    },
+                    {
+                        "name": "role_id",
+                        "in": "query",
+                        "description": "Role",
+                        "required": true
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "Password",
+                        "required": true
+                    },
+                    {
+                        "name": "password_confirmation",
+                        "in": "query",
+                        "description": "Password Conformation",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Created student",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "student": {
+                                            "properties": {
+                                                "": {
+                                                    "$ref": "#/components/schemas/Student"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/students/{student}": {
+            "get": {
+                "tags": [
+                    "students"
+                ],
+                "description": "Show student",
+                "operationId": "d67efa075fe7ae07b51c13d66feb5031",
+                "parameters": [
+                    {
+                        "name": "student",
+                        "in": "path",
+                        "description": "Student subject",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Student show sucessfull",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "": {
+                                                    "$ref": "#/components/schemas/Student"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized user"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "students"
+                ],
+                "description": "Student Update",
+                "operationId": "9444764f9c8e8489ac353800443a8910",
+                "parameters": [
+                    {
+                        "name": "student",
+                        "in": "path",
+                        "description": "Object student",
+                        "required": true
+                    },
+                    {
+                        "name": "first_name",
+                        "in": "query",
+                        "description": "First name",
+                        "required": true
+                    },
+                    {
+                        "name": "last_name",
+                        "in": "query",
+                        "description": "Last name",
+                        "required": true
+                    },
+                    {
+                        "name": "middle_name",
+                        "in": "query",
+                        "description": "Middle name",
+                        "required": true
+                    },
+                    {
+                        "name": "group_id",
+                        "in": "query",
+                        "description": "Group",
+                        "required": true
+                    },
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Email",
+                        "required": true
+                    },
+                    {
+                        "name": "city",
+                        "in": "query",
+                        "description": "City",
+                        "required": true
+                    },
+                    {
+                        "name": "street",
+                        "in": "query",
+                        "description": "Street",
+                        "required": true
+                    },
+                    {
+                        "name": "home",
+                        "in": "query",
+                        "description": "Home",
+                        "required": true
+                    },
+                    {
+                        "name": "birthday",
+                        "in": "query",
+                        "description": "Birthday",
+                        "required": true
+                    },
+                    {
+                        "name": "role_id",
+                        "in": "query",
+                        "description": "Role",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Student update sucessfull",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "": {
+                                                    "$ref": "#/components/schemas/Student"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized user"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "students"
+                ],
+                "description": "Student delete",
+                "operationId": "ddcd162891895aa10326ee815a72665b",
+                "parameters": [
+                    {
+                        "name": "student",
+                        "in": "path",
+                        "description": "Object student",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Student delete sucessfull"
+                    },
+                    "401": {
+                        "description": "Unauthorized user"
+                    }
+                }
+            }
+        },
+        "/students/pdf/download": {
+            "post": {
+                "tags": [
+                    "students"
+                ],
+                "description": "Student delete",
+                "operationId": "8a0ae049be0d525e6514fd3fc600f5da",
+                "responses": {
+                    "200": {
+                        "description": "Student link is ready"
+                    },
+                    "401": {
+                        "description": "Unauthorized user"
+                    }
+                }
+            }
+        },
+        "/students/{student}/restore": {
+            "post": {
+                "tags": [
+                    "students"
+                ],
+                "description": "Student restore",
+                "operationId": "03476098e2c791b10f88641a2f4421a9",
+                "parameters": [
+                    {
+                        "name": "student",
+                        "in": "path",
+                        "description": "Object student",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Student restore sucessfull"
+                    },
+                    "401": {
+                        "description": "Unauthorized user"
+                    }
+                }
+            }
+        },
+        "/students/{student}/forceDelete": {
+            "post": {
+                "tags": [
+                    "students"
+                ],
+                "description": "Student forceDelete",
+                "operationId": "85deed59c4ae6660e849b430dd37792e",
+                "parameters": [
+                    {
+                        "name": "student",
+                        "in": "path",
+                        "description": "Object student",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Student force delete sucessfull"
+                    },
+                    "401": {
+                        "description": "Unauthorized user"
+                    }
+                }
+            }
+        },
+        "/api/subjects": {
+            "get": {
+                "tags": [
+                    "subject"
+                ],
+                "description": "Subjects list",
+                "operationId": "7ec04c0df2c6d2830d25036d6f4d4b61",
+                "responses": {
+                    "200": {
+                        "description": "Subjects list",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "": {
+                                                    "$ref": "#/components/schemas/Subject"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized user"
+                    }
+                }
+            }
+        },
+        "/api/subjects/": {
+            "post": {
+                "tags": [
+                    "subject"
+                ],
+                "description": "Subject store",
+                "operationId": "a36c60c53a320073a16d7060929b3bef",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Subject name",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Subject create sucessfull",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "": {
+                                                    "$ref": "#/components/schemas/Subject"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized user"
+                    }
+                }
+            }
+        },
+        "/api/subjects/{subject}": {
+            "get": {
+                "tags": [
+                    "subject"
+                ],
+                "description": "Show subject",
+                "operationId": "8d258e774868d03016b16a8f4c354e04",
+                "parameters": [
+                    {
+                        "name": "subject",
+                        "in": "path",
+                        "description": "Object subject",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "subject show sucessfull",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "": {
+                                                    "$ref": "#/components/schemas/Subject"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized user"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "subject"
+                ],
+                "description": "Subject Update",
+                "operationId": "93b54cc3883b8b943b24c908891dbb34",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "subject name",
+                        "required": true
+                    },
+                    {
+                        "name": "subject",
+                        "in": "path",
+                        "description": "Object subject",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Subject update sucessfull",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "": {
+                                                    "$ref": "#/components/schemas/Subject"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized user"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "subject"
+                ],
+                "description": "Subject delete",
+                "operationId": "81e875ba9c5c29e8285393505250ffc4",
+                "parameters": [
+                    {
+                        "name": "subject",
+                        "in": "path",
+                        "description": "Object subject",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Subject delete sucessfull"
+                    },
+                    "401": {
+                        "description": "Unauthorized user"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Group": {
+                "required": [
+                    "id",
+                    "name"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "id",
+                        "type": "number",
+                        "example": "1"
+                    },
+                    "name": {
+                        "description": "Group_name",
+                        "type": "string",
+                        "example": "IVT-[123]"
+                    }
+                },
+                "type": "object"
+            },
+            "Score": {
+                "required": [
+                    "id",
+                    "student_id",
+                    "subject_id"
+                ],
+                "properties": {
+                    "score": {
+                        "description": "Score",
+                        "type": "number",
+                        "example": "5"
+                    },
+                    "student_id": {
+                        "description": "Student",
+                        "type": "number",
+                        "example": "11"
+                    },
+                    "subject_id": {
+                        "description": "Subject",
+                        "type": "number",
+                        "example": "13"
+                    }
+                },
+                "type": "object"
+            },
+            "Student": {
+                "required": [
+                    "id",
+                    "first_name",
+                    "last_name",
+                    "middle_name",
+                    "group_id",
+                    "birthday",
+                    "role_id"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "id",
+                        "type": "number",
+                        "example": "1"
+                    },
+                    "first_name": {
+                        "description": "first_name",
+                        "type": "string",
+                        "example": "Alex"
+                    },
+                    "last_name": {
+                        "description": "last_name",
+                        "type": "string",
+                        "example": "Ivanov"
+                    },
+                    "middle_name": {
+                        "description": "middle_name",
+                        "type": "string",
+                        "example": "Timurovich"
+                    },
+                    "group_id": {
+                        "description": "group_id",
+                        "type": "number",
+                        "example": "10"
+                    },
+                    "birthday": {
+                        "description": "birthday",
+                        "type": "string",
+                        "format": "date",
+                        "example": "1998-02-02"
+                    },
+                    "role_id": {
+                        "description": "role_id",
+                        "type": "nubmer",
+                        "example": "2"
+                    }
+                },
+                "type": "object"
+            },
+            "Subject": {
+                "required": [
+                    "id",
+                    "name"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "id",
+                        "type": "number",
+                        "example": "1"
+                    },
+                    "name": {
+                        "description": "Subject name",
+                        "type": "string",
+                        "example": "Subject-3212"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "sanctum": {
+                "type": "apiKey",
+                "description": "Enter token in format (Bearer <token>)",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    },
+    "security": [
+        []
+    ]
+}
