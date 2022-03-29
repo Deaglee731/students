@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Gate;
 class ScoreController extends Controller
 {
     /**
-     * @OA\Post(
+     * @OA\Get(
      *     path="/api/students/{student}/addScore/",
      *     description="Groups store",
      *     tags={"score"},

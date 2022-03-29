@@ -278,12 +278,12 @@
             }
         },
         "/api/students/{student}/addScore/": {
-            "post": {
+            "get": {
                 "tags": [
                     "score"
                 ],
                 "description": "Groups store",
-                "operationId": "1871b52d8d61285f3669f968f65a2bb8",
+                "operationId": "2c1b50a92f7b197222e5c1b0613e0f65",
                 "parameters": [
                     {
                         "name": "student_id",

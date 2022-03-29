@@ -121,6 +121,11 @@ class Student extends Authenticatable
                 Дом {$this->address['home']}";
     }
 
+    public function setBirthdayAttribute($birthday)
+    {
+        $this->attributes['birthday'] = date("Y-m-d", strtotime($birthday));
+    }
+
     public function scopeFilter($query, $request)
     {
         if (isset($request->firstname)) {

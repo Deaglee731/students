@@ -27,7 +27,6 @@ class AuthController extends Controller
      *          description="password",
      *          in="query",
      *      ),
-     * 
      *     @OA\RequestBody(
      *         required=true,
      *             @OA\JsonContent(
@@ -105,7 +104,13 @@ class AuthController extends Controller
      *     path="/api/reset-password",
      *     summary="Api authenticate with passport",
      *     description="Api authenticate with passport",
-     *     tags={"Auth"},
+     *     tags={"auth"},
+     *     @OA\Parameter(
+     *          required=true,
+     *          name="email",
+     *          description="email address",
+     *          in="query",
+     *     ),
      *     @OA\RequestBody(
      *         required=true,
      *             @OA\JsonContent(
@@ -118,7 +123,7 @@ class AuthController extends Controller
      *         ),
      *      @OA\Response(
      *         response=200,
-     *         description="OK",
+     *         description="Password sent with mail",
      *     ),
      * )
      */
