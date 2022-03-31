@@ -11,7 +11,7 @@ class StudentScores extends Mailable
 {
     use Queueable, SerializesModels;
 
-    protected $student;
+    public $student;
 
     /**
      * Create a new message instance.
