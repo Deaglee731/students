@@ -39,17 +39,17 @@
         </div>
 
         <div class="form-floating mb-3 lead">
-            <input type="text" id="inputCity" name="city" value=" {{$student->address['city'] }}" size="18" class="form-control" style="max-width:max-content  ;" />
+            <input type="text" id="inputCity" name="city" value=" {{isset($student->address['city']) }}" size="18" class="form-control" style="max-width:max-content  ;" />
             <label for="inputCity">New city</label>
         </div>
 
         <div class="form-floating mb-3 lead">
-            <input type="text" id="inputStreet" name="street" value=" {{$student->address['street'] }}" size="18" class="form-control" style="max-width:max-content ;" />
+            <input type="text" id="inputStreet" name="street" value=" {{isset($student->address['street']) }}" size="18" class="form-control" style="max-width:max-content ;" />
             <label for="inputStreet">New street</label>
         </div>
 
         <div class="form-floating mb-3 lead">
-            <input type="text" id="inputHome" name="home" value=" {{$student->address['home'] }}" size="18" class="form-control" style="max-width:max-content ;" />
+            <input type="text" id="inputHome" name="home" value=" {{isset($student->address['home']) }}" size="18" class="form-control" style="max-width:max-content ;" />
             <label for="inputHome">New home</label>
         </div>
         <div class="form-floating mb-3 lead">

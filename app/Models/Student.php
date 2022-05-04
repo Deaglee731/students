@@ -12,7 +12,7 @@ use Laravel\Passport\HasApiTokens;
  * @OA\Schema(
  *      schema="Student",
  *      required={"id", "first_name", "last_name", "middle_name", "group_id", "birthday", "role_id"},
- * 
+ *
  *      @OA\Property (
  *          property="id", description="id",
  *          type="number", example="1",
@@ -116,8 +116,8 @@ class Student extends Authenticatable
 
     public function getFullAddressAttribute()
     {
-        return "Город {$this->address['city']}
-                Улица {$this->address['street']} 
+        return "Городz {$this->address['city']}
+                Улица {$this->address['street']}
                 Дом {$this->address['home']}";
     }
 
