@@ -116,9 +116,9 @@ class Student extends Authenticatable
 
     public function getFullAddressAttribute()
     {
-        return "Городz {$this->address['city']}
-                Улица {$this->address['street']}
-                Дом {$this->address['home']}";
+        return "Город " . isset($this->address['city']).
+                "Улица " .isset($this->address['street']).
+                "Дом " .isset($this->address['home']);
     }
 
     public function setBirthdayAttribute($birthday)

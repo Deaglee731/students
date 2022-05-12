@@ -15,13 +15,13 @@
                 <th>{{ $student->first_name }}</th>
                 @foreach ($student->subjectsScore as $sub)
                     <th scope="col">{{ isset($sub->pivot->score) ? $sub->pivot->score : '-' }}</th>
-                @endforeach                   
+                @endforeach
             @endforeach
             </tr>
             </tr>
                 <th>AVG SCORE</th>
                 @foreach ($avgScore as $score)
-                    <th scope="col">{{ $score }}</th>
+                    <th scope="col">{{ isset($score) }}</th>
                 @endforeach
             </tr>
         </tbody>
