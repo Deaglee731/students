@@ -31,7 +31,7 @@ class FileServices
         $filename = $request->file('avatar')->getClientOriginalName();
         $student->update(['avatar_path' => $filename]);
 
-        $request->file('avatar')->storeAs(
+        $request->file('avatar')->storePubliclyAs(
             "avatars/{$student->id}",
             $filename
         );
