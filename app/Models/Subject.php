@@ -18,7 +18,6 @@ use Illuminate\Database\Eloquent\Model;
  *          type="string", example="Subject-3212",
  *      ),
  * )
- *
  */
 class Subject extends Model
 {
@@ -36,5 +35,7 @@ class Subject extends Model
         if (isset($request->name)) {
             return $query->where('name', 'LIKE', "%{$request->name}%");
         }
+
+        return $query;
     }
 }
