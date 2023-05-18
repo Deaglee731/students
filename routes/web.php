@@ -28,11 +28,11 @@ Route::get('/dashboard', function () {
 
 require __DIR__ . '/auth.php';
 
-Route::resource('groups', GroupController::class)->shallow()->middleware('auth');
-Route::resource('subjects', SubjectController::class)->shallow()->middleware('auth');
-Route::resource('students', StudentController::class)->shallow()->middleware('auth');
-
 Route::middleware('auth')->group(function() {
+
+    Route::resource('groups', GroupController::class)->shallow()->middleware('auth');
+    Route::resource('subjects', SubjectController::class)->shallow()->middleware('auth');
+    Route::resource('students', StudentController::class)->shallow()->middleware('auth');
 
     Route::prefix('profile')->group(function() {
         Route::get('/', [ProfileController::class, 'index'])->name('profile.index');
