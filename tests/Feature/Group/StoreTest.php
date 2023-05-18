@@ -10,6 +10,7 @@ use Tests\TestCase;
 class StoreTest extends TestCase
 {
     use RefreshDatabase;
+
     public function test_store_new_group()
     {
         $group = Group::factory()->make();

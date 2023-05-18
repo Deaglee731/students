@@ -12,9 +12,9 @@ class CreateTest extends TestCase
 
     public function test_create_new_group()
     {
-        $user = Student::factory()->create(['role_id' => 1]);
+        $admin = Student::factory()->create(['role_id' => 1]);
 
-        $response = $this->actingAs($user)->get(route('groups.create'));
+        $response = $this->actingAs($admin)->get(route('groups.create'));
 
         $response->assertOk()->assertViewIs('groups.create');
     }

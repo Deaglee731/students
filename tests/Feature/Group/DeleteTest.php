@@ -4,10 +4,13 @@ namespace Tests\Feature\Group;
 
 use App\Models\Group;
 use App\Models\Student;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class DeleteTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function test_delete_group()
     {
         $group = Group::factory()->create();

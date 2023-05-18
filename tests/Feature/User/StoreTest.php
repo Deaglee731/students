@@ -14,7 +14,7 @@ class StoreTest extends TestCase
 
     public function test_store_new_student()
     {
-        $student = Student::factory()->make();
+        $student = Student::factory()->make(['role_id' => 2]);
         $admin = Student::factory()->create(['role_id' => 1]);
 
         $response = $this->actingAs($admin)->post(route('students.store'), $student->all()->except(['id'])->toArray());
