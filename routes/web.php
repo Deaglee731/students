@@ -32,63 +32,37 @@ Route::resource('groups', GroupController::class)->shallow()->middleware('auth')
 Route::resource('subjects', SubjectController::class)->shallow()->middleware('auth');
 Route::resource('students', StudentController::class)->shallow()->middleware('auth');
 
-Route::GET('/students/{student}', [StudentController::class, 'show'])
-    ->name('students.show')
-    ->withTrashed()
-    ->middleware('auth');
+Route::middleware('auth')->group(function() {
 
-Route::GET('/students/{student}/addScore', [ScoreController::class, 'create'])
-    ->name('scores.create')
-    ->middleware('auth')
-    ->can('edit', 'student');
+    Route::prefix('profile')->group(function() {
+        Route::get('/', [ProfileController::class, 'index'])->name('profile.index');
+        Route::post('/{student}', [ProfileController::class, 'update'])->name('profile.update');
+        Route::post('/{student}/updateAvatar', [ProfileController::class, 'updateAvatar'])->name('profile.update.avatar');
+    });
 
-Route::POST('/students/{student}/saveScore', [ScoreController::class, 'store'])
-    ->name('scores.store')
-    ->middleware('auth')
-    ->can('edit', 'student');
-
-Route::DELETE('/students/{student}/deleteScore/', [ScoreController::class, 'delete'])
-    ->name('scores.delete')
-    ->middleware('auth')
-    ->can('edit', 'student');
-
-Route::GET('students/{student}/editScore/{subject_id}', [ScoreController::class, 'edit'])
-    ->name('scores.edit')
-    ->middleware('auth')
-    ->can('edit', 'student');
-
-Route::PATCH('students/{student}/updateScore', [ScoreController::class, 'update'])
-    ->name('scores.update')
-    ->middleware('auth')
-    ->can('edit', 'student');
+    Route::prefix('students')->group(function() {
+        Route::POST('/pdf/download', [StudentController::class, 'downloadList'])
+            ->name('students.download');
+        Route::POST('/{student}/restore', [StudentController::class, 'restore'])
+            ->name('students.restore')->withTrashed();
+        Route::POST('/{student}/forceDelete', [StudentController::class, 'forceDelete'])
+            ->name('students.forceDelete')->withTrashed();
+        Route::PATCH('students/{student}/updateScore', [ScoreController::class, 'update'])
+            ->name('scores.update')->can('edit', 'student');
+        Route::GET('/{student}/editScore/{subject_id}', [ScoreController::class, 'edit'])
+            ->name('scores.edit')->can('edit', 'student');
+        Route::DELETE('/{student}/deleteScore/', [ScoreController::class, 'delete'])
+            ->name('scores.delete')->can('edit', 'student');
+        Route::POST('/{student}/saveScore', [ScoreController::class, 'store'])
+            ->name('scores.store')->can('edit', 'student');
+        Route::GET('/{student}/addScore', [ScoreController::class, 'create'])
+            ->name('scores.create')->can('edit', 'student');
+        Route::GET('/{student}', [StudentController::class, 'show'])
+            ->name('students.show')->withTrashed();
+    });
+});
 
 Route::GET('/groups/{group}/showJournal', [GroupController::class, 'showJournal'])
     ->name('group_journal.index')
     ->middleware('auth')
     ->can('view', 'group');
-
-Route::GET('/profile/', [ProfileController::class, 'index'])
-    ->name('profile.index')
-    ->middleware('auth');
-
-Route::POST('/profile/{student}', [ProfileController::class, 'update'])
-    ->name('profile.update')
-    ->middleware('auth');
-
-Route::POST('/profile/{student}/updateAvatar', [ProfileController::class, 'updateAvatar'])
-    ->name('profile.update.avatar')
-    ->middleware('auth');
-
-Route::POST('/students/pdf/download', [StudentController::class, 'downloadList'])
-    ->name('students.download')
-    ->middleware('auth');
-
-Route::POST('/students/{student}/restore', [StudentController::class, 'restore'])
-    ->name('students.restore')
-    ->withTrashed()
-    ->middleware('auth');
-
-Route::POST('/students/{student}/forceDelete', [StudentController::class, 'forceDelete'])
-    ->name('students.forceDelete')
-    ->withTrashed()
-    ->middleware('auth');
