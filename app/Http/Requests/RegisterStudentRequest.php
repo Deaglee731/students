@@ -30,7 +30,7 @@ class RegisterStudentRequest extends FormRequest
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'middle_name' => ['required', 'string', 'max:255'],
-            'group_id' => ['required', 'string', 'max:10'],
+            'group_id' => ['required'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:students'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'city' => 'required',

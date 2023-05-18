@@ -54,7 +54,7 @@ class StudentController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(RegisterStudentRequest $request)
     {
@@ -82,7 +82,7 @@ class StudentController extends Controller
      *
      * @param  \App\Models\Student  $students
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function show(Student $student)
     {
@@ -104,7 +104,7 @@ class StudentController extends Controller
      *
      * @param  \App\Models\Student  $students
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function edit(Student $student)
     {
@@ -127,7 +127,7 @@ class StudentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Student  $students
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(Student $student, StudentRequest $request)
     {
@@ -150,7 +150,7 @@ class StudentController extends Controller
      *
      * @param  \App\Models\Student  $students
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Student $student)
     {
