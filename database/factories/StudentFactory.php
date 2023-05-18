@@ -28,9 +28,9 @@ class StudentFactory extends Factory
             'birthday' => $this->faker->date('Y:m:d', 'now'),
             'email' => $this->faker->unique()->safeEmail,
             'email_verified_at' => now(),
-            'password' => bcrypt('12345678'),
+            'password' => bcrypt('123123De!'),
             'remember_token' => Str::random(10),
-            'role_id' => rand(1,3),
+            'role_id' => rand(2,3),
         ];
     }
 }
