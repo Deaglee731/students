@@ -22,7 +22,7 @@ class StudentController extends Controller
      *         description="Student list",
      *         @OA\JsonContent(
      *              @OA\Property (
-     *                  property="data", 
+     *                  property="data",
      *                  type="object",
      *                  @OA\Property (ref="#/components/schemas/Student"),
      *              ),
@@ -125,7 +125,7 @@ class StudentController extends Controller
      *          description="Created student",
      *          @OA\JsonContent(
      *              @OA\Property (
-     *                  property="student", 
+     *                  property="student",
      *                  type="object",
      *                  @OA\Property (ref="#/components/schemas/Student"),
      *              ),
@@ -169,7 +169,7 @@ class StudentController extends Controller
      *         description="Student show sucessfull",
      *         @OA\JsonContent(
      *              @OA\Property (
-     *                  property="data", 
+     *                  property="data",
      *                  type="object",
      *                  @OA\Property (ref="#/components/schemas/Student"),
      *              ),
@@ -264,7 +264,7 @@ class StudentController extends Controller
      *         description="Student update sucessfull",
      *         @OA\JsonContent(
      *              @OA\Property (
-     *                  property="data", 
+     *                  property="data",
      *                  type="object",
      *                  @OA\Property (ref="#/components/schemas/Student"),
      *              ),
@@ -377,8 +377,8 @@ class StudentController extends Controller
         $student->restore();
 
         return response()->json([
-           'message' => 'Восстановление завершено.',
-       ]);
+            'message' => 'Восстановление завершено.',
+        ]);
     }
 
     /**
