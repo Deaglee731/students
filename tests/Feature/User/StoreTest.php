@@ -14,11 +14,11 @@ class StoreTest extends TestCase
 
     public function test_store_new_student()
     {
-        $data = Student::factory()->make();
-        $admin = Student::factory()->create();
+        $student = Student::factory()->make();
+        $admin = Student::factory()->create(['role_id' => 1]);
 
-        $response = $this->actingAs($admin)->post(route('students.store'), $data->all()->except(['id'])->toArray());
-        $this->assertDatabaseHas('students', [$data->all()->toArray()]);
+        $response = $this->actingAs($admin)->post(route('students.store'), $student->all()->except(['id'])->toArray());
+        $this->assertDatabaseHas('students', [$student->all()->toArray()]);
 
         $response->assertStatus(302)->assertRedirect();
     }
